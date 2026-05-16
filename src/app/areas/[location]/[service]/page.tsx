@@ -35,36 +35,36 @@ export async function generateMetadata(
   const svc = services.find(s => s.slug === params.service);
   if (!loc || !svc) return { title: 'Not Found' };
 
-  const exactMatchKeyword = `${svc.title} in ${loc.name}`;
-  const title = `${exactMatchKeyword} | #1 ${svc.title} Contractor ${loc.district} — AMS`;
-  const description = `Top rated ${svc.title.toLowerCase()} contractor in ${loc.name}, ${loc.district}. AMS Civil — 25+ yrs exp, ₹150–450/sq.ft, 1-yr warranty. ${svc.benefits[0]}. Free site visit: +91 87793 91690.`;
+  const exactMatchKeyword = `Top ${svc.title} Contractor in ${loc.name}`;
+  const title = `${exactMatchKeyword} | Best Price & Expert Service`;
+  const description = `Looking for the best ${svc.title.toLowerCase()} in ${loc.name}, ${loc.district}? AMS Civil offers premium quality, 25+ yrs exp, and ₹150–450/sq.ft rates with a 1-yr warranty. ${svc.benefits[0]}. Call for a Free Site Visit: +91 87793 91690.`;
 
   return {
     title,
     description,
     keywords: [
-      exactMatchKeyword,
+      `${svc.title} in ${loc.name}`,
       `best ${svc.title} in ${loc.name}`,
-      `${svc.title} near me`,
-      `top rated ${svc.title.toLowerCase()} contractor ${loc.name}`,
+      `top ${svc.title.toLowerCase()} contractor ${loc.name}`,
+      `expert ${svc.title.toLowerCase()} near me`,
       `${svc.title.toLowerCase()} service center ${loc.name}`,
       `affordable ${svc.title.toLowerCase()} work ${loc.name}`,
       `${svc.title.toLowerCase()} specialist ${loc.name}`,
-      `${svc.title.toLowerCase()} cost in ${loc.name}`,
+      `${svc.title.toLowerCase()} cost per sq ft in ${loc.name}`,
       `civil mistry for ${svc.title.toLowerCase()} ${loc.name}`,
       `professional ${svc.title.toLowerCase()} builders ${loc.name}`,
       /* Hindi/Hinglish keywords — critical for Indian search intent */
       `${loc.name} mein ${svc.title.toLowerCase()}`,
       `${svc.title.toLowerCase()} ka rate ${loc.name}`,
-      `${svc.title.toLowerCase()} wala ${loc.name}`,
+      `${svc.title.toLowerCase()} karne wala ${loc.name}`,
       `best ${svc.title.toLowerCase()} mistry ${loc.name}`,
       `best ${svc.title.toLowerCase()} mistri ${loc.name}`,
       `${svc.title.toLowerCase()} mistri near me`,
-      `${svc.title.toLowerCase()} mistri ${loc.name}`,
       `${loc.name} mein ${svc.title.toLowerCase()} ka kaam`,
       `${svc.title.toLowerCase()} thekedar ${loc.name}`,
-      `sasta ${svc.title.toLowerCase()} ${loc.name}`,
+      `sasta aur achha ${svc.title.toLowerCase()} ${loc.name}`,
       `${svc.title.toLowerCase()} contractor contact number ${loc.name}`,
+      `guaranteed ${svc.title.toLowerCase()} ${loc.name}`,
       ...loc.nearby.slice(0, 5).map(n => `${svc.title} in ${n}`),
       ...loc.nearby.slice(0, 5).map(n => `best ${svc.title.toLowerCase()} near ${n}`),
     ],

@@ -24,25 +24,25 @@ export async function generateMetadata(
   const loc = getLocation(params.location);
   if (!loc) return { title: 'Not Found' };
 
-  const title       = `Civil Work in ${loc.name} | #1 Civil Contractor & Construction Company — AMS`;
-  const description = `Looking for professional civil work in ${loc.name}? #1 Civil Contractor & Construction Company in ${loc.name}, ${loc.district}. AMS provides bungalow construction, bathroom renovation, tiles, flooring, POP & kitchen work. 25+ yrs exp. ₹150–450/sq.ft. Free site visit: +91 87793 91690.`;
+  const title       = `Top Rated Civil Contractor in ${loc.name} | Best Construction Company — AMS`;
+  const description = `Hire the best civil contractor in ${loc.name}, ${loc.district}. AMS provides premium house construction, bathroom/kitchen renovation, tiles, flooring & POP work. 25+ Yrs Exp. Get a Free Site Visit & Estimate: +91 87793 91690.`;
 
   return {
     title,
     description,
     keywords: [
-      `civil work in ${loc.name}`,
+      `top civil contractor in ${loc.name}`,
+      `best construction company ${loc.name}`,
+      `civil work contractor ${loc.name}`,
+      `house renovation services ${loc.name}`,
+      `home builders in ${loc.name}`,
       `best civil work ${loc.name}`,
       `professional civil work in ${loc.name}`,
-      `civil work contractor ${loc.name}`,
       `civil work cost in ${loc.name}`,
-      `construction company in ${loc.name}`,
-      `best civil contractor in ${loc.name}`,
+      `turnkey construction company in ${loc.name}`,
       `top rated building contractor ${loc.name}`,
       `civil work near me ${loc.name}`,
-      `renovation services ${loc.name}`,
       `bungalow construction ${loc.name}`,
-      `home builders in ${loc.name}`,
       `commercial construction ${loc.name}`,
       `bathroom renovation ${loc.name}`,
       `kitchen renovation ${loc.name}`,
@@ -57,22 +57,23 @@ export async function generateMetadata(
       `${loc.name} mein civil work`,
       `${loc.name} mein construction company`,
       `${loc.name} mein civil contractor`,
-      `ghar banane wala ${loc.name}`,
-      `thekedar ${loc.name}`,
+      `ghar banane wala contractor ${loc.name}`,
+      `achha thekedar ${loc.name}`,
       `civil mistry ${loc.name}`,
       `civil mistri ${loc.name}`,
       `best mistry in ${loc.name}`,
-      `best mistri in ${loc.name}`,
       `plaster mistri ${loc.name}`,
       `tiles mistri ${loc.name}`,
-      `${loc.name} construction rate`,
-      `${loc.name} mein renovation`,
+      `${loc.name} construction rate per sq ft`,
+      `${loc.name} mein ghar ka renovation`,
       `building contractor near ${loc.name}`,
       `${loc.name} ke paas construction company`,
       `flat renovation ${loc.name}`,
       `home construction cost ${loc.name}`,
-      `waterproofing ${loc.name}`,
+      `waterproofing specialist ${loc.name}`,
       `false ceiling ${loc.name}`,
+      `sasta aur achha contractor ${loc.name}`,
+      `civil contractor near me`,
       ...loc.nearby.map(n => `best construction company in ${n}`),
       ...loc.nearby.map(n => `civil contractor near ${n}`),
     ],
