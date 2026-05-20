@@ -12,7 +12,7 @@ import {
   Shield, Clock, Award, Users, MapPin,
   Waves, LayoutTemplate, Fence, Hammer,
 } from 'lucide-react';
-import { WhatsAppLogo, PhoneLogo } from '@/components/ui/BrandIcons';
+import { motion } from 'framer-motion';
 import { services, stats, testimonials, faqs } from '@/data/siteData';
 import { openQuotePopup } from '@/components/ui/QuotePopup';
 import CountUp from '@/components/ui/CountUp';
@@ -240,12 +240,19 @@ function HeroSection() {
 
             {/* CTAs */}
             <div className="flex flex-wrap gap-4 mb-10 animate-fadeUp">
-              <button onClick={openQuotePopup} className="btn-primary text-base px-8 py-4">
+              <motion.button 
+                whileHover={{ scale: 1.05, boxShadow: '0 0 20px rgba(249,115,22,0.4)' }}
+                whileTap={{ scale: 0.95 }}
+                onClick={openQuotePopup} 
+                className="btn-primary text-base px-8 py-4"
+              >
                 Get Free Quote <ArrowRight size={18} />
-              </button>
-              <Link href="/projects" className="btn-ghost text-base px-8 py-4">
-                View Projects
-              </Link>
+              </motion.button>
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <Link href="/projects" className="btn-ghost text-base px-8 py-4 h-full flex items-center">
+                  View Projects
+                </Link>
+              </motion.div>
             </div>
 
             {/* Trust badges */}
@@ -315,8 +322,8 @@ function IntroSection() {
           <div>
             <div className="section-label animate-on-scroll">About Us</div>
             <h2 className="font-display text-3xl lg:text-4xl xl:text-5xl text-white leading-tight mb-6 animate-on-scroll">
-              A Legacy Built on{' '}
-              <span className="text-gradient">Trust &amp; Quality</span>
+              Premium Bungalow Construction & <br/>
+              <span className="text-gradient">Civil Work in Mumbai</span>
             </h2>
             <p className="text-slate-400 leading-relaxed mb-4 animate-on-scroll">
               As the leading <strong className="text-white">building contractor in Mumbai</strong>, AMS Civil Construction
@@ -491,7 +498,7 @@ function ProjectsCarousel() {
           <div>
             <div className="section-label animate-on-scroll">Our Work</div>
             <h2 className="font-display text-3xl lg:text-4xl xl:text-5xl text-white leading-tight animate-on-scroll">
-              Featured <span className="text-gradient">Projects</span>
+              Featured <span className="text-gradient">Civil Work Projects</span>
             </h2>
           </div>
           {/* Filter tabs */}
