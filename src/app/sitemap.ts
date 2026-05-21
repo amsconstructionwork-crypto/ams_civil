@@ -6,6 +6,10 @@ import { getDb } from '@/lib/mongodb';
 import { locations } from '@/data/locations';
 import { services } from '@/data/siteData';
 
+// SEO: Keep sitemap dynamic so it always serves the latest live blogs without staleness
+export const dynamic = 'force-dynamic';
+export const revalidate = 3600; // Revalidate at most every hour to balance DB load and crawl accuracy
+
 const BASE = 'https://www.amscivilwork.in';
 // Use a fixed date — not `new Date()` — so Google sees stable lastModified
 const SITE_UPDATED = new Date('2026-05-21');
@@ -73,17 +77,23 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   });
 
   /* ── Dynamic Blogs ─────────────────────────────────────── */
-  const db = await getDb();
-  const blogs = await db.collection('blogs').find({
-    published: true,
-    $or: [{ publishDate: { $lte: new Date() } }, { publishDate: { $exists: false } }]
-  }).toArray();
-  const blogPages: MetadataRoute.Sitemap = blogs.map(blog => ({
-    url: `${BASE}/blog/${blog.slug}`,
-    lastModified: new Date(blog.updatedAt || blog.createdAt),
-    changeFrequency: 'weekly' as const,
-    priority: blog.slug?.includes('guide') || blog.slug?.includes('2026') ? 0.9 : 0.8,
-  }));
+  let blogPages: MetadataRoute.Sitemap = [];
+  try {
+    const db = await getDb();
+    const blogs = await db.collection('blogs').find({
+      published: true,
+      $or: [{ publishDate: { $lte: new Date() } }, { publishDate: { $exists: false } }]
+    }).toArray();
+    
+    blogPages = blogs.map(blog => ({
+      url: `${BASE}/blog/${blog.slug}`,
+      lastModified: new Date(blog.updatedAt || blog.createdAt),
+      changeFrequency: 'weekly' as const,
+      priority: blog.slug?.includes('guide') || blog.slug?.includes('2026') ? 0.9 : 0.8,
+    }));
+  } catch (error) {
+    console.error('[Sitemap] Failed to fetch dynamic blogs from MongoDB:', error);
+  }
 
   return [...staticPages, ...servicePages, ...locationPages, ...blogPages];
 }

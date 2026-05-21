@@ -9,9 +9,14 @@ import { WhatsAppLogo, PhoneLogo } from '@/components/ui/BrandIcons';
 export const revalidate = 3600;
 
 async function getBlogData(slug: string) {
-  const db = await getDb();
-  const blog = await db.collection('blogs').findOne({ slug, published: true });
-  return blog;
+  try {
+    const db = await getDb();
+    const blog = await db.collection('blogs').findOne({ slug, published: true });
+    return blog;
+  } catch (error) {
+    console.error(`[Blog Engine] Failed to query blog details for slug ${slug}:`, error);
+    return null;
+  }
 }
 
 async function getRelatedBlogs(currentSlug: string) {
