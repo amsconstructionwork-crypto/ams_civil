@@ -1,9 +1,10 @@
 // src/app/api/testimonials/route.ts
-// GET  /api/testimonials  — fetch all testimonials
+// GET  /api/testimonials  — fetch all testimonials (public)
 // POST /api/testimonials  — save a new testimonial (admin only)
 
 import { NextRequest, NextResponse } from 'next/server';
 import { getDb } from '@/lib/mongodb';
+import { requireAuth, sanitizeInput } from '@/lib/auth';
 
 const COLLECTION = 'testimonials';
 
@@ -22,6 +23,9 @@ export async function GET() {
 }
 
 export async function POST(request: NextRequest) {
+  const authError = await requireAuth(request);
+  if (authError) return authError;
+
   try {
     const body = await request.json();
     const { name, location, rating, text, service } = body;
@@ -30,8 +34,14 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ success: false, error: 'Name, rating, and text are required.' }, { status: 400 });
     }
 
-    // Generate initials for avatar if not provided
-    const initials = name
+    // Validate rating
+    const numRating = Number(rating);
+    if (numRating < 1 || numRating > 5) {
+      return NextResponse.json({ success: false, error: 'Rating must be between 1 and 5.' }, { status: 400 });
+    }
+
+    const safeName = sanitizeInput(name).trim();
+    const initials = safeName
       .split(' ')
       .map((n: string) => n[0])
       .join('')
@@ -40,11 +50,11 @@ export async function POST(request: NextRequest) {
 
     const db = await getDb();
     const newItem = {
-      name: name.trim(),
-      location: location?.trim() || 'Mumbai',
-      rating: Number(rating) || 5,
-      text: text.trim(),
-      service: service?.trim() || 'General Service',
+      name: safeName,
+      location: sanitizeInput(location)?.trim() || 'Mumbai',
+      rating: numRating,
+      text: sanitizeInput(text).trim(),
+      service: sanitizeInput(service)?.trim() || 'General Service',
       avatar: initials,
       createdAt: new Date(),
     };

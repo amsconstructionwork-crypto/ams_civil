@@ -1,13 +1,14 @@
 // src/app/api/gallery/route.ts
-// GET  /api/gallery  — fetch all gallery items
+// GET  /api/gallery  — fetch all gallery items (public)
 // POST /api/gallery  — save a new gallery item (admin only)
 
 import { NextRequest, NextResponse } from 'next/server';
 import { getDb } from '@/lib/mongodb';
+import { requireAuth, sanitizeInput } from '@/lib/auth';
 
 const COLLECTION = 'gallery';
 
-/* ── GET ────────────────────────────────────────────────────── */
+/* ── GET (Public) ──────────────────────────────────────────── */
 export async function GET() {
   try {
     const db   = await getDb();
@@ -22,8 +23,11 @@ export async function GET() {
   }
 }
 
-/* ── POST ───────────────────────────────────────────────────── */
+/* ── POST (Admin Only) ─────────────────────────────────────── */
 export async function POST(request: NextRequest) {
+  const authError = await requireAuth(request);
+  if (authError) return authError;
+
   try {
     const body = await request.json();
     const { src, title, category } = body;
@@ -32,12 +36,17 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ success: false, error: 'Image URL and category are required.' }, { status: 400 });
     }
 
+    // Validate image URL format
+    if (!src.startsWith('https://') && !src.startsWith('/images/')) {
+      return NextResponse.json({ success: false, error: 'Invalid image URL.' }, { status: 400 });
+    }
+
     const db = await getDb();
     const newItem = {
-      src,
-      title:     title?.trim() || 'AMS Civil Construction Project',
-      alt:       title?.trim() || 'AMS Civil Construction Project',
-      category:  category,
+      src: sanitizeInput(src),
+      title:     sanitizeInput(title)?.trim() || 'AMS Civil Construction Project',
+      alt:       sanitizeInput(title)?.trim() || 'AMS Civil Construction Project',
+      category:  sanitizeInput(category),
       createdAt: new Date(),
     };
 

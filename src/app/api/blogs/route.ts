@@ -1,13 +1,14 @@
 // src/app/api/blogs/route.ts
-// GET  /api/blogs          - Fetch all blogs
-// POST /api/blogs          - Create a new blog post
+// GET  /api/blogs          - Fetch all blogs (public)
+// POST /api/blogs          - Create a new blog post (admin only)
 
 import { NextRequest, NextResponse } from 'next/server';
 import { getDb } from '@/lib/mongodb';
+import { requireAuth, sanitizeInput } from '@/lib/auth';
 
 const COLLECTION = 'blogs';
 
-/* ── GET ────────────────────────────────────────────────────── */
+/* ── GET (Public) ──────────────────────────────────────────── */
 export async function GET(request: NextRequest) {
   try {
     const db = await getDb();
@@ -27,8 +28,12 @@ export async function GET(request: NextRequest) {
   }
 }
 
-/* ── POST ───────────────────────────────────────────────────── */
+/* ── POST (Admin Only) ─────────────────────────────────────── */
 export async function POST(request: NextRequest) {
+  // ── Auth check ──────────────────────────────────────────
+  const authError = await requireAuth(request);
+  if (authError) return authError;
+
   try {
     const body = await request.json();
     const { title, excerpt, content, featuredImage, seoKeywords, author, published, publishDate } = body;
@@ -43,20 +48,20 @@ export async function POST(request: NextRequest) {
     const db = await getDb();
 
     // Basic slugification - lowercase, replace spaces with hyphens, remove special characters
-    const slug = title.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
+    const slug = sanitizeInput(title).trim().toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
 
     // Ensure slug is unique
     const existing = await db.collection(COLLECTION).findOne({ slug });
     const finalSlug = existing ? `${slug}-${Date.now()}` : slug;
 
     const newBlog = {
-      title: title.trim(),
+      title: sanitizeInput(title).trim(),
       slug: finalSlug,
-      excerpt: excerpt?.trim() || '',
-      content: content.trim(),
+      excerpt: sanitizeInput(excerpt)?.trim() || '',
+      content: content.trim(), // Content may contain HTML (blog body)
       featuredImage: featuredImage || null,
-      seoKeywords: seoKeywords?.trim() || '',
-      author: author?.trim() || 'AMS Civil Team',
+      seoKeywords: sanitizeInput(seoKeywords)?.trim() || '',
+      author: sanitizeInput(author)?.trim() || 'AMS Civil Team',
       published: Boolean(published),
       publishDate: publishDate ? new Date(publishDate) : new Date(),
       createdAt: new Date(),

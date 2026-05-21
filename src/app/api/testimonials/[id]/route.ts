@@ -1,9 +1,11 @@
 // src/app/api/testimonials/[id]/route.ts
 // DELETE /api/testimonials/[id]  — remove a testimonial (admin only)
+// PUT    /api/testimonials/[id]  — update a testimonial (admin only)
 
 import { NextRequest, NextResponse } from 'next/server';
 import { getDb } from '@/lib/mongodb';
 import { ObjectId } from 'mongodb';
+import { requireAuth, sanitizeInput } from '@/lib/auth';
 
 const COLLECTION = 'testimonials';
 
@@ -11,10 +13,13 @@ export async function DELETE(
   request: NextRequest,
   { params }: { params: { id: string } }
 ) {
+  const authError = await requireAuth(request);
+  if (authError) return authError;
+
   try {
     const { id } = params;
-    if (!id) {
-      return NextResponse.json({ success: false, error: 'Testimonial ID is required.' }, { status: 400 });
+    if (!id || !ObjectId.isValid(id)) {
+      return NextResponse.json({ success: false, error: 'Valid testimonial ID is required.' }, { status: 400 });
     }
 
     const db = await getDb();
@@ -35,17 +40,24 @@ export async function PUT(
   request: NextRequest,
   { params }: { params: { id: string } }
 ) {
+  const authError = await requireAuth(request);
+  if (authError) return authError;
+
   try {
     const { id } = params;
+    if (!ObjectId.isValid(id)) {
+      return NextResponse.json({ success: false, error: 'Invalid ID.' }, { status: 400 });
+    }
+
     const body = await request.json();
     const { name, location, rating, text, service } = body;
 
-    if (!id || !name || !text || !rating) {
+    if (!name || !text || !rating) {
       return NextResponse.json({ success: false, error: 'Incomplete data for update.' }, { status: 400 });
     }
 
-    // Recalculate initials in case name changed
-    const initials = name
+    const safeName = sanitizeInput(name).trim();
+    const initials = safeName
       .split(' ')
       .map((n: string) => n[0])
       .join('')
@@ -54,11 +66,11 @@ export async function PUT(
 
     const db = await getDb();
     const updateData = {
-      name: name.trim(),
-      location: location?.trim() || 'Mumbai',
-      rating: Number(rating) || 5,
-      text: text.trim(),
-      service: service?.trim() || 'General Service',
+      name: safeName,
+      location: sanitizeInput(location)?.trim() || 'Mumbai',
+      rating: Math.min(5, Math.max(1, Number(rating) || 5)),
+      text: sanitizeInput(text).trim(),
+      service: sanitizeInput(service)?.trim() || 'General Service',
       avatar: initials,
       updatedAt: new Date(),
     };

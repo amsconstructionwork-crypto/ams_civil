@@ -1,9 +1,10 @@
 // src/app/api/gallery/[id]/route.ts
-// DELETE /api/gallery/[id] — remove a gallery item
+// DELETE /api/gallery/[id] — remove a gallery item (admin only)
 
 import { NextRequest, NextResponse } from 'next/server';
 import { getDb } from '@/lib/mongodb';
 import { ObjectId } from 'mongodb';
+import { requireAuth } from '@/lib/auth';
 
 const COLLECTION = 'gallery';
 
@@ -11,10 +12,13 @@ export async function DELETE(
   request: NextRequest,
   { params }: { params: { id: string } }
 ) {
+  const authError = await requireAuth(request);
+  if (authError) return authError;
+
   try {
     const { id } = params;
-    if (!id) {
-      return NextResponse.json({ success: false, error: 'ID is required.' }, { status: 400 });
+    if (!id || !ObjectId.isValid(id)) {
+      return NextResponse.json({ success: false, error: 'Valid ID is required.' }, { status: 400 });
     }
 
     const db = await getDb();

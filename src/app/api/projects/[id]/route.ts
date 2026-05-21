@@ -1,18 +1,22 @@
 // src/app/api/projects/[id]/route.ts
-// PUT    /api/projects/:id  — update a project
-// DELETE /api/projects/:id  — delete a project
+// PUT    /api/projects/:id  — update a project (admin only)
+// DELETE /api/projects/:id  — delete a project (admin only)
 
 import { NextRequest, NextResponse } from 'next/server';
 import { getDb } from '@/lib/mongodb';
 import { ObjectId } from 'mongodb';
+import { requireAuth, sanitizeInput } from '@/lib/auth';
 
 const COLLECTION = 'projects';
 
-/* ── PUT ────────────────────────────────────────────────────── */
+/* ── PUT (Admin Only) ──────────────────────────────────────── */
 export async function PUT(
   request: NextRequest,
   { params }: { params: { id: string } },
 ) {
+  const authError = await requireAuth(request);
+  if (authError) return authError;
+
   try {
     const body = await request.json();
     const { id, _id, createdAt, ...updates } = body; // strip immutable fields
@@ -20,6 +24,12 @@ export async function PUT(
     if (!ObjectId.isValid(params.id)) {
       return NextResponse.json({ success: false, error: 'Invalid project ID.' }, { status: 400 });
     }
+
+    // Sanitize string fields
+    if (updates.title) updates.title = sanitizeInput(updates.title);
+    if (updates.location) updates.location = sanitizeInput(updates.location);
+    if (updates.description) updates.description = sanitizeInput(updates.description);
+    if (updates.category) updates.category = sanitizeInput(updates.category);
 
     const db = await getDb();
 
@@ -48,11 +58,14 @@ export async function PUT(
   }
 }
 
-/* ── DELETE ─────────────────────────────────────────────────── */
+/* ── DELETE (Admin Only) ───────────────────────────────────── */
 export async function DELETE(
   request: NextRequest,
   { params }: { params: { id: string } },
 ) {
+  const authError = await requireAuth(request);
+  if (authError) return authError;
+
   try {
     if (!ObjectId.isValid(params.id)) {
       return NextResponse.json({ success: false, error: 'Invalid project ID.' }, { status: 400 });

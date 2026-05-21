@@ -2,10 +2,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getDb } from '@/lib/mongodb';
 import { ObjectId } from 'mongodb';
+import { requireAuth, sanitizeInput } from '@/lib/auth';
 
 const COLLECTION = 'blogs';
 
-/* ── GET Single Blog by Slug ────────────────────────────────────── */
+/* ── GET Single Blog by Slug (Public) ───────────────────────── */
 export async function GET(
   request: NextRequest,
   { params }: { params: { slug: string } }
@@ -26,15 +27,16 @@ export async function GET(
   }
 }
 
-/* ── PUT Update Blog by ID ─────────────────────────────────────── */
+/* ── PUT Update Blog by ID (Admin Only) ────────────────────── */
 export async function PUT(
   request: NextRequest,
   { params }: { params: { slug: string } }
 ) {
+  // ── Auth check ──────────────────────────────────────────
+  const authError = await requireAuth(request);
+  if (authError) return authError;
+
   try {
-    // Note: To make things simple, the frontend passes the MongoDB _id inside the params
-    // instead of the slug when doing a PUT or DELETE. 
-    // Wait, the folder name is [slug], but we can just use the param as the ID.
     const id = params.slug; 
 
     if (!ObjectId.isValid(id)) {
@@ -46,17 +48,16 @@ export async function PUT(
 
     const db = await getDb();
 
-    // Preserve the original slug, or regenerate if needed. We'll regenerate it based on title.
-    const slug = title.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
+    const slug = sanitizeInput(title).trim().toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
 
     const updateDoc = {
-      title: title.trim(),
+      title: sanitizeInput(title).trim(),
       slug: slug,
-      excerpt: excerpt?.trim() || '',
+      excerpt: sanitizeInput(excerpt)?.trim() || '',
       content: content.trim(),
       featuredImage: featuredImage || null,
-      seoKeywords: seoKeywords?.trim() || '',
-      author: author?.trim() || 'AMS Civil Team',
+      seoKeywords: sanitizeInput(seoKeywords)?.trim() || '',
+      author: sanitizeInput(author)?.trim() || 'AMS Civil Team',
       published: Boolean(published),
       publishDate: publishDate ? new Date(publishDate) : new Date(),
       updatedAt: new Date(),
@@ -78,11 +79,15 @@ export async function PUT(
   }
 }
 
-/* ── DELETE Blog by ID ────────────────────────────────────────── */
+/* ── DELETE Blog by ID (Admin Only) ────────────────────────── */
 export async function DELETE(
   request: NextRequest,
   { params }: { params: { slug: string } }
 ) {
+  // ── Auth check ──────────────────────────────────────────
+  const authError = await requireAuth(request);
+  if (authError) return authError;
+
   try {
     const id = params.slug;
 
