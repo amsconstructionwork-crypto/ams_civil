@@ -20,6 +20,15 @@
   --slate-main:  #94A3B8;
   --slate-light: #CBD5E1;
   --white:       #F8FAFC;
+
+  /* Layout dynamics */
+  --banner-height: 72px;
+}
+
+@media (min-width: 640px) {
+  :root {
+    --banner-height: 44px;
+  }
 }
 
 /* ── Base ────────────────────────────────────────────────────── */
