@@ -12,17 +12,24 @@ import { generateLocalParagraph, generateWhyChooseUs, generateFAQs, zoneContext 
 import { MapPin, CheckCircle, ArrowRight, ShieldCheck, Star, Clock, Sparkles, HelpCircle } from 'lucide-react';
 import { WhatsAppLogo, PhoneLogo } from '@/components/ui/BrandIcons';
 import ModernCTA from '@/components/ui/ModernCTA';
+import { getDb } from '@/lib/mongodb';
 
 /* ── Allow on-demand generation for non-pre-rendered paths ── */
 export const dynamicParams = true;
 
 /* ── Pre-render top paths ───── */
 export async function generateStaticParams() {
+  const CORE_ZONES = ['South Mumbai', 'Western Line', 'Central Line', 'Navi Mumbai'];
   const params: { location: string; service: string }[] = [];
+  
   locations.forEach(loc => {
-    services.forEach(svc => {
-      params.push({ location: loc.slug, service: svc.slug });
-    });
+    // ANTI-BLOAT FIX: Only pre-render the highest value locations at build time.
+    // The rest will generate on-demand, saving massive crawl budget and build time.
+    if (CORE_ZONES.includes(loc.zone)) {
+      services.forEach(svc => {
+        params.push({ location: loc.slug, service: svc.slug });
+      });
+    }
   });
   return params;
 }
@@ -81,11 +88,22 @@ export async function generateMetadata(
   };
 }
 
-export default function AreaServicePage({ params }: { params: { location: string; service: string } }) {
+export default async function AreaServicePage({ params }: { params: { location: string; service: string } }) {
   const loc = getLocation(params.location);
   const svc = services.find(s => s.slug === params.service);
   
   if (!loc || !svc) notFound();
+
+  /* ── Fetch Dynamic Blog Content ── */
+  let relatedBlogs: any[] = [];
+  try {
+    const db = await getDb();
+    relatedBlogs = await db.collection('blogs').find({ 
+      published: true 
+    }).sort({ createdAt: -1 }).limit(3).toArray();
+  } catch (e) {
+    console.error('Failed to fetch blogs', e);
+  }
 
   const exactMatchKeyword = `${svc.title} in ${loc.name}`;
   const localParagraph = generateLocalParagraph(loc, svc);
@@ -445,6 +463,31 @@ export default function AreaServicePage({ params }: { params: { location: string
           </div>
         </div>
       </section>
+
+      {/* ── Helpful Guides (Dynamic Blog Injection for SEO) ── */}
+      {relatedBlogs.length > 0 && (
+        <section className="section-y bg-[#080D1A] border-t border-white/5">
+          <div className="container-custom">
+            <div className="text-center mb-12">
+              <div className="section-label mx-auto">Helpful Guides</div>
+              <h2 className="font-display text-2xl lg:text-4xl text-white mt-4">
+                Latest from our <span className="text-gradient">Civil Engineering Blog</span>
+              </h2>
+            </div>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {relatedBlogs.map(blog => (
+                <Link key={blog._id.toString()} href={`/blog/${blog.slug}`} className="card p-5 group">
+                   <h3 className="text-white font-bold mb-2 group-hover:text-orange-400 transition-colors">{blog.title}</h3>
+                   <p className="text-slate-400 text-sm line-clamp-2">{blog.excerpt}</p>
+                   <div className="mt-4 text-orange-400 text-xs font-bold uppercase tracking-widest flex items-center gap-1">
+                     Read Guide <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                   </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* ── Cross-Service Internal Links (SEO mesh) ────── */}
       <section className="section-y bg-[#0B1120] border-t border-white/5">

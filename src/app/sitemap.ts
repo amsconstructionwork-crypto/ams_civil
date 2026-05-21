@@ -50,20 +50,26 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   /* ── Location pages & Location × Service pages ────────────── */
   const locationPages: MetadataRoute.Sitemap = [];
   locations.forEach(loc => {
+    // Always include the main location page
     locationPages.push({
       url:             `${BASE}/areas/${loc.slug}`,
       lastModified:    SITE_UPDATED,
       changeFrequency: 'weekly' as const,
       priority:        getLocationPriority(loc.zone),
     });
-    services.forEach(svc => {
-      locationPages.push({
-        url:             `${BASE}/areas/${loc.slug}/${svc.slug}`,
-        lastModified:    SITE_UPDATED,
-        changeFrequency: 'weekly' as const,
-        priority:        getLocationServicePriority(loc.zone),
+    
+    // ANTI-BLOAT FIX: Only generate the granular Location × Service pages for Core Zones
+    // This forces Google to focus its crawl budget on high-value Mumbai/Thane/Navi Mumbai areas
+    if (CORE_ZONES.includes(loc.zone)) {
+      services.forEach(svc => {
+        locationPages.push({
+          url:             `${BASE}/areas/${loc.slug}/${svc.slug}`,
+          lastModified:    SITE_UPDATED,
+          changeFrequency: 'weekly' as const,
+          priority:        getLocationServicePriority(loc.zone),
+        });
       });
-    });
+    }
   });
 
   /* ── Dynamic Blogs ─────────────────────────────────────── */

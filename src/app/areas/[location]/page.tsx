@@ -11,6 +11,7 @@ import { services } from '@/data/siteData';
 import { MapPin, CheckCircle, ArrowRight, Star, ShieldCheck, Clock, Users, HardHat } from 'lucide-react';
 import { WhatsAppLogo, PhoneLogo } from '@/components/ui/BrandIcons';
 import ModernCTA from '@/components/ui/ModernCTA';
+import { getDb } from '@/lib/mongodb';
 
 /* ── Generate all static paths at build time ──────────────── */
 export async function generateStaticParams() {
@@ -93,9 +94,21 @@ export async function generateMetadata(
 /* ═══════════════════════════════════════════════════════════════
    PAGE COMPONENT
    ═══════════════════════════════════════════════════════════════ */
-export default function LocationPage({ params }: { params: { location: string } }) {
+export default async function LocationPage({ params }: { params: { location: string } }) {
   const loc = getLocation(params.location);
   if (!loc) notFound();
+
+  /* ── Dynamic Content Injection (Fixes Thin Content Penalty) ── */
+  let localProjects: any[] = [];
+  try {
+    const db = await getDb();
+    localProjects = await db.collection('projects').find({ 
+      location: { $regex: new RegExp(loc.name, 'i') },
+      status: 'completed'
+    }).limit(3).toArray();
+  } catch (e) {
+    console.error('Failed to fetch local projects', e);
+  }
 
   /* JSON-LD for this specific location — optimized for Google Rich Results */
   const jsonLd = {
@@ -460,6 +473,35 @@ export default function LocationPage({ params }: { params: { location: string } 
           </div>
         </div>
       </section>
+
+      {/* ── Dynamic Local Projects (SEO Unique Value) ──────── */}
+      {localProjects.length > 0 && (
+        <section className="section-y bg-[#080D1A] border-t border-white/5">
+          <div className="container-custom">
+            <div className="text-center mb-12">
+              <div className="section-label mx-auto">Real Results</div>
+              <h2 className="font-display text-3xl lg:text-4xl text-white mt-4">
+                Recently Completed in <span className="text-gradient">{loc.name}</span>
+              </h2>
+            </div>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {localProjects.map(project => (
+                <div key={project._id.toString()} className="card p-5">
+                  <div className="relative aspect-video rounded-xl overflow-hidden mb-4">
+                    {project.images?.[0] ? (
+                      <Image src={project.images[0]} alt={project.title} fill className="object-cover" />
+                    ) : (
+                      <div className="w-full h-full bg-white/5 flex items-center justify-center">No Image</div>
+                    )}
+                  </div>
+                  <h3 className="text-white font-bold mb-2">{project.title}</h3>
+                  <p className="text-slate-400 text-sm line-clamp-2">{project.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* ── CTA ─────────────────────────────────────────── */}
       <section className="py-24 relative overflow-hidden">
