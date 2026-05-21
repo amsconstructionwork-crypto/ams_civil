@@ -8,7 +8,7 @@ import { services } from '@/data/siteData';
 
 const BASE = 'https://www.amscivilwork.in';
 // Use a fixed date — not `new Date()` — so Google sees stable lastModified
-const SITE_UPDATED = new Date('2026-05-02');
+const SITE_UPDATED = new Date('2026-05-21');
 
 /* ── Zone-based priority tiers for crawl budget optimization ── */
 const CORE_ZONES = ['South Mumbai', 'Western Line', 'Central Line', 'Navi Mumbai'];
@@ -82,7 +82,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     url: `${BASE}/blog/${blog.slug}`,
     lastModified: new Date(blog.updatedAt || blog.createdAt),
     changeFrequency: 'weekly' as const,
-    priority: 0.8,
+    priority: blog.slug?.includes('guide') || blog.slug?.includes('2026') ? 0.9 : 0.8,
   }));
 
   return [...staticPages, ...servicePages, ...locationPages, ...blogPages];
