@@ -12,7 +12,7 @@ export const revalidate = 3600; // Revalidate at most every hour to balance DB l
 
 const BASE = 'https://www.amscivilwork.in';
 // Use a fixed date — not `new Date()` — so Google sees stable lastModified
-const SITE_UPDATED = new Date('2026-05-21');
+const SITE_UPDATED = new Date('2026-05-25');
 
 /* ── Zone-based priority tiers for crawl budget optimization ── */
 const CORE_ZONES = ['South Mumbai', 'Western Line', 'Central Line', 'Navi Mumbai'];
@@ -62,18 +62,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority:        getLocationPriority(loc.zone),
     });
     
-    // ANTI-BLOAT FIX: Only generate the granular Location × Service pages for Core Zones
-    // This forces Google to focus its crawl budget on high-value Mumbai/Thane/Navi Mumbai areas
-    if (CORE_ZONES.includes(loc.zone)) {
-      services.forEach(svc => {
-        locationPages.push({
-          url:             `${BASE}/areas/${loc.slug}/${svc.slug}`,
-          lastModified:    SITE_UPDATED,
-          changeFrequency: 'weekly' as const,
-          priority:        getLocationServicePriority(loc.zone),
-        });
+    // SEO SCALING: Generate granular Location × Service pages for ALL zones to maximize impressions.
+    services.forEach(svc => {
+      locationPages.push({
+        url:             `${BASE}/areas/${loc.slug}/${svc.slug}`,
+        lastModified:    SITE_UPDATED,
+        changeFrequency: 'weekly' as const,
+        priority:        getLocationServicePriority(loc.zone),
       });
-    }
+    });
   });
 
   /* ── Dynamic Blogs ─────────────────────────────────────── */

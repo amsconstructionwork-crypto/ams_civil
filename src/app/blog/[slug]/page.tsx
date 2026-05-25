@@ -22,13 +22,16 @@ async function getBlogData(slug: string) {
 async function getRelatedBlogs(currentSlug: string) {
   try {
     const db = await getDb();
+    // SEO: Use $sample to show random related blogs, increasing internal cross-links
     return await db.collection('blogs')
-      .find({ 
-        slug: { $ne: currentSlug }, 
-        published: true,
-        $or: [{ publishDate: { $lte: new Date() } }, { publishDate: { $exists: false } }]
-      })
-      .limit(3)
+      .aggregate([
+        { $match: { 
+          slug: { $ne: currentSlug }, 
+          published: true,
+          $or: [{ publishDate: { $lte: new Date() } }, { publishDate: { $exists: false } }]
+        }},
+        { $sample: { size: 6 } }
+      ])
       .toArray();
   } catch (e) {
     return [];
@@ -45,16 +48,20 @@ function calculateReadingTime(content: string) {
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
   const blog = await getBlogData(params.slug);
   
-  if (!blog) return { title: 'Article Not Found | AMS Civil Construction' };
+  if (!blog) return { title: 'Article Not Found' };
+
+  const currentYear = new Date().getFullYear();
+  const hasYear = blog.title.includes(currentYear.toString());
+  const optimizedTitle = hasYear ? blog.title : `${blog.title} (${currentYear} Update)`;
 
   return {
-    title: `${blog.title} | AMS Civil Blog`,
-    description: blog.excerpt || `Read ${blog.title} on the AMS Civil Construction Blog.`,
+    title: optimizedTitle,
+    description: `⭐ ${blog.excerpt || `Read our expert guide on ${blog.title}.`} Get free estimates today!`,
     keywords: blog.seoKeywords || 'construction blog, civil contractors, ams civil construction',
     openGraph: {
       type: 'article',
-      title: blog.title,
-      description: blog.excerpt,
+      title: optimizedTitle,
+      description: `⭐ ${blog.excerpt}`,
       publishedTime: new Date(blog.createdAt).toISOString(),
       authors: [blog.author || 'AMS Civil Construction'],
     },
@@ -90,9 +97,27 @@ export default async function BlogArticlePage({ params }: { params: { slug: stri
     mainEntityOfPage: { '@type': 'WebPage', '@id': shareUrl },
   };
 
+  const faqJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      {
+        '@type': 'Question',
+        name: `What is the average cost of civil work in Mumbai?`,
+        acceptedAnswer: { '@type': 'Answer', text: `The cost varies based on the scope of work and materials used. Contact AMS Civil Construction for a free site visit and exact quote.` }
+      },
+      {
+        '@type': 'Question',
+        name: `Is structural alteration safe in a flat?`,
+        acceptedAnswer: { '@type': 'Answer', text: `Yes, as long as it does not interfere with load-bearing RCC columns or beams. Always hire a certified civil contractor.` }
+      }
+    ]
+  };
+
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
 
       <main className="min-h-screen bg-[#080D1A] pt-32 pb-24 selection-orange relative overflow-hidden">
         {/* Background Gradients */}

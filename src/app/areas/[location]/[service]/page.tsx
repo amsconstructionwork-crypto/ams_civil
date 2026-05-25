@@ -43,8 +43,8 @@ export async function generateMetadata(
   if (!loc || !svc) return { title: 'Not Found' };
 
   const exactMatchKeyword = `Top ${svc.title} Contractor in ${loc.name}`;
-  const title = `${exactMatchKeyword} | Best Price & Expert Service`;
-  const description = `Looking for the best ${svc.title.toLowerCase()} in ${loc.name}, ${loc.district}? AMS Civil offers premium quality, 25+ yrs exp, and ₹150–450/sq.ft rates with a 1-yr warranty. ${svc.benefits[0]}. Call for a Free Site Visit: +91 87793 91690.`;
+  const title = `${exactMatchKeyword} (2026) | Free Quote`;
+  const description = `⭐ Looking for the best ${svc.title.toLowerCase()} in ${loc.name}, ${loc.district}? AMS Civil offers premium quality, 25+ yrs exp, and 100% Guaranteed Work. ${svc.benefits[0]}. Call for a Free Site Visit: +91 87793 91690.`;
 
   return {
     title,

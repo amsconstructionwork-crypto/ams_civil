@@ -21,8 +21,8 @@ export async function generateMetadata(
   const svc = services.find(s => s.slug === params.slug);
   if (!svc) return { title: 'Not Found' };
 
-  const title = `${svc.title} in Mumbai | #1 ${svc.title} Contractor — AMS Civil`;
-  const description = `Expert ${svc.title.toLowerCase()} services across all Mumbai areas. ${svc.shortDesc} 25+ yrs, ₹150–450/sq.ft, 1-yr warranty. Free site visit: +91 87793 91690.`;
+  const title = `${svc.title} in Mumbai (2026) | Free Quote`;
+  const description = `⭐ Expert ${svc.title.toLowerCase()} services across Mumbai. ${svc.shortDesc} 25+ yrs, 100% Quality Guaranteed, 1-yr warranty. Get a Free Site Visit Today! 📞 +91 87793 91690.`;
 
   return {
     title,
