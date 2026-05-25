@@ -74,18 +74,36 @@ async function run() {
 
       let content = blog.content;
 
-      // 1. Inject internal links into existing text intelligently
-      for (const item of linkDictionary) {
-        // Only replace the FIRST occurrence to avoid spamming the same link
-        let replaced = false;
-        content = content.replace(item.regex, (match) => {
-          if (!replaced && !match.includes('<a')) {
-            replaced = true;
-            return `<a href="${item.link}" style="color: #F97316; font-weight: bold; text-decoration: underline;" title="${item.text} in Mumbai">${match}</a>`;
+      // 1. Inject internal links into existing text intelligently without nesting HTML tags
+      const parts = content.split(/(<[^>]+>)/g);
+      let inAnchor = false;
+      
+      for (let i = 0; i < parts.length; i++) {
+        const part = parts[i];
+        if (i % 2 === 1) {
+          // Inside a tag
+          if (part.toLowerCase().startsWith('<a')) {
+            inAnchor = true;
+          } else if (part.toLowerCase().startsWith('</a>')) {
+            inAnchor = false;
           }
-          return match;
-        });
+        } else {
+          // Inside plain text
+          if (!inAnchor) {
+            for (const item of linkDictionary) {
+              let replaced = false;
+              parts[i] = parts[i].replace(item.regex, (match) => {
+                if (!replaced) {
+                  replaced = true;
+                  return `<a href="${item.link}" style="color: #F97316; font-weight: bold; text-decoration: underline;" title="${item.text} in Mumbai">${match}</a>`;
+                }
+                return match;
+              });
+            }
+          }
+        }
       }
+      content = parts.join('');
 
       // 2. Build the SEO Enhancer Section
       const deepDiveContent = `
