@@ -249,6 +249,40 @@ export const services: Service[] = [
     ],
     image: '/images/plaster-work.png',
   },
+  {
+    id: '13',
+    title: 'Painting Work',
+    slug: 'painting',
+    icon: 'Paintbrush',
+    shortDesc: 'Interior & exterior painting with premium paint brands.',
+    description:
+      'Our professional painting services cover both interior and exterior surfaces. We use premium paints from Asian Paints, Berger, and Nerolac for long-lasting, vibrant finishes. From texture painting and stencil work to waterproof exterior coats, we handle all painting requirements with precision and clean execution.',
+    benefits: [
+      'Premium paint brands (Asian Paints, Berger, Nerolac)',
+      'Interior & exterior painting expertise',
+      'Texture, stencil & designer wall painting',
+      'Proper surface preparation & priming',
+      'Clean, dust-free execution process',
+    ],
+    image: 'https://images.unsplash.com/photo-1562259929-b4e1fd3aef09?w=800&q=80',
+  },
+  {
+    id: '14',
+    title: 'Waterproofing',
+    slug: 'waterproofing',
+    icon: 'Wrench',
+    shortDesc: 'Advanced waterproofing for terraces, bathrooms & basements.',
+    description:
+      'We provide multi-layer waterproofing solutions for terraces, bathrooms, basements, and water tanks. Using industry-leading products from Dr. Fixit, Fosroc, and SikaFlex, we ensure complete protection against seepage and dampness. Our waterproofing comes with a 5-year leak-proof guarantee.',
+    benefits: [
+      '5-year leak-proof guarantee',
+      'Multi-layer waterproofing systems',
+      'Premium products (Dr. Fixit, Fosroc, Sika)',
+      'Terrace, bathroom & basement specialisation',
+      'Post-application inspection & testing',
+    ],
+    image: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80',
+  },
 ];
 
 /* ─────────────────────────────────────────────────────────────── */

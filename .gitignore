@@ -39,3 +39,7 @@ Thumbs.db
 
 # Custom
 /scratch/
+service-account.json
+find-href-leaks.js
+fix-blog-links.js
+

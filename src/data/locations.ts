@@ -113,6 +113,37 @@ export const locations: LocationData[] = [
   { slug:'waluj',     name:'Waluj',     zone:'Maharashtra', district:'Aurangabad', pincode:'431136', landmarks:['MIDC Waluj','Waluj Lake'], nearby:['Aurangabad','Paithan'] },
   { slug:'kamptee',   name:'Kamptee',   zone:'Maharashtra', district:'Nagpur', pincode:'441001', landmarks:['Dragon Palace Temple','Kamptee Cantonment'], nearby:['Nagpur'] },
   { slug:'raniganj',  name:'Raniganj',  zone:'West Bengal', district:'Paschim Bardhaman', pincode:'713347', landmarks:['Raniganj Market','Mejia Bridge'], nearby:['Asansol','Dhanbad'] },
+
+  /* ── Karnataka (Extended — 404 Fix) ──────────────────────── */
+  { slug:'whitefield',      name:'Whitefield',      zone:'Karnataka', district:'Bengaluru', pincode:'560066', landmarks:['ITPL','Phoenix Marketcity Whitefield','Graphite India'], nearby:['Bangalore','Koramangala'] },
+  { slug:'electronic-city', name:'Electronic City',  zone:'Karnataka', district:'Bengaluru', pincode:'560100', landmarks:['Infosys Campus','Wipro Campus','Electronic City Flyover'], nearby:['Bangalore','Koramangala'] },
+  { slug:'koramangala',     name:'Koramangala',      zone:'Karnataka', district:'Bengaluru', pincode:'560034', landmarks:['Forum Mall','Koramangala BDA Complex','Jyoti Nivas College'], nearby:['Bangalore','Whitefield','Electronic City'] },
+  { slug:'hunsur',          name:'Hunsur',           zone:'Karnataka', district:'Mysuru',    pincode:'571105', landmarks:['Hunsur Lake','Lakshmikanthaswamy Temple','Hunsur Bus Stand'], nearby:['Mysore','Bangalore'] },
+  { slug:'mandya',          name:'Mandya',           zone:'Karnataka', district:'Mandya',    pincode:'571401', landmarks:['KRS Dam','Sugar Factory','Mandya Town Hall'], nearby:['Mysore','Bangalore'] },
+
+  /* ── Jharkhand (Extended — 404 Fix) ──────────────────────── */
+  { slug:'mango',     name:'Mango',     zone:'Jharkhand', district:'East Singhbhum', pincode:'831012', landmarks:['Mango Market','Dimna Lake Road','Mango Station'], nearby:['Jamshedpur','Sakchi','Adityapur'] },
+  { slug:'sindri',    name:'Sindri',    zone:'Jharkhand', district:'Dhanbad',         pincode:'828122', landmarks:['Sindri Fertilizer Factory','Sindri Market'], nearby:['Dhanbad','Jharia'] },
+  { slug:'hatia',     name:'Hatia',     zone:'Jharkhand', district:'Ranchi',          pincode:'834003', landmarks:['Hatia Station','Hatia Dam','Ranchi Ring Road'], nearby:['Ranchi','Namkum','Bariatu'] },
+  { slug:'adityapur', name:'Adityapur', zone:'Jharkhand', district:'Seraikela-Kharsawan', pincode:'831013', landmarks:['Adityapur Industrial Area','Gamharia Bridge'], nearby:['Jamshedpur','Sakchi','Mango'] },
+  { slug:'jharia',    name:'Jharia',    zone:'Jharkhand', district:'Dhanbad',         pincode:'828111', landmarks:['Jharia Coalfield','Jharia Market','Tisra Falls'], nearby:['Dhanbad','Sindri'] },
+
+  /* ── West Bengal (Extended — 404 Fix) ────────────────────── */
+  { slug:'salt-lake',  name:'Salt Lake',  zone:'West Bengal', district:'Kolkata',           pincode:'700091', landmarks:['Salt Lake Sector V','Nicco Park','Central Park'], nearby:['Kolkata','New Town','Howrah'] },
+  { slug:'howrah',     name:'Howrah',     zone:'West Bengal', district:'Howrah',             pincode:'711101', landmarks:['Howrah Bridge','Howrah Station','Belur Math'], nearby:['Kolkata','Salt Lake'] },
+  { slug:'new-town',   name:'New Town',   zone:'West Bengal', district:'Kolkata',            pincode:'700156', landmarks:['Eco Park','Axis Mall','Biswa Bangla Gate'], nearby:['Kolkata','Salt Lake'] },
+  { slug:'durgapur',   name:'Durgapur',   zone:'West Bengal', district:'Paschim Bardhaman', pincode:'713201', landmarks:['Durgapur Steel Plant','Kumar Mangalam Park','City Centre Durgapur'], nearby:['Asansol','Raniganj'] },
+
+  /* ── Maharashtra (Extended — 404 Fix) ────────────────────── */
+  { slug:'boisar',     name:'Boisar',     zone:'Maharashtra', district:'Palghar',     pincode:'401501', landmarks:['Boisar Station','Tarapur Atomic Power Station','MIDC Tarapur'], nearby:['Virar','Vasai','Nalasopara'] },
+  { slug:'igatpuri',   name:'Igatpuri',   zone:'Maharashtra', district:'Nasik',       pincode:'422403', landmarks:['Vipassana Centre','Bhatsa Dam','Tringalwadi Fort'], nearby:['Nasik','Sinnar'] },
+  { slug:'sinnar',     name:'Sinnar',     zone:'Maharashtra', district:'Nasik',       pincode:'422103', landmarks:['Sinnar MIDC','Gondeshwar Temple','Sinnar Lake'], nearby:['Nasik','Igatpuri'] },
+  { slug:'deolali',    name:'Deolali',    zone:'Maharashtra', district:'Nasik',       pincode:'422401', landmarks:['Deolali Camp','Artillery Centre','Deolali Market'], nearby:['Nasik','Igatpuri','Sinnar'] },
+  { slug:'grant-road', name:'Grant Road', zone:'South Mumbai', district:'Mumbai City', pincode:'400007', landmarks:['Grant Road Station','Nana Chowk','Opera House'], nearby:['Tardeo','Marine Lines','Churchgate'] },
+  { slug:'wardha',     name:'Wardha',     zone:'Maharashtra', district:'Wardha',      pincode:'442001', landmarks:['Sewagram Ashram','Wardha Station','Bor Wildlife Sanctuary'], nearby:['Nagpur','Kamptee'] },
+
+  /* ── Goa (Extended — 404 Fix) ────────────────────────────── */
+  { slug:'calangute',  name:'Calangute',  zone:'Goa', district:'North Goa', pincode:'403516', landmarks:['Calangute Beach','St. Alex Church','Baga Beach'], nearby:['Panjim','Margao'] },
 ];
 
 export function normalizeSlug(slug: string): string {

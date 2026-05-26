@@ -61,6 +61,12 @@ const serviceDeepContent: Record<string, (loc: LocationData) => string> = {
 
   'plaster-work': (loc) =>
     `Professional plastering in ${loc.name} is the foundation of every great finish. Our plasterers near ${loc.landmarks[0] || loc.name} apply both internal gypsum plaster (for faster drying and smooth finish) and external cement-sand plaster (for weather resistance) with proper curing cycles. In ${loc.district}, where humidity and monsoon conditions vary, we adjust mix ratios and curing times to prevent cracking and ensure long-term adhesion.`,
+
+  'painting': (loc) =>
+    `Professional painting services in ${loc.name} cover both interior and exterior surfaces with premium brands like Asian Paints, Berger, and Nerolac. Our painters near ${loc.landmarks[0] || loc.name} begin with thorough surface preparation — filling cracks, applying putty, sanding smooth, and priming — before the first coat goes on. In ${loc.district}, we consider the local climate and humidity levels to select paint formulations that resist peeling, fading, and dampness for years.`,
+
+  'waterproofing': (loc) =>
+    `Waterproofing in ${loc.name} is critical for protecting your property against the ${loc.zone} monsoon and water seepage. Our waterproofing specialists near ${loc.landmarks[0] || loc.name} use multi-layer systems from Dr. Fixit, Fosroc, and Sika — including cementitious coating, liquid membrane application, and crystalline waterproofing. Whether it's a terrace, bathroom, basement, or water tank in ${loc.district}, we deliver a 5-year leak-proof guarantee backed by thorough post-application flood testing.`,
 };
 
 /* ── Generate unique paragraph based on location seed ──────── */

@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { getDb } from '@/lib/mongodb';
 import { Calendar, User, ArrowLeft, Share2, ShieldCheck, Clock, CheckCircle2, Facebook, Twitter, Linkedin, ArrowRight } from 'lucide-react';
 import { WhatsAppLogo, PhoneLogo } from '@/components/ui/BrandIcons';
+import { sanitizeBlogHtml } from '@/lib/sanitizeHtml';
 
 export const revalidate = 3600;
 
@@ -194,7 +195,7 @@ export default async function BlogArticlePage({ params }: { params: { slug: stri
                            prose-li:marker:text-orange-500 prose-li:marker:font-black
                            prose-blockquote:border-l-4 prose-blockquote:border-orange-500 prose-blockquote:bg-orange-500/5 prose-blockquote:p-6 prose-blockquote:rounded-r-xl prose-blockquote:italic prose-blockquote:text-xl
                            prose-img:rounded-2xl prose-img:shadow-2xl prose-img:border prose-img:border-[#1E2D45]"
-                 dangerouslySetInnerHTML={{ __html: blog.content }} />
+                 dangerouslySetInnerHTML={{ __html: sanitizeBlogHtml(blog.content || '') }} />
           </div>
 
           {/* Author/Quality Box */}
