@@ -146,13 +146,13 @@ export default function ServicesPageContent() {
                       </div>
                     </div>
 
-                    <h2 className="font-display font-bold text-white text-3xl lg:text-4xl mb-4 animate-on-scroll">
-                      {svc.title}
+                    <h2 className="font-display font-bold text-white text-3xl lg:text-4xl mb-4 animate-on-scroll hover:text-brand-amber transition-colors">
+                      <Link href={`/services/${svc.slug}`}>{svc.title}</Link>
                     </h2>
                     <p className="text-brand-smoke leading-relaxed mb-8 animate-on-scroll">
                       {svc.description}
                     </p>
-
+ 
                     {/* Benefits */}
                     <div className="mb-8 animate-on-scroll">
                       <h3 className="text-white font-semibold text-sm uppercase tracking-widest mb-4">
@@ -167,42 +167,37 @@ export default function ServicesPageContent() {
                         ))}
                       </ul>
                     </div>
-
+ 
                     {/* CTAs */}
-                    <div className="flex flex-wrap gap-3 items-center animate-on-scroll">
-                      <button onClick={() => openQuotePopup(svc.title)} className="btn-primary text-xs px-5 py-2.5">
-                        Request Service <ArrowRight size={14} />
-                      </button>
-                      <Link href={`/services/${svc.slug}`} className="btn-outline text-xs px-5 py-2.5 text-center hover:border-brand-amber hover:text-brand-amber transition-colors">
-                        View Full Details
+                    <div className="flex flex-wrap gap-3 animate-on-scroll">
+                      <Link href={`/services/${svc.slug}`} className="btn-primary text-xs px-5 py-2.5 flex items-center gap-1.5">
+                        Detailed Service Page <ArrowRight size={14} />
                       </Link>
+                      <button onClick={() => openQuotePopup(svc.title)} className="btn-outline text-xs px-4 py-2.5 hover:border-brand-amber hover:text-brand-amber transition-colors">
+                        Quick Estimate
+                      </button>
                       <div className="flex gap-2">
                         <a href="https://wa.me/918779391690" target="_blank" rel="noopener noreferrer"
                           className="btn-outline text-xs px-4 py-2.5 flex items-center gap-1.5 group">
                           <WhatsAppLogo className="w-4 h-4 fill-[#F97316] group-hover:fill-current" />
                           Consultation
                         </a>
-                        <a href="https://wa.me/919004298911" target="_blank" rel="noopener noreferrer"
-                          className="btn-outline text-xs px-4 py-2.5 flex items-center gap-1.5 group">
-                          <WhatsAppLogo className="w-4 h-4 fill-[#F97316] group-hover:fill-current" />
-                          Support
-                        </a>
                       </div>
                     </div>
                   </div>
-
+ 
                   {/* Image block */}
                   <div className="relative animate-on-scroll">
-                    <div className="relative h-[400px] lg:h-[500px] overflow-hidden">
+                    <Link href={`/services/${svc.slug}`} className="block relative h-[400px] lg:h-[500px] overflow-hidden group">
                       <Image
                         src={svc.image}
                         alt={svc.title}
                         fill
-                        className="object-cover"
+                        className="object-cover group-hover:scale-105 transition-transform duration-500"
                       />
                       {/* Amber accent corner */}
                       <div className={`absolute ${isEven ? 'bottom-0 right-0' : 'bottom-0 left-0'} w-16 h-16 bg-brand-amber`} />
-                    </div>
+                    </Link>
                     {/* Service name tag */}
                     <div className={`absolute top-6 ${isEven ? '-right-4' : '-left-4'} bg-brand-charcoal border border-brand-amber/40 px-4 py-2`}>
                       <span className="text-brand-amber text-xs font-mono">{svc.title}</span>
