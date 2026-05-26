@@ -169,10 +169,13 @@ export default function ServicesPageContent() {
                     </div>
 
                     {/* CTAs */}
-                    <div className="flex flex-wrap gap-3 animate-on-scroll">
+                    <div className="flex flex-wrap gap-3 items-center animate-on-scroll">
                       <button onClick={() => openQuotePopup(svc.title)} className="btn-primary text-xs px-5 py-2.5">
                         Request Service <ArrowRight size={14} />
                       </button>
+                      <Link href={`/services/${svc.slug}`} className="btn-outline text-xs px-5 py-2.5 text-center hover:border-brand-amber hover:text-brand-amber transition-colors">
+                        View Full Details
+                      </Link>
                       <div className="flex gap-2">
                         <a href="https://wa.me/918779391690" target="_blank" rel="noopener noreferrer"
                           className="btn-outline text-xs px-4 py-2.5 flex items-center gap-1.5 group">
