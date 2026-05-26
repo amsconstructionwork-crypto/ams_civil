@@ -48,7 +48,7 @@ export const metadata: Metadata = {
   },
 
   description:
-    '⭐ Looking for the best civil contractor in Mumbai? AMS Civil offers premium bungalow construction & renovations. 25+ Yrs Exp. 100% Free Estimate! Call +91 87793 91690.',
+    '🏗️ Looking for the best civil contractor in Mumbai? AMS Civil offers premium bungalow construction & renovations. 25+ Yrs Exp. 100% Free Estimate! Call +91 87793 91690.',
 
   keywords: [
     /* ── Brand ──────────────────────────────────────────── */

@@ -34,6 +34,24 @@ export async function generateStaticParams() {
   return params;
 }
 
+/* ── Realistic Service-Specific Emojis for Google CTR ── */
+const serviceEmojiMap: Record<string, string> = {
+  'bungalow-construction': '🏗️',
+  'full-interior-work': '🛋️',
+  'swimming-pool-work': '🌊',
+  'compound-wall-work': '🧱',
+  'building-repair-work': '🛠️',
+  'bathroom-renovation': '🛁',
+  'tiles-work': '🧱',
+  'kitchen-work': '🍽️',
+  'flooring-work': '📐',
+  'wall-work': '🧱',
+  'pop-work': '✨',
+  'plaster-work': '🛠️',
+  'painting': '🎨',
+  'waterproofing': '💧',
+};
+
 /* ── SEO Metadata Generation ────────────────────────── */
 export async function generateMetadata(
   { params }: { params: { location: string; service: string } }
@@ -42,9 +60,10 @@ export async function generateMetadata(
   const svc = services.find(s => s.slug === params.service);
   if (!loc || !svc) return { title: 'Not Found' };
 
+  const emoji = serviceEmojiMap[svc.slug] || '👷';
   const exactMatchKeyword = `Top ${svc.title} Contractor in ${loc.name}`;
   const title = `${exactMatchKeyword} (2026) | Free Quote`;
-  const description = `⭐ Looking for the best ${svc.title.toLowerCase()} in ${loc.name}, ${loc.district}? AMS Civil offers premium quality, 25+ yrs exp, and 100% Guaranteed Work. ${svc.benefits[0]}. Call for a Free Site Visit: +91 87793 91690.`;
+  const description = `${emoji} Looking for the best ${svc.title.toLowerCase()} in ${loc.name}, ${loc.district}? AMS Civil offers premium quality, 25+ yrs exp, and 100% Guaranteed Work. ${svc.benefits[0]}. Call for a Free Site Visit: +91 87793 91690.`;
 
   return {
     title,

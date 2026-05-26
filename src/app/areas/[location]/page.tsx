@@ -26,7 +26,7 @@ export async function generateMetadata(
   if (!loc) return { title: 'Not Found' };
 
   const title       = `Top Rated Civil Contractor in ${loc.name} (2026) | Free Visit`;
-  const description = `⭐ Award-Winning Civil Contractor in ${loc.name}, ${loc.district}. Premium bungalow construction, renovations & interior work. 100% Quality Guaranteed. Get a Free Site Visit Today! 📞 +91 87793 91690.`;
+  const description = `🏗️ Award-Winning Civil Contractor in ${loc.name}, ${loc.district}. Premium bungalow construction, renovations & interior work. 100% Quality Guaranteed. Get a Free Site Visit Today! 📞 +91 87793 91690.`;
 
   return {
     title,
