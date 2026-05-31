@@ -16,17 +16,9 @@ interface LeadFormData {
 
 export default function LeadGenPopup() {
   const [isOpen, setIsOpen] = useState(false);
-  const [hasShown, setHasShown] = useState(true); // Default to true until checked
+  const [hasShown, setHasShown] = useState(false);
 
   const { register, handleSubmit, reset, formState: { errors, isSubmitting } } = useForm<LeadFormData>();
-
-  useEffect(() => {
-    // Check if user has already seen the popup in this session
-    const shownBefore = sessionStorage.getItem('lead_gen_popup_shown');
-    if (!shownBefore) {
-      setHasShown(false);
-    }
-  }, []);
 
   useEffect(() => {
     if (hasShown) return;
@@ -36,13 +28,13 @@ export default function LeadGenPopup() {
       const windowHeight = window.innerHeight;
       const documentHeight = document.documentElement.scrollHeight;
       
-      // Show when user has scrolled 10% of the page
-      const scrollPercentage = (scrollY / (documentHeight - windowHeight)) * 100;
+      const scrollableDistance = documentHeight - windowHeight;
+      const scrollPercentage = scrollableDistance > 0 ? (scrollY / scrollableDistance) * 100 : 0;
 
-      if (scrollPercentage > 10) {
+      // Show when user has scrolled 10% of the page, or if page is short just show after a small scroll
+      if (scrollPercentage > 10 || (scrollY > 150 && scrollableDistance <= 0)) {
         setIsOpen(true);
         setHasShown(true);
-        sessionStorage.setItem('lead_gen_popup_shown', 'true');
         window.removeEventListener('scroll', handleScroll);
       }
     };
