@@ -59,6 +59,9 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     title: optimizedTitle,
     description: `⭐ ${blog.excerpt || `Read our expert guide on ${blog.title}.`} Get free estimates today!`,
     keywords: blog.seoKeywords || 'construction blog, civil contractors, ams civil construction',
+    alternates: {
+      canonical: `https://www.amscivilwork.in/blog/${blog.slug}`,
+    },
     openGraph: {
       type: 'article',
       title: optimizedTitle,

@@ -11,6 +11,7 @@ import Footer from '@/components/layout/Footer';
 import WhatsAppButton from '@/components/ui/WhatsAppButton';
 import QuotePopup from '@/components/ui/QuotePopup';
 import LeadGenPopup from '@/components/ui/LeadGenPopup';
+import PageTracker from '@/components/tracking/PageTracker';
 import { Toaster } from 'react-hot-toast';
 
 const playfair = Playfair_Display({
@@ -406,6 +407,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <WhatsAppButton />
         <QuotePopup />
         <LeadGenPopup />
+        <PageTracker />
       </body>
     </html>
   );

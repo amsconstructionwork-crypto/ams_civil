@@ -36,10 +36,10 @@ export default function LeadGenPopup() {
       const windowHeight = window.innerHeight;
       const documentHeight = document.documentElement.scrollHeight;
       
-      // Show when user has scrolled 35% of the page
+      // Show when user has scrolled 10% of the page
       const scrollPercentage = (scrollY / (documentHeight - windowHeight)) * 100;
 
-      if (scrollPercentage > 35) {
+      if (scrollPercentage > 10) {
         setIsOpen(true);
         setHasShown(true);
         localStorage.setItem('lead_gen_popup_shown', 'true');
