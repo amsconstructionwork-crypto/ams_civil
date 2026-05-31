@@ -11,6 +11,7 @@ import { locations } from '@/data/locations';
 import { CheckCircle, ArrowRight, ShieldCheck, MapPin, Star, Wrench, Hammer, Award, Shield } from 'lucide-react';
 import ModernCTA from '@/components/ui/ModernCTA';
 import { serviceDetailsData } from '@/data/serviceDetails';
+import { WhatsAppLogo } from '@/components/ui/BrandIcons';
 
 export async function generateStaticParams() {
   return services.map(s => ({ slug: s.slug }));
@@ -191,8 +192,8 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
             </a>
             <a href={`https://wa.me/918779391690?text=Hi! I need ${encodeURIComponent(svc.title)} service in Mumbai. Please call me.`}
               target="_blank" rel="noopener noreferrer"
-              className="btn-outline text-sm px-6 py-4 bg-[#101827]">
-              💬 WhatsApp Us
+              className="btn-outline text-sm px-6 py-4 bg-[#101827] flex items-center gap-2">
+              <WhatsAppLogo className="w-5 h-5 fill-white" /> WhatsApp Us
             </a>
           </div>
         </div>
