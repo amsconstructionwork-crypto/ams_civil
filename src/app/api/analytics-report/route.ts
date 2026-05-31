@@ -3,6 +3,8 @@
 // Triggered by Vercel Cron at 8 PM IST daily, or manually via GET request
 // Protected by CRON_SECRET to prevent unauthorized access
 
+export const dynamic = 'force-dynamic';
+
 import { NextRequest, NextResponse } from 'next/server';
 import { getDb } from '@/lib/mongodb';
 import nodemailer from 'nodemailer';

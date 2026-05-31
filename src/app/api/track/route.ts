@@ -2,6 +2,8 @@
 // POST /api/track — Records a page view in MongoDB for analytics
 // Lightweight, non-blocking, no user-facing delay
 
+export const dynamic = 'force-dynamic';
+
 import { NextRequest, NextResponse } from 'next/server';
 import { getDb } from '@/lib/mongodb';
 
