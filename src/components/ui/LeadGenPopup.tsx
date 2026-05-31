@@ -21,8 +21,8 @@ export default function LeadGenPopup() {
   const { register, handleSubmit, reset, formState: { errors, isSubmitting } } = useForm<LeadFormData>();
 
   useEffect(() => {
-    // Check if user has already seen the popup in this session or before
-    const shownBefore = localStorage.getItem('lead_gen_popup_shown');
+    // Check if user has already seen the popup in this session
+    const shownBefore = sessionStorage.getItem('lead_gen_popup_shown');
     if (!shownBefore) {
       setHasShown(false);
     }
@@ -42,7 +42,7 @@ export default function LeadGenPopup() {
       if (scrollPercentage > 10) {
         setIsOpen(true);
         setHasShown(true);
-        localStorage.setItem('lead_gen_popup_shown', 'true');
+        sessionStorage.setItem('lead_gen_popup_shown', 'true');
         window.removeEventListener('scroll', handleScroll);
       }
     };
