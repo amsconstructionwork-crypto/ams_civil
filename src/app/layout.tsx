@@ -343,14 +343,6 @@ const jsonLd = {
       name:             'AMS Civil Construction',
       description:      'Mumbai construction company — bungalows, bathrooms, kitchens, tiles, POP & more',
       publisher:        { '@id': 'https://www.amscivilwork.in/#business' },
-      potentialAction: {
-        '@type':       'SearchAction',
-        target: {
-          '@type':       'EntryPoint',
-          urlTemplate:   'https://www.amscivilwork.in/search?q={search_term_string}',
-        },
-        'query-input': 'required name=search_term_string',
-      },
     },
   ],
 };
