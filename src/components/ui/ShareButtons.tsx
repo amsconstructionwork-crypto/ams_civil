@@ -27,13 +27,13 @@ export default function ShareButtons({ title }: ShareButtonsProps) {
   const encodedTitle = encodeURIComponent(title);
 
   return (
-    <div className="flex flex-col sm:flex-row items-center gap-4 py-6 border-y border-white/10 my-8">
-      <div className="flex items-center gap-2 text-slate-300 font-medium">
-        <Share2 className="w-5 h-5 text-orange-500" />
-        <span>Share this article:</span>
+    <div className="fixed z-50 bottom-0 left-0 right-0 sm:bottom-auto sm:top-1/2 sm:-translate-y-1/2 sm:left-4 sm:right-auto bg-slate-900 sm:bg-transparent border-t border-slate-800 sm:border-none p-3 sm:p-0 flex sm:flex-col items-center justify-center gap-3 shadow-[0_-4px_20px_rgba(0,0,0,0.5)] sm:shadow-none">
+      <div className="hidden sm:flex flex-col items-center gap-2 mb-2">
+        <span className="text-orange-500 font-bold text-xs uppercase tracking-wider" style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}>Share</span>
+        <div className="w-px h-8 bg-orange-500/50"></div>
       </div>
       
-      <div className="flex items-center gap-3">
+      <div className="flex sm:flex-col items-center gap-3 w-full sm:w-auto justify-evenly">
         {/* WhatsApp */}
         <a
           href={`https://api.whatsapp.com/send?text=${encodedTitle}%20${encodedUrl}`}
