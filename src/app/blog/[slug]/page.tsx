@@ -128,8 +128,24 @@ export default async function BlogArticlePage({ params }: { params: { slug: stri
         {/* Background Gradients */}
         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-orange-500/5 rounded-full blur-[120px] pointer-events-none" />
         <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-500/5 rounded-full blur-[120px] pointer-events-none" />
+        <div className="container-custom max-w-7xl mx-auto relative z-10">
+          <div className="flex flex-col lg:flex-row gap-8">
+            
+            {/* Left Sidebar Ad (Desktop Only) */}
+            <aside className="hidden lg:block w-64 flex-shrink-0">
+              <div className="sticky top-32 flex flex-col items-center justify-start min-h-[600px] w-full bg-white/5 border border-dashed border-slate-600 rounded-xl p-4 text-center hover:bg-white/10 transition-colors">
+                <p className="text-slate-400 text-xs font-medium mb-1">Ad Space</p>
+                <ins className="adsbygoogle"
+                     style={{ display: 'block' }}
+                     data-ad-client="ca-pub-1153253906727408"
+                     data-ad-slot="XXXXXXX"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+              </div>
+            </aside>
 
-        <article className="container-custom max-w-4xl relative z-10">
+            {/* Main Article Content */}
+            <article className="flex-1 min-w-0 max-w-4xl mx-auto w-full">
           
           {/* Breadcrumbs & Back */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
@@ -290,8 +306,23 @@ export default async function BlogArticlePage({ params }: { params: { slug: stri
               </div>
             </section>
           )}
+            </article>
 
-        </article>
+            {/* Right Sidebar Ad (Desktop Only) */}
+            <aside className="hidden lg:block w-64 flex-shrink-0">
+              <div className="sticky top-32 flex flex-col items-center justify-start min-h-[600px] w-full bg-white/5 border border-dashed border-slate-600 rounded-xl p-4 text-center hover:bg-white/10 transition-colors">
+                <p className="text-slate-400 text-xs font-medium mb-1">Ad Space</p>
+                <ins className="adsbygoogle"
+                     style={{ display: 'block' }}
+                     data-ad-client="ca-pub-1153253906727408"
+                     data-ad-slot="XXXXXXX"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+              </div>
+            </aside>
+
+          </div>
+        </div>
       </main>
     </>
   );
