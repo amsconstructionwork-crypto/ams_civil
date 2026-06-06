@@ -133,8 +133,7 @@ export default async function BlogArticlePage({ params }: { params: { slug: stri
             
             {/* Left Sidebar Ad (Desktop Only) */}
             <aside className="hidden lg:block w-64 flex-shrink-0">
-              <div className="sticky top-32 flex flex-col items-center justify-start min-h-[600px] w-full bg-white/5 border border-dashed border-slate-600 rounded-xl p-4 text-center hover:bg-white/10 transition-colors">
-                <p className="text-slate-400 text-xs font-medium mb-1">Ad Space</p>
+              <div className="sticky top-32 w-full">
                 <ins className="adsbygoogle"
                      style={{ display: 'block' }}
                      data-ad-client="ca-pub-1153253906727408"
@@ -205,13 +204,11 @@ export default async function BlogArticlePage({ params }: { params: { slug: stri
 
           {/* Article Body */}
           <div className="relative">
-            {/* Google AdSense Placeholder (Top) */}
-            <div className="w-full my-8 bg-white/5 border border-dashed border-slate-600 rounded-xl p-6 flex flex-col items-center justify-center min-h-[120px] text-center hover:bg-white/10 transition-colors">
-               <p className="text-slate-400 text-sm font-medium mb-1">Advertisement Space Available</p>
-               <p className="text-slate-500 text-xs mb-3">Want to reach property buyers in {blog.locationTags && blog.locationTags.length > 0 ? blog.locationTags[0] : 'Mumbai'}? Contact us to place your Ad here.</p>
+            {/* Google AdSense (Top) */}
+            <div className="w-full my-8">
                <ins className="adsbygoogle"
                     style={{ display: 'block' }}
-                    data-ad-client="ca-pub-XXXXXXXXXXXXX"
+                    data-ad-client="ca-pub-1153253906727408"
                     data-ad-slot="XXXXXXX"
                     data-ad-format="auto"
                     data-full-width-responsive="true"></ins>
@@ -228,6 +225,16 @@ export default async function BlogArticlePage({ params }: { params: { slug: stri
                            prose-blockquote:border-l-4 prose-blockquote:border-orange-500 prose-blockquote:bg-orange-500/5 prose-blockquote:p-6 prose-blockquote:rounded-r-xl prose-blockquote:italic prose-blockquote:text-xl
                            prose-img:rounded-2xl prose-img:shadow-2xl prose-img:border prose-img:border-[#1E2D45]"
                  dangerouslySetInnerHTML={{ __html: sanitizeBlogHtml(blog.content || '') }} />
+          </div>
+
+          {/* Google AdSense (Bottom - 90% Read) */}
+          <div className="w-full mt-12 mb-8">
+             <ins className="adsbygoogle"
+                  style={{ display: 'block' }}
+                  data-ad-client="ca-pub-1153253906727408"
+                  data-ad-slot="XXXXXXX"
+                  data-ad-format="auto"
+                  data-full-width-responsive="true"></ins>
           </div>
 
           <div className="mt-8 px-2">
@@ -310,8 +317,7 @@ export default async function BlogArticlePage({ params }: { params: { slug: stri
 
             {/* Right Sidebar Ad (Desktop Only) */}
             <aside className="hidden lg:block w-64 flex-shrink-0">
-              <div className="sticky top-32 flex flex-col items-center justify-start min-h-[600px] w-full bg-white/5 border border-dashed border-slate-600 rounded-xl p-4 text-center hover:bg-white/10 transition-colors">
-                <p className="text-slate-400 text-xs font-medium mb-1">Ad Space</p>
+              <div className="sticky top-32 w-full">
                 <ins className="adsbygoogle"
                      style={{ display: 'block' }}
                      data-ad-client="ca-pub-1153253906727408"
