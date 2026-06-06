@@ -134,7 +134,7 @@ export default function AnalyticsTab() {
                       <span className="text-slate-400 font-mono">{device.count} <span className="text-xs">({percentage}%)</span></span>
                     </div>
                     <div className="w-full bg-slate-800 rounded-full h-1.5">
-                      <div className="bg-blue-500 h-1.5 rounded-full" style={{ width: \`\${percentage}%\` }}></div>
+                      <div className="bg-blue-500 h-1.5 rounded-full" style={{ width: `${percentage}%` }}></div>
                     </div>
                   </div>
                 );
