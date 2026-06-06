@@ -188,6 +188,18 @@ export default async function BlogArticlePage({ params }: { params: { slug: stri
 
           {/* Article Body */}
           <div className="relative">
+            {/* Google AdSense Placeholder (Top) */}
+            <div className="w-full my-8 bg-white/5 border border-dashed border-slate-600 rounded-xl p-6 flex flex-col items-center justify-center min-h-[120px] text-center hover:bg-white/10 transition-colors">
+               <p className="text-slate-400 text-sm font-medium mb-1">Advertisement Space Available</p>
+               <p className="text-slate-500 text-xs mb-3">Want to reach property buyers in {blog.locationTags && blog.locationTags.length > 0 ? blog.locationTags[0] : 'Mumbai'}? Contact us to place your Ad here.</p>
+               <ins className="adsbygoogle"
+                    style={{ display: 'block' }}
+                    data-ad-client="ca-pub-XXXXXXXXXXXXX"
+                    data-ad-slot="XXXXXXX"
+                    data-ad-format="auto"
+                    data-full-width-responsive="true"></ins>
+            </div>
+
             <div className="prose prose-invert prose-orange max-w-none 
                            prose-headings:font-display prose-headings:font-black
                            prose-h2:text-3xl prose-h2:text-white prose-h2:mt-12 prose-h2:mb-6 prose-h2:pb-4 prose-h2:border-b-2 prose-h2:border-orange-500/20
@@ -201,8 +213,28 @@ export default async function BlogArticlePage({ params }: { params: { slug: stri
                  dangerouslySetInnerHTML={{ __html: sanitizeBlogHtml(blog.content || '') }} />
           </div>
 
+          {/* Location-Specific Lead Generation Banner */}
+          <div className="mt-12 p-8 rounded-2xl relative overflow-hidden group shadow-2xl border border-orange-500/30" 
+               style={{ background: 'linear-gradient(135deg, #101827 0%, #1E2D45 100%)' }}>
+            <div className="absolute top-0 right-0 w-64 h-64 bg-orange-500/10 blur-[60px] rounded-full translate-x-1/2 -translate-y-1/2" />
+            <div className="relative z-10 text-center sm:text-left flex flex-col md:flex-row items-center justify-between gap-6">
+              <div>
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/20 text-orange-400 text-xs font-bold uppercase tracking-widest mb-3">
+                  <ShieldCheck size={14} /> Verified Contractors
+                </div>
+                <h3 className="text-white font-display text-2xl sm:text-3xl font-black mb-2">
+                  Looking for the Best Civil Contractor in <span className="text-orange-400">{blog.locationTags && blog.locationTags.length > 0 ? blog.locationTags[0] : 'Mumbai'}</span>?
+                </h3>
+                <p className="text-slate-300 text-md">Get a free site visit and estimate today. No hidden charges.</p>
+              </div>
+              <a href="tel:+918779391690" className="px-8 py-4 bg-orange-500 text-white font-black text-lg rounded-xl hover:bg-orange-600 transition-all hover:scale-105 shadow-[0_0_20px_rgba(249,115,22,0.4)] whitespace-nowrap flex items-center gap-2">
+                <PhoneLogo className="w-5 h-5 fill-white" /> Call Now
+              </a>
+            </div>
+          </div>
+
           {/* Author/Quality Box */}
-          <div className="mt-16 p-8 rounded-2xl bg-[#101827] border border-[#1E2D45] flex items-center gap-6">
+          <div className="mt-12 p-8 rounded-2xl bg-[#101827] border border-[#1E2D45] flex items-center gap-6">
             <div className="w-16 h-16 rounded-full bg-gradient-to-br from-orange-400 to-orange-600 p-0.5 hidden sm:block">
               <div className="w-full h-full rounded-full bg-[#0B1120] flex items-center justify-center text-white font-bold text-2xl">
                 {blog.author?.[0] || 'A'}

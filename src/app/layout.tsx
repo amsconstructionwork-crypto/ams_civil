@@ -360,6 +360,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
 
+        {/* Google AdSense Verification */}
+        <Script 
+          async 
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1153253906727408"
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
+
         {/* Preconnect for Cloudinary images */}
         <link rel="preconnect" href="https://res.cloudinary.com" />
         {/* PWA Manifest */}

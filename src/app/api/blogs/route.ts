@@ -62,6 +62,7 @@ export async function POST(request: NextRequest) {
       featuredImage: featuredImage || null,
       seoKeywords: sanitizeInput(seoKeywords)?.trim() || '',
       author: sanitizeInput(author)?.trim() || 'AMS Civil Team',
+      locationTags: body.locationTags || [], // Array of location strings (e.g., ["Borivali", "Navi Mumbai"])
       published: Boolean(published),
       publishDate: publishDate ? new Date(publishDate) : new Date(),
       createdAt: new Date(),

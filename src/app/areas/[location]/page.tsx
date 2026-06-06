@@ -100,14 +100,24 @@ export default async function LocationPage({ params }: { params: { location: str
 
   /* ── Dynamic Content Injection (Fixes Thin Content Penalty) ── */
   let localProjects: any[] = [];
+  let localBlogs: any[] = [];
   try {
     const db = await getDb();
     localProjects = await db.collection('projects').find({ 
       location: { $regex: new RegExp(loc.name, 'i') },
       status: 'completed'
     }).limit(3).toArray();
+
+    localBlogs = await db.collection('blogs').find({
+      published: true,
+      $or: [
+        { locationTags: { $in: [loc.name, loc.zone, ...loc.nearby] } },
+        { title: { $regex: new RegExp(loc.name, 'i') } },
+        { seoKeywords: { $regex: new RegExp(loc.name, 'i') } }
+      ]
+    }).sort({ createdAt: -1 }).limit(3).toArray();
   } catch (e) {
-    console.error('Failed to fetch local projects', e);
+    console.error('Failed to fetch local projects or blogs', e);
   }
 
   /* JSON-LD for this specific location — optimized for Google Rich Results */
@@ -497,6 +507,29 @@ export default async function LocationPage({ params }: { params: { location: str
                   <h3 className="text-white font-bold mb-2">{project.title}</h3>
                   <p className="text-slate-400 text-sm line-clamp-2">{project.description}</p>
                 </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* ── Dynamic Local Blogs (SEO Value) ──────── */}
+      {localBlogs.length > 0 && (
+        <section className="section-y bg-[#0B1120] border-t border-white/5">
+          <div className="container-custom">
+            <div className="text-center mb-12">
+              <div className="section-label mx-auto">Construction Guides</div>
+              <h2 className="font-display text-3xl lg:text-4xl text-white mt-4">
+                Latest Property & Civil Updates in <span className="text-gradient">{loc.name}</span>
+              </h2>
+            </div>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {localBlogs.map((blog: any) => (
+                <Link key={blog._id.toString()} href={`/blog/${blog.slug}`} className="card p-5 group hover:border-orange-500/40 transition-colors">
+                  <h3 className="text-white font-bold mb-2 group-hover:text-orange-400 transition-colors line-clamp-2">{blog.title}</h3>
+                  <p className="text-slate-400 text-sm line-clamp-3 mb-4">{blog.excerpt}</p>
+                  <span className="text-orange-400 text-xs font-bold flex items-center gap-1">Read Guide <ArrowRight size={14}/></span>
+                </Link>
               ))}
             </div>
           </div>

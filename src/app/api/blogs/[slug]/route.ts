@@ -58,6 +58,7 @@ export async function PUT(
       featuredImage: featuredImage || null,
       seoKeywords: sanitizeInput(seoKeywords)?.trim() || '',
       author: sanitizeInput(author)?.trim() || 'AMS Civil Team',
+      locationTags: body.locationTags || [], // Array of location strings
       published: Boolean(published),
       publishDate: publishDate ? new Date(publishDate) : new Date(),
       updatedAt: new Date(),

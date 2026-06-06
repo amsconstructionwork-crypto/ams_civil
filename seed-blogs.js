@@ -39,6 +39,7 @@ async function run() {
         updatedAt: new Date(),
         published: true,
         seoKeywords: "ghar banane ka kharcha, construction cost in mumbai 2026, 1000 sq ft house construction cost, civil contractor mumbai, ghar banane wala",
+        locationTags: ["Mumbai", "Navi Mumbai", "Thane"],
         content: `
 <h2>Mumbai Mein Ghar Banane Ka Kharcha: 2026 Updated Guide</h2>
 <p>Agar aap Mumbai, Navi Mumbai ya Thane mein apna naya ghar (bungalow ya villa) banane ka soch rahe hain, toh sabse pehla sawal aata hai — <strong>"Kharcha kitna aayega?"</strong></p>
@@ -82,6 +83,7 @@ async function run() {
         updatedAt: new Date(),
         published: true,
         seoKeywords: "bathroom renovation cost mumbai, tiles lagane ka rate, best tiles mistri in mumbai, plumbing cost, bathroom remodeling",
+        locationTags: ["Mumbai", "Andheri", "Borivali"],
         content: `
 <h2>Bathroom Renovation Cost in Mumbai (2026)</h2>
 <p>Mumbai ke flats mein bathroom chote hote hain, par sabko ek premium aur luxury feel chahiye hota hai. Ek complete <strong>bathroom renovation</strong> ka kharcha Mumbai mein ₹40,000 se leke ₹1,20,000 tak jaa sakta hai.</p>
@@ -130,6 +132,7 @@ async function run() {
         updatedAt: new Date(),
         published: true,
         seoKeywords: "waterproofing contractor mumbai, roof waterproofing, wall seelan repair, leakage solution mumbai, best civil contractor",
+        locationTags: ["Mumbai", "Mira Road", "Kandivali"],
         content: `
 <h2>Waterproofing in Mumbai: Seelan Aur Leakage Se Bachne Ke Tarike</h2>
 <p>Mumbai ki baarish (Monsoons) apne saath bahut si problems le aati hai, jismein sabse badi problem hai diwaaron mein <strong>seelan (dampness)</strong> aur chhat (roof) se leakage. Agar iska ilaj sahi waqt par nahi kiya gaya, toh aapka mehenga paint aur furniture dono kharab ho sakte hain.</p>
@@ -163,13 +166,12 @@ async function run() {
     ];
 
     for (const blog of blogs) {
-      const exists = await blogsCollection.findOne({ slug: blog.slug });
-      if (!exists) {
-        await blogsCollection.insertOne(blog);
-        console.log("Inserted blog: " + blog.title);
-      } else {
-        console.log("Blog already exists: " + blog.title);
-      }
+      await blogsCollection.updateOne(
+        { slug: blog.slug },
+        { $set: blog },
+        { upsert: true }
+      );
+      console.log("Upserted blog: " + blog.title);
     }
     console.log("Seeding complete!");
   } catch(e) {
