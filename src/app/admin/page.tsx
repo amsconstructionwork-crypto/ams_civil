@@ -11,17 +11,18 @@ import {
   Eye, X, Save, CheckCircle, Clock, HardHat, LogIn, LogOut, Lock,
   User, Eye as EyeIcon, EyeOff, ShieldCheck, AlertCircle, Upload,
   ImageIcon, RefreshCw, Mail, Calendar, Tag, MapPin,
-  Bell, BellOff, Search, PenTool, MessageCircle
+  Bell, BellOff, Search, PenTool, MessageCircle, BarChart3
 } from 'lucide-react';
 import { WhatsAppLogo, PhoneLogo } from '@/components/ui/BrandIcons';
 import toast from 'react-hot-toast';
 import BlogsTab from '@/components/admin/BlogsTab';
+import AnalyticsTab from '@/components/admin/AnalyticsTab';
 
 /* ─── Session key only — credentials live in .env.local on server ─ */
 const SESSION_KEY = 'mandal_admin_auth';
 
 /* ─── Types ─────────────────────────────────────────────────────── */
-type Tab        = 'overview' | 'projects' | 'gallery' | 'enquiries' | 'testimonials' | 'blogs';
+type Tab        = 'overview' | 'projects' | 'gallery' | 'enquiries' | 'testimonials' | 'blogs' | 'analytics';
 type ProjStatus = 'ongoing' | 'completed';
 type EnqStatus  = 'new' | 'contacted' | 'converted';
 
@@ -433,6 +434,7 @@ function Dashboard({ onLogout }: { onLogout: () => void }) {
           <nav className="flex lg:flex-col gap-1 lg:w-52 flex-shrink-0 overflow-x-auto pb-2 lg:pb-0 scroll-smooth" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
             {([
               { id: 'overview',  label: 'Overview',  icon: LayoutDashboard },
+              { id: 'analytics', label: 'Traffic Analytics', icon: BarChart3 },
               { id: 'projects',  label: 'Projects',  icon: FolderOpen      },
               { id: 'gallery',   label: 'Gallery',   icon: ImageIcon       },
               { id: 'enquiries', label: 'Enquiries', icon: MessageSquare   },
@@ -456,6 +458,7 @@ function Dashboard({ onLogout }: { onLogout: () => void }) {
 
           {/* Tab content */}
           <div className="flex-1 min-w-0">
+            {activeTab === 'analytics' && <AnalyticsTab />}
             {activeTab === 'blogs' && <BlogsTab />}
             {activeTab === 'testimonials' && (
               <TestimonialsTab 
