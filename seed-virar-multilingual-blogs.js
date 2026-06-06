@@ -70,12 +70,12 @@ async function run() {
 <p>If you have a property in Virar, contact us today for a <strong>Free Site Visit and Quotation</strong>!</p>
         `
       },
-      // 2. HINDI VERSION
+      // 2. HINDI VERSION (PURE HINDI)
       {
-        title: "Virar Mein Naya Ghar Banwane Ya Renovate Karne Ka Kharcha (2026)",
+        title: "विरार में नया घर बनवाने या रिनोवेट (Renovate) करने का खर्च (2026)",
         slug: "virar-flat-renovation-cost-hindi",
-        excerpt: "Kya aap Virar mein naya flat le rahe hain ya plot lekar bungalow banwana chahte hain? Jaaniye Virar mein civil work, tiles aur painting ka exact kharcha.",
-        author: "Mandal Civil Works Expert",
+        excerpt: "क्या आप विरार में नया फ्लैट ले रहे हैं या प्लॉट लेकर बंगला बनवाना चाहते हैं? जानिए विरार में सिविल वर्क, टाइल्स और पेंटिंग का सही खर्च।",
+        author: "मंडल सिविल वर्क्स एक्सपर्ट",
         publishDate: new Date(),
         createdAt: new Date(),
         updatedAt: new Date(),
@@ -83,31 +83,31 @@ async function run() {
         seoKeywords: "virar civil contractor hindi, virar flat renovation cost, bungalow construction virar, best contractor in virar west, global city interior design",
         locationTags: ["Virar", "Vasai", "Palghar", "Western Line"],
         content: `
-<h2>Virar: Naye Gharon Ka Naya Thikana</h2>
-<p>Pichle kuch saalon mein Virar sabse tezi se badhta hua area ban gaya hai. Global City (Virar West) jaise bade projects aur Virar East mein naye plots ke aane se, yahan property kharidna ek smart investment ban gaya hai.</p>
+<h2>विरार: नए घरों का नया ठिकाना</h2>
+<p>पिछले कुछ सालों में विरार सबसे तेज़ी से बढ़ता हुआ इलाका बन गया है। ग्लोबल सिटी (विरार वेस्ट) जैसे बड़े प्रोजेक्ट्स और विरार ईस्ट में नए प्लॉट्स के आने से, यहाँ प्रॉपर्टी खरीदना एक शानदार निवेश (Investment) बन गया है।</p>
 
-<p>Lekin ghar kharidne ke baad sabse bada sawal aata hai: <strong>"Andar ka kaam (Civil Work aur Interior) kis se karwayein aur kharcha kitna aayega?"</strong> Aaj hum isi par baat karenge.</p>
+<p>लेकिन घर खरीदने के बाद सबसे बड़ा सवाल आता है: <strong>"अंदर का काम (सिविल वर्क और इंटीरियर) किससे करवाएं और खर्च कितना आएगा?"</strong> आज हम इसी विषय पर बात करेंगे।</p>
 
-<h3>Virar Mein 1BHK / 2BHK Flat Renovation Ka Kharcha</h3>
-<p>Agar aapne resale flat liya hai ya builder ne aapko 'bare shell' (khaali) flat diya hai, toh usko rehne layak banane mein yeh kharcha aa sakta hai:</p>
+<h3>विरार में 1BHK / 2BHK फ्लैट रिनोवेशन का खर्च</h3>
+<p>अगर आपने रीसेल (Resale) फ्लैट लिया है या बिल्डर ने आपको 'बेयर शेल' (खाली) फ्लैट दिया है, तो उसको रहने लायक बनाने में यह खर्च आ सकता है:</p>
 <ul>
-  <li><strong>Farsh (Flooring):</strong> Nayi vitrified tiles lagane ka kharcha material aur labour ke sath lagbhag ₹60,000 se ₹90,000 aata hai.</li>
-  <li><strong>Bathroom aur Waterproofing:</strong> Virar mein baarish bahut hoti hai, isliye proper waterproofing bahut zaroori hai. Ek bathroom ka naya kaam ₹50,000 se ₹70,000 tak jata hai.</li>
-  <li><strong>Kitchen Platform:</strong> Naya mazboot civil platform aur wall tiles lagane mein ₹45,000 se ₹65,000 lagte hain.</li>
-  <li><strong>POP aur Paint:</strong> Deewaron ko smooth karne aur POP ceiling banane ka kharcha ₹50,000 se ₹80,000 ke beech aata hai.</li>
+  <li><strong>फर्श (Flooring):</strong> नई विट्रीफाइड टाइल्स लगाने का खर्च (सामान और लेबर के साथ) लगभग ₹60,000 से ₹90,000 के बीच आता है।</li>
+  <li><strong>बाथरूम और वॉटरप्रूफिंग:</strong> विरार में बारिश बहुत होती है, इसलिए सही वॉटरप्रूफिंग बहुत ज़रूरी है। एक बाथरूम का नया काम ₹50,000 से ₹70,000 तक जाता है।</li>
+  <li><strong>किचन प्लैटफॉर्म:</strong> नया मज़बूत सिविल प्लैटफॉर्म और दीवार पर टाइल्स लगाने में ₹45,000 से ₹65,000 लगते हैं।</li>
+  <li><strong>पीओपी (POP) और पेंटिंग:</strong> दीवारों को स्मूथ करने और पीओपी सीलिंग बनाने का खर्च ₹50,000 से ₹80,000 के बीच आता है।</li>
 </ul>
 
-<h3>Virar Mein Plot Lekar Bungalow Banwane Ka Kharcha</h3>
-<p>Virar East aur gaon wale (Gaothan) areas mein log zameen lekar apna aalishan bungalow banwa rahe hain. Agar aap base se lekar pura finishing tak kisi thekedar ko dete hain (Turnkey Contract), toh iska rate <strong>₹1,700 se ₹2,200 per sq.ft.</strong> tak padta hai. Isme mitti khudai se lekar chabi dene tak ka sab kaam thekedar karta hai.</p>
+<h3>विरार में प्लॉट लेकर बंगला बनवाने का खर्च</h3>
+<p>विरार ईस्ट और गाँव वाले (गाँवठाण) इलाकों में लोग ज़मीन लेकर अपना आलीशान बंगला बनवा रहे हैं। अगर आप बेस (नींव) से लेकर पूरा फिनिशिंग तक किसी ठेकेदार को काम देते हैं (टर्नकी कॉन्ट्रैक्ट), तो इसका रेट <strong>₹1,700 से ₹2,200 प्रति स्क्वायर फीट</strong> तक पड़ता है। इसमें मिट्टी की खुदाई से लेकर चाबी सौंपने तक का सारा काम ठेकेदार करता है।</p>
 
-<h3>Virar Mein Mandal Civil Works Hi Kyun?</h3>
-<p>Ghar ka kaam ek baar hota hai, isliye kisi anjaan mistri par bharosa karna nuksan daayak ho sakta hai. <strong>Mandal Civil Works</strong> pichle 20 saalon se Vasai-Virar aur Mumbai mein kaam kar raha hai.</p>
+<h3>विरार में मंडल सिविल वर्क्स ही क्यों?</h3>
+<p>घर का काम बार-बार नहीं होता, इसलिए किसी अनजान मिस्त्री पर भरोसा करना नुकसानदायक हो सकता है। <strong>मंडल सिविल वर्क्स (Mandal Civil Works)</strong> पिछले 20 सालों से वसई-विरार और मुंबई में काम कर रहा है।</p>
 <ul>
-  <li><strong>Saaf Hisaab (Transparent Pricing):</strong> Hum pehle hi written quotation dete hain jisme material ka naam likha hota hai.</li>
-  <li><strong>Turnkey Service:</strong> Plumber, Painter, aur Tiler alag alag nahi dhoondhne padenge, humari ek hi team sab karegi.</li>
+  <li><strong>साफ हिसाब (Transparent Pricing):</strong> हम पहले ही लिखित कोटेशन (Quotation) देते हैं जिसमें लगाए जाने वाले सामान का नाम लिखा होता है।</li>
+  <li><strong>टर्नकी सर्विस (Turnkey Service):</strong> आपको प्लंबर, पेंटर और टाइल्स लगाने वाले को अलग-अलग नहीं ढूँढना पड़ेगा, हमारी एक ही टीम सब कुछ करेगी।</li>
 </ul>
 
-<p>Agar aap Virar mein property le chuke hain, toh aaj hi humein call karein aur <strong>Free Estimate</strong> payein!</p>
+<p>अगर आपने विरार में प्रॉपर्टी ली है, तो आज ही हमें कॉल करें और <strong>फ्री एस्टीमेट (Free Estimate)</strong> पाएं!</p>
         `
       },
       // 3. MARATHI VERSION
