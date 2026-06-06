@@ -6,6 +6,7 @@ import { getDb } from '@/lib/mongodb';
 import { Calendar, User, ArrowLeft, Share2, ShieldCheck, Clock, CheckCircle2, Facebook, Twitter, Linkedin, ArrowRight } from 'lucide-react';
 import { WhatsAppLogo, PhoneLogo } from '@/components/ui/BrandIcons';
 import { sanitizeBlogHtml } from '@/lib/sanitizeHtml';
+import ShareButtons from '@/components/ui/ShareButtons';
 
 export const revalidate = 3600;
 
@@ -211,6 +212,10 @@ export default async function BlogArticlePage({ params }: { params: { slug: stri
                            prose-blockquote:border-l-4 prose-blockquote:border-orange-500 prose-blockquote:bg-orange-500/5 prose-blockquote:p-6 prose-blockquote:rounded-r-xl prose-blockquote:italic prose-blockquote:text-xl
                            prose-img:rounded-2xl prose-img:shadow-2xl prose-img:border prose-img:border-[#1E2D45]"
                  dangerouslySetInnerHTML={{ __html: sanitizeBlogHtml(blog.content || '') }} />
+          </div>
+
+          <div className="mt-8 px-2">
+            <ShareButtons title={blog.title} />
           </div>
 
           {/* Location-Specific Lead Generation Banner */}
