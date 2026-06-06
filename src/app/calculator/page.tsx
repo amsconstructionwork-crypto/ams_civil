@@ -59,11 +59,10 @@ export default function CalculatorPage() {
       if (services.includes('painting')) total += (base * 0.25);
     }
 
-    if (total === 0) total = base; // Fallback if nothing selected
+    if (total === 0) total = base;
 
     total = total * condMult;
 
-    // Return a range
     const min = Math.floor(total * 0.9);
     const max = Math.floor(total * 1.15);
 
@@ -77,8 +76,8 @@ export default function CalculatorPage() {
   const estimate = calculateEstimate();
 
   const handleWhatsApp = () => {
-    const text = `Hi AMS Civil! I used your calculator.%0A%0A*Property:* ${propertyType}%0A*Services:* ${services.length > 0 ? services.join(', ') : 'Not selected'}%0A*Quality:* ${condition}%0A*Estimated Range:* ${estimate.min} - ${estimate.max}%0A%0APlease provide me an exact quote.`;
-    window.open(`https://wa.me/918779391690?text=${text}`, '_blank');
+    const text = `Hi AMS Civil! I used your calculator.\n\n*Property:* ${propertyType}\n*Services:* ${services.length > 0 ? services.join(', ') : 'Not selected'}\n*Quality:* ${condition}\n*Estimated Range:* ${estimate.min} - ${estimate.max}\n\nPlease provide me an exact quote.`;
+    window.open(`https://wa.me/918779391690?text=${encodeURIComponent(text)}`, '_blank');
   };
 
   return (
@@ -98,21 +97,19 @@ export default function CalculatorPage() {
           </div>
 
           <div className="bg-[#101827] border border-[#1E2D45] rounded-3xl p-6 sm:p-10 shadow-2xl relative overflow-hidden">
-            {/* Progress Bar */}
             <div className="flex items-center justify-between mb-10 relative">
               <div className="absolute left-0 top-1/2 -translate-y-1/2 w-full h-1 bg-[#1E2D45] -z-10" />
               <div 
                 className="absolute left-0 top-1/2 -translate-y-1/2 h-1 bg-orange-500 -z-10 transition-all duration-500" 
-                style={{ width: \`\${((step - 1) / 2) * 100}%\` }}
+                style={{ width: `${((step - 1) / 2) * 100}%` }}
               />
               {[1, 2, 3].map((num) => (
-                <div key={num} className={\`w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm transition-colors \${step >= num ? 'bg-orange-500 text-white' : 'bg-[#1E2D45] text-slate-400'}\`}>
+                <div key={num} className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm transition-colors ${step >= num ? 'bg-orange-500 text-white' : 'bg-[#1E2D45] text-slate-400'}`}>
                   {step > num ? <CheckCircle2 size={20} /> : num}
                 </div>
               ))}
             </div>
 
-            {/* Step 1: Property Type */}
             {step === 1 && (
               <div className="animate-fade-in">
                 <h2 className="text-2xl text-white font-bold mb-6">1. What is your property type?</h2>
@@ -121,7 +118,7 @@ export default function CalculatorPage() {
                     <button
                       key={opt.id}
                       onClick={() => setPropertyType(opt.id)}
-                      className={\`p-4 rounded-xl border flex flex-col items-center justify-center gap-3 transition-all \${propertyType === opt.id ? 'border-orange-500 bg-orange-500/10 text-orange-400' : 'border-[#1E2D45] bg-white/5 text-slate-300 hover:border-orange-500/50 hover:bg-white/10'}\`}
+                      className={`p-4 rounded-xl border flex flex-col items-center justify-center gap-3 transition-all ${propertyType === opt.id ? 'border-orange-500 bg-orange-500/10 text-orange-400' : 'border-[#1E2D45] bg-white/5 text-slate-300 hover:border-orange-500/50 hover:bg-white/10'}`}
                     >
                       <opt.icon size={32} className={propertyType === opt.id ? 'text-orange-500' : 'text-slate-500'} />
                       <span className="font-medium text-center">{opt.label}</span>
@@ -136,7 +133,6 @@ export default function CalculatorPage() {
               </div>
             )}
 
-            {/* Step 2: Services */}
             {step === 2 && (
               <div className="animate-fade-in">
                 <h2 className="text-2xl text-white font-bold mb-6">2. What services do you need?</h2>
@@ -145,13 +141,13 @@ export default function CalculatorPage() {
                     <button
                       key={opt.id}
                       onClick={() => toggleService(opt.id)}
-                      className={\`p-5 rounded-xl border text-left flex items-start gap-4 transition-all \${services.includes(opt.id) ? 'border-orange-500 bg-orange-500/10' : 'border-[#1E2D45] bg-white/5 hover:border-orange-500/50 hover:bg-white/10'}\`}
+                      className={`p-5 rounded-xl border text-left flex items-start gap-4 transition-all ${services.includes(opt.id) ? 'border-orange-500 bg-orange-500/10' : 'border-[#1E2D45] bg-white/5 hover:border-orange-500/50 hover:bg-white/10'}`}
                     >
-                      <div className={\`p-3 rounded-lg \${services.includes(opt.id) ? 'bg-orange-500 text-white' : 'bg-[#1E2D45] text-slate-400'}\`}>
+                      <div className={`p-3 rounded-lg ${services.includes(opt.id) ? 'bg-orange-500 text-white' : 'bg-[#1E2D45] text-slate-400'}`}>
                         <opt.icon size={24} />
                       </div>
                       <div>
-                        <h3 className={\`font-bold text-lg mb-1 \${services.includes(opt.id) ? 'text-orange-400' : 'text-white'}\`}>{opt.label}</h3>
+                        <h3 className={`font-bold text-lg mb-1 ${services.includes(opt.id) ? 'text-orange-400' : 'text-white'}`}>{opt.label}</h3>
                         <p className="text-slate-400 text-sm">{opt.desc}</p>
                       </div>
                     </button>
@@ -172,7 +168,6 @@ export default function CalculatorPage() {
               </div>
             )}
 
-            {/* Step 3: Result */}
             {step === 3 && (
               <div className="animate-fade-in">
                 <h2 className="text-2xl text-white font-bold mb-6">3. Select Finish Quality</h2>
@@ -181,9 +176,9 @@ export default function CalculatorPage() {
                     <button
                       key={opt.id}
                       onClick={() => setCondition(opt.id)}
-                      className={\`p-5 rounded-xl border text-center transition-all \${condition === opt.id ? 'border-orange-500 bg-orange-500/10' : 'border-[#1E2D45] bg-white/5 hover:border-orange-500/50 hover:bg-white/10'}\`}
+                      className={`p-5 rounded-xl border text-center transition-all ${condition === opt.id ? 'border-orange-500 bg-orange-500/10' : 'border-[#1E2D45] bg-white/5 hover:border-orange-500/50 hover:bg-white/10'}`}
                     >
-                      <h3 className={\`font-bold text-xl mb-2 \${condition === opt.id ? 'text-orange-400' : 'text-white'}\`}>{opt.label}</h3>
+                      <h3 className={`font-bold text-xl mb-2 ${condition === opt.id ? 'text-orange-400' : 'text-white'}`}>{opt.label}</h3>
                       <p className="text-slate-400 text-sm">{opt.desc}</p>
                     </button>
                   ))}
