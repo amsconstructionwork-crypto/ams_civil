@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import { getDb } from '@/lib/mongodb';
-import { Calendar, User, ArrowLeft, Share2, ShieldCheck, Clock, CheckCircle2, Facebook, Twitter, Linkedin, ArrowRight } from 'lucide-react';
+import { Calendar, User, ArrowLeft, Share2, ShieldCheck, Clock, CheckCircle2, Facebook, Twitter, Linkedin, ArrowRight, Eye } from 'lucide-react';
 import { WhatsAppLogo, PhoneLogo } from '@/components/ui/BrandIcons';
 import { sanitizeBlogHtml } from '@/lib/sanitizeHtml';
 import ShareButtons from '@/components/ui/ShareButtons';
@@ -47,6 +47,17 @@ function calculateReadingTime(content: string) {
   return Math.max(1, Math.ceil(minutes));
 }
 
+// Generate realistic deterministic view count >= 50,000 based on slug
+function getViewsFromSlug(slug: string) {
+  let hash = 0;
+  for (let i = 0; i < slug.length; i++) {
+    hash = slug.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  const base = 50240;
+  const variance = Math.abs(hash) % 12000;
+  return (base + variance).toLocaleString('en-IN');
+}
+
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
   const blog = await getBlogData(params.slug);
   
@@ -82,6 +93,8 @@ export default async function BlogArticlePage({ params }: { params: { slug: stri
   const formattedDate = new Date(blog.publishDate || blog.createdAt).toLocaleDateString('en-IN', {
     year: 'numeric', month: 'long', day: 'numeric',
   });
+  
+  const viewsCount = getViewsFromSlug(params.slug);
 
   const shareUrl = `https://www.amscivilwork.in/blog/${blog.slug}`;
   const shareText = encodeURIComponent(`Check out this article: ${blog.title}`);
@@ -185,6 +198,9 @@ export default async function BlogArticlePage({ params }: { params: { slug: stri
                 </span>
                 <span className="flex items-center gap-1.5 py-1 px-2 rounded bg-slate-800/50">
                   <Clock size={13} className="text-blue-400" /> {readingTime} min read
+                </span>
+                <span className="flex items-center gap-1.5 py-1 px-2 rounded bg-slate-800/50">
+                  <Eye size={13} className="text-green-400" /> {viewsCount} views
                 </span>
               </div>
 
@@ -302,7 +318,8 @@ export default async function BlogArticlePage({ params }: { params: { slug: stri
                   <Link key={r.slug} href={`/blog/${r.slug}`} className="group h-full bg-[#101827] border border-[#1E2D45] hover:border-orange-500/40 rounded-xl overflow-hidden transition-all">
                     <div className="p-6">
                       <div className="flex items-center gap-2 text-[10px] font-mono text-slate-500 mb-4 uppercase tracking-wider">
-                        <Clock size={12} className="text-orange-400" /> {calculateReadingTime(r.content || '')} min read
+                        <span className="flex items-center gap-1"><Clock size={12} className="text-orange-400" /> {calculateReadingTime(r.content || '')} min</span>
+                        <span className="flex items-center gap-1 ml-2"><Eye size={12} className="text-green-400" /> {getViewsFromSlug(r.slug)}</span>
                       </div>
                       <h3 className="text-white font-bold text-lg leading-tight mb-3 group-hover:text-orange-400 transition-colors line-clamp-2">{r.title || 'Untitled Article'}</h3>
                       <p className="text-slate-500 text-xs line-clamp-3 mb-6">{r.excerpt}</p>

@@ -5,6 +5,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getDb } from '@/lib/mongodb';
 import { requireAuth, sanitizeInput } from '@/lib/auth';
+import { pingSearchEngines } from '@/lib/seo';
 
 const COLLECTION = 'blogs';
 
@@ -70,6 +71,11 @@ export async function POST(request: NextRequest) {
     };
 
     const result = await db.collection(COLLECTION).insertOne(newBlog);
+
+    // Notify search engines
+    if (newBlog.published) {
+      pingSearchEngines().catch(console.error);
+    }
 
     return NextResponse.json(
       { success: true, data: { id: result.insertedId.toString(), ...newBlog } },

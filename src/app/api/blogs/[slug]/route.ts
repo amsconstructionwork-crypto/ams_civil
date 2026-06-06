@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getDb } from '@/lib/mongodb';
 import { ObjectId } from 'mongodb';
 import { requireAuth, sanitizeInput } from '@/lib/auth';
+import { pingSearchEngines } from '@/lib/seo';
 
 const COLLECTION = 'blogs';
 
@@ -71,6 +72,11 @@ export async function PUT(
 
     if (result.matchedCount === 0) {
       return NextResponse.json({ success: false, error: 'Blog not found.' }, { status: 404 });
+    }
+
+    // Notify search engines if published
+    if (updateDoc.published) {
+      pingSearchEngines().catch(console.error);
     }
 
     return NextResponse.json({ success: true, data: { id, ...updateDoc } });

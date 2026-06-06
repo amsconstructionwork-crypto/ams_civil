@@ -1,7 +1,18 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { getDb } from '@/lib/mongodb';
-import { Calendar, PenTool, ArrowRight } from 'lucide-react';
+import { Calendar, PenTool, ArrowRight, Eye } from 'lucide-react';
+
+// Generate realistic deterministic view count >= 50,000 based on slug
+function getViewsFromSlug(slug: string) {
+  let hash = 0;
+  for (let i = 0; i < slug.length; i++) {
+    hash = slug.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  const base = 50240;
+  const variance = Math.abs(hash) % 12000;
+  return (base + variance).toLocaleString('en-IN');
+}
 
 // Force dynamic or revalidate every hour so new blogs appear
 export const revalidate = 3600;
@@ -66,9 +77,12 @@ export default async function BlogIndexPage() {
               return (
                 <Link key={blog._id.toString()} href={`/blog/${blog.slug}`} className="group flex flex-col h-full bg-[#101827] border border-[#1E2D45] hover:border-orange-500/40 rounded-xl overflow-hidden transition-all duration-300 hover:shadow-[0_8px_30px_rgb(0,0,0,0.4)] hover:-translate-y-1">
                   <div className="p-6 flex flex-col h-full">
-                    <div className="flex items-center gap-4 text-xs font-mono text-slate-500 mb-4">
+                    <div className="flex items-center justify-between text-xs font-mono text-slate-500 mb-4">
                       <span className="flex items-center gap-1">
                         <Calendar size={14} className="text-orange-400" /> {formattedDate}
+                      </span>
+                      <span className="flex items-center gap-1">
+                        <Eye size={14} className="text-green-400" /> {getViewsFromSlug(blog.slug)} views
                       </span>
                     </div>
 
