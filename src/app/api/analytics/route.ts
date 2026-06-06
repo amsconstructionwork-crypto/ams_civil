@@ -18,12 +18,20 @@ export async function GET() {
       { $limit: 10 }
     ]).toArray();
 
-    // Top Cities
+    // Top Cities (Visitor Location)
     const topCities = await collection.aggregate([
       { $match: { city: { $ne: null } } },
       { $group: { _id: "$city", views: { $sum: 1 } } },
       { $sort: { views: -1 } },
       { $limit: 5 }
+    ]).toArray();
+
+    // Top Target Areas (From Visited URLs like /areas/virar)
+    const topAreas = await collection.aggregate([
+      { $match: { area: { $ne: null } } },
+      { $group: { _id: "$area", views: { $sum: 1 } } },
+      { $sort: { views: -1 } },
+      { $limit: 10 }
     ]).toArray();
 
     // Device Breakdown
@@ -45,6 +53,7 @@ export async function GET() {
         totalViews,
         todayViews,
         topPages: topPages.map(p => ({ url: p._id, views: p.views, service: p.service })),
+        topAreas: topAreas.map(a => ({ area: a._id, views: a.views })),
         topCities: topCities.map(c => ({ city: c._id, views: c.views })),
         devices: devices.map(d => ({ device: d._id, count: d.count }))
       }

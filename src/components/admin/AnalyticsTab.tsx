@@ -7,6 +7,7 @@ interface AnalyticsData {
   totalViews: number;
   todayViews: number;
   topPages: { url: string; views: number; service?: string }[];
+  topAreas: { area: string; views: number }[];
   topCities: { city: string; views: number }[];
   devices: { device: string; count: number }[];
 }
@@ -159,6 +160,25 @@ export default function AnalyticsTab() {
               )}
             </div>
           </div>
+          {/* Target Areas */}
+          <div className="card p-6">
+            <h3 className="text-white font-semibold mb-4 flex items-center gap-2 border-b border-slate-800 pb-3">
+              <MapPin size={16} className="text-purple-400" /> Top Target Areas
+            </h3>
+            <p className="text-xs text-slate-500 mb-3">Based on pages visited (e.g. /areas/virar)</p>
+            <div className="space-y-3 mt-2">
+              {data.topAreas?.map((area, i) => (
+                <div key={i} className="flex justify-between items-center text-sm p-2 rounded bg-slate-800/50">
+                  <span className="text-slate-300 capitalize">{area.area}</span>
+                  <span className="text-purple-400 font-mono font-semibold bg-purple-500/10 px-2 py-0.5 rounded">{area.views}</span>
+                </div>
+              ))}
+              {(!data.topAreas || data.topAreas.length === 0) && (
+                <p className="text-slate-500 text-xs text-center py-2">No target area data available yet.</p>
+              )}
+            </div>
+          </div>
+
         </div>
 
       </div>
