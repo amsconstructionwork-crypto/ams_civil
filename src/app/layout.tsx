@@ -13,6 +13,7 @@ import QuotePopup from '@/components/ui/QuotePopup';
 import LeadGenPopup from '@/components/ui/LeadGenPopup';
 import PageTracker from '@/components/tracking/PageTracker';
 import { Toaster } from 'react-hot-toast';
+import ConditionalLayout from '@/components/layout/ConditionalLayout';
 
 const playfair = Playfair_Display({
   subsets: ['latin'],
@@ -399,13 +400,20 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             },
           }}
         />
-        <TopBanner />
-        <Navbar />
-        <main>{children}</main>
-        <Footer />
-        <WhatsAppButton />
-        <QuotePopup />
-        <LeadGenPopup />
+        <ConditionalLayout
+          topBanner={<TopBanner />}
+          navbar={<Navbar />}
+          footer={<Footer />}
+          floatingElements={
+            <>
+              <WhatsAppButton />
+              <QuotePopup />
+              <LeadGenPopup />
+            </>
+          }
+        >
+          {children}
+        </ConditionalLayout>
         <PageTracker />
       </body>
     </html>
