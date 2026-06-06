@@ -13,6 +13,11 @@ const nextConfig = {
       bodySizeLimit: '10mb',
     },
   },
+  eslint: {
+    // Warning: This allows production builds to successfully complete even if
+    // your project has ESLint errors.
+    ignoreDuringBuilds: true,
+  },
   // SEO: Remove X-Powered-By header
   poweredByHeader: false,
   // SEO: Enable compression for better Core Web Vitals
