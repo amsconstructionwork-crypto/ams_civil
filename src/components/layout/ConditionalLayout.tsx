@@ -19,8 +19,9 @@ export default function ConditionalLayout({
 }: ConditionalLayoutProps) {
   const pathname = usePathname();
   const isAdmin = pathname?.startsWith('/admin');
+  const isLandingPage = pathname === '/free-consultation';
 
-  if (isAdmin) {
+  if (isAdmin || isLandingPage) {
     return (
       <>
         <main>{children}</main>
