@@ -8,7 +8,7 @@ import { WhatsAppLogo, PhoneLogo } from '@/components/ui/BrandIcons';
 import { sanitizeBlogHtml } from '@/lib/sanitizeHtml';
 import ShareButtons from '@/components/ui/ShareButtons';
 
-export const revalidate = 3600;
+export const dynamic = 'force-dynamic';
 
 async function getBlogData(slug: string) {
   try {

@@ -14,8 +14,8 @@ function getViewsFromSlug(slug: string) {
   return (base + variance).toLocaleString('en-IN');
 }
 
-// Force dynamic or revalidate every hour so new blogs appear
-export const revalidate = 3600;
+// Force dynamic rendering so new blogs appear immediately (no caching delays)
+export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
   title: 'Construction & Interior Design Blog | AMS Civil Construction',
