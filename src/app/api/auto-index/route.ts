@@ -44,10 +44,14 @@ export async function GET(request: Request) {
     const db = await getDb();
     const collection = db.collection('blogs');
 
-    // Find up to 100 published blogs that have NOT been indexed yet
+    // Find up to 100 published blogs that are CURRENTLY visible (not future dated) and not indexed yet
     const blogsToSubmit = await collection.find({
       published: true,
-      googleIndexed: { $ne: true }
+      googleIndexed: { $ne: true },
+      $or: [
+        { publishDate: { $lte: new Date() } },
+        { publishDate: { $exists: false } }
+      ]
     }).limit(100).toArray();
 
     if (blogsToSubmit.length === 0) {
