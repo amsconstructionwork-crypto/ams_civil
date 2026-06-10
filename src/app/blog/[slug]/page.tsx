@@ -7,6 +7,8 @@ import { Calendar, User, ArrowLeft, Share2, ShieldCheck, Clock, CheckCircle2, Fa
 import { WhatsAppLogo, PhoneLogo } from '@/components/ui/BrandIcons';
 import { sanitizeBlogHtml } from '@/lib/sanitizeHtml';
 import ShareButtons from '@/components/ui/ShareButtons';
+import AdsterraBanner from '@/components/ads/AdsterraBanner';
+import AdsterraNative from '@/components/ads/AdsterraNative';
 
 export const dynamic = 'force-dynamic';
 
@@ -147,12 +149,7 @@ export default async function BlogArticlePage({ params }: { params: { slug: stri
             {/* Left Sidebar Ad (Desktop Only) */}
             <aside className="hidden lg:block w-64 flex-shrink-0">
               <div className="sticky top-32 w-full">
-                <ins className="adsbygoogle"
-                     style={{ display: 'block' }}
-                     data-ad-client="ca-pub-1153253906727408"
-                     data-ad-slot="XXXXXXX"
-                     data-ad-format="auto"
-                     data-full-width-responsive="true"></ins>
+                <AdsterraBanner variant="300x250" />
               </div>
             </aside>
 
@@ -220,14 +217,9 @@ export default async function BlogArticlePage({ params }: { params: { slug: stri
 
           {/* Article Body */}
           <div className="relative">
-            {/* Google AdSense (Top) */}
+            {/* Adsterra In-Content Ad (Top) */}
             <div className="w-full my-8">
-               <ins className="adsbygoogle"
-                    style={{ display: 'block' }}
-                    data-ad-client="ca-pub-1153253906727408"
-                    data-ad-slot="XXXXXXX"
-                    data-ad-format="auto"
-                    data-full-width-responsive="true"></ins>
+              <AdsterraBanner variant="728x90" />
             </div>
 
             <div className="prose prose-invert prose-orange max-w-none 
@@ -243,14 +235,9 @@ export default async function BlogArticlePage({ params }: { params: { slug: stri
                  dangerouslySetInnerHTML={{ __html: sanitizeBlogHtml(blog.content || '') }} />
           </div>
 
-          {/* Google AdSense (Bottom - 90% Read) */}
+          {/* Adsterra Native Ad (Bottom — blends with content) */}
           <div className="w-full mt-12 mb-8">
-             <ins className="adsbygoogle"
-                  style={{ display: 'block' }}
-                  data-ad-client="ca-pub-1153253906727408"
-                  data-ad-slot="XXXXXXX"
-                  data-ad-format="auto"
-                  data-full-width-responsive="true"></ins>
+            <AdsterraNative />
           </div>
 
           <div className="mt-8 px-2">
@@ -335,12 +322,7 @@ export default async function BlogArticlePage({ params }: { params: { slug: stri
             {/* Right Sidebar Ad (Desktop Only) */}
             <aside className="hidden lg:block w-64 flex-shrink-0">
               <div className="sticky top-32 w-full">
-                <ins className="adsbygoogle"
-                     style={{ display: 'block' }}
-                     data-ad-client="ca-pub-1153253906727408"
-                     data-ad-slot="XXXXXXX"
-                     data-ad-format="auto"
-                     data-full-width-responsive="true"></ins>
+                <AdsterraBanner variant="300x250" />
               </div>
             </aside>
 

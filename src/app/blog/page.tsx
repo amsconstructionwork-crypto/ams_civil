@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import { getDb } from '@/lib/mongodb';
 import { Calendar, PenTool, ArrowRight, Eye } from 'lucide-react';
+import AdsterraBanner from '@/components/ads/AdsterraBanner';
 
 // Generate realistic deterministic view count >= 50,000 based on slug
 function getViewsFromSlug(slug: string) {
@@ -57,6 +58,11 @@ export default async function BlogIndexPage() {
           <p className="text-slate-400 text-lg">
             Stay updated with the latest trends, cost estimates, and deep-dive guides into civil construction and interior design in Mumbai.
           </p>
+        </div>
+
+        {/* Adsterra Banner Ad */}
+        <div className="max-w-4xl mx-auto mb-12">
+          <AdsterraBanner variant="728x90" />
         </div>
 
         {blogs.length === 0 ? (

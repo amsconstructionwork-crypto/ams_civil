@@ -2,7 +2,6 @@
 // Root layout with comprehensive SEO — targeting all Mumbai areas
 
 import type { Metadata } from 'next';
-import Script from 'next/script';
 import { Playfair_Display, DM_Sans, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
 import Navbar from '@/components/layout/Navbar';
@@ -14,6 +13,7 @@ import LeadGenPopup from '@/components/ui/LeadGenPopup';
 import PageTracker from '@/components/tracking/PageTracker';
 import { Toaster } from 'react-hot-toast';
 import ConditionalLayout from '@/components/layout/ConditionalLayout';
+import AdsterraSocialBar from '@/components/ads/AdsterraSocialBar';
 
 const playfair = Playfair_Display({
   subsets: ['latin'],
@@ -361,13 +361,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
 
-        {/* Google AdSense Verification (Native script tag for Crawler visibility) */}
-        <Script 
-          async 
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1153253906727408"
-          crossOrigin="anonymous"
-          strategy="afterInteractive"
-        />
+        {/* Adsterra ads are loaded per-component, no global head script needed */}
 
         {/* Preconnect for Cloudinary images */}
         <link rel="preconnect" href="https://res.cloudinary.com" />
@@ -416,6 +410,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {children}
         </ConditionalLayout>
         <PageTracker />
+        <AdsterraSocialBar />
       </body>
     </html>
   );
