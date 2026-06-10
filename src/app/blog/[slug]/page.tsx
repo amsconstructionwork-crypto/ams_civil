@@ -156,6 +156,11 @@ export default async function BlogArticlePage({ params }: { params: { slug: stri
             {/* Main Article Content */}
             <article className="flex-1 min-w-0 max-w-4xl mx-auto w-full">
           
+          {/* Massive Top Banner Ad */}
+          <div className="w-full mb-8 flex justify-center">
+            <AdsterraBanner variant="728x90" />
+          </div>
+
           {/* Breadcrumbs & Back */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
             <nav className="flex items-center gap-2 text-xs font-medium">
@@ -240,6 +245,10 @@ export default async function BlogArticlePage({ params }: { params: { slug: stri
             <AdsterraNative />
           </div>
 
+          <div className="w-full my-8 flex justify-center">
+            <AdsterraBanner variant="728x90" />
+          </div>
+
           <div className="mt-8 px-2">
             <ShareButtons title={blog.title} />
           </div>
@@ -317,6 +326,10 @@ export default async function BlogArticlePage({ params }: { params: { slug: stri
               </div>
             </section>
           )}
+
+          <div className="w-full mt-12 flex justify-center">
+            <AdsterraBanner variant="728x90" />
+          </div>
             </article>
 
             {/* Right Sidebar Ad (Desktop Only) */}

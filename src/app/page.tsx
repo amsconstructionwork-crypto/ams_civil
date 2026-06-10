@@ -18,6 +18,7 @@ import { openQuotePopup } from '@/components/ui/QuotePopup';
 import CountUp from '@/components/ui/CountUp';
 import GalleryCarouselSection from '@/components/ui/GalleryCarousel';
 import ModernCTA from '@/components/ui/ModernCTA';
+import AdsterraBanner from '@/components/ads/AdsterraBanner';
 
 /* ── Icon map ───────────────────────────────────────────────── */
 const iconMap: Record<string, React.ElementType> = {
@@ -71,6 +72,10 @@ export default function HomePage() {
       <ServicesSection />
       <ProjectsCarousel />
       <GalleryCarouselSection />
+      {/* Adsterra Homepage Middle Ad */}
+      <div className="w-full bg-[#080D1A] py-12 flex justify-center">
+        <AdsterraBanner variant="728x90" />
+      </div>
       <WhyUsSection />
       <TestimonialsSection />
       <FAQSection />
@@ -116,6 +121,10 @@ function NetworkSection() {
 
   return (
     <section className="py-20 bg-[#080D1A] border-t border-white/5 relative group">
+      {/* Adsterra Homepage Top Ad */}
+      <div className="w-full bg-[#0B1120] py-8 border-b border-[#1E2D45] flex justify-center">
+        <AdsterraBanner variant="728x90" />
+      </div>
       <div className="container-custom">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
           <div className="max-w-2xl">

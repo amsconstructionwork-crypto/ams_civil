@@ -1,3 +1,4 @@
+import React from 'react';
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { getDb } from '@/lib/mongodb';
@@ -73,7 +74,7 @@ export default async function BlogIndexPage() {
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {blogs.map((blog) => {
+            {blogs.map((blog, index) => {
               const formattedDate = new Date(blog.publishDate || blog.createdAt).toLocaleDateString('en-IN', {
                 year: 'numeric',
                 month: 'long',
@@ -81,35 +82,43 @@ export default async function BlogIndexPage() {
               });
 
               return (
-                <Link key={blog._id.toString()} href={`/blog/${blog.slug}`} className="group flex flex-col h-full bg-[#101827] border border-[#1E2D45] hover:border-orange-500/40 rounded-xl overflow-hidden transition-all duration-300 hover:shadow-[0_8px_30px_rgb(0,0,0,0.4)] hover:-translate-y-1">
-                  <div className="p-6 flex flex-col h-full">
-                    <div className="flex items-center justify-between text-xs font-mono text-slate-500 mb-4">
-                      <span className="flex items-center gap-1">
-                        <Calendar size={14} className="text-orange-400" /> {formattedDate}
-                      </span>
-                      <span className="flex items-center gap-1">
-                        <Eye size={14} className="text-green-400" /> {getViewsFromSlug(blog.slug)} views
-                      </span>
+                <React.Fragment key={blog._id.toString()}>
+                  <Link href={`/blog/${blog.slug}`} className="group flex flex-col h-full bg-[#101827] border border-[#1E2D45] hover:border-orange-500/40 rounded-xl overflow-hidden transition-all duration-300 hover:shadow-[0_8px_30px_rgb(0,0,0,0.4)] hover:-translate-y-1">
+                    <div className="p-6 flex flex-col h-full">
+                      <div className="flex items-center justify-between text-xs font-mono text-slate-500 mb-4">
+                        <span className="flex items-center gap-1">
+                          <Calendar size={14} className="text-orange-400" /> {formattedDate}
+                        </span>
+                        <span className="flex items-center gap-1">
+                          <Eye size={14} className="text-green-400" /> {getViewsFromSlug(blog.slug)} views
+                        </span>
+                      </div>
+
+                      <h2 className="font-display font-bold text-xl text-white mb-3 group-hover:text-orange-400 transition-colors line-clamp-2">
+                        {blog.title}
+                      </h2>
+
+                      {blog.excerpt && (
+                        <p className="text-slate-400 text-sm leading-relaxed mb-6 line-clamp-3 flex-grow">
+                          {blog.excerpt}
+                        </p>
+                      )}
+
+                      <div className="mt-auto pt-4 border-t border-[#1E2D45] flex items-center justify-between">
+                        <span className="text-xs text-slate-500 font-medium">By {blog.author}</span>
+                        <span className="text-orange-400 text-sm flex items-center gap-1 font-medium group-hover:gap-2 transition-all">
+                          Read Story <ArrowRight size={16} />
+                        </span>
+                      </div>
                     </div>
-
-                    <h2 className="font-display font-bold text-xl text-white mb-3 group-hover:text-orange-400 transition-colors line-clamp-2">
-                      {blog.title}
-                    </h2>
-
-                    {blog.excerpt && (
-                      <p className="text-slate-400 text-sm leading-relaxed mb-6 line-clamp-3 flex-grow">
-                        {blog.excerpt}
-                      </p>
-                    )}
-
-                    <div className="mt-auto pt-4 border-t border-[#1E2D45] flex items-center justify-between">
-                      <span className="text-xs text-slate-500 font-medium">By {blog.author}</span>
-                      <span className="text-orange-400 text-sm flex items-center gap-1 font-medium group-hover:gap-2 transition-all">
-                        Read Story <ArrowRight size={16} />
-                      </span>
+                  </Link>
+                  {/* Inject an Ad banner after every 3rd card */}
+                  {(index + 1) % 3 === 0 && (
+                    <div className="col-span-1 md:col-span-2 lg:col-span-3 flex justify-center my-6">
+                      <AdsterraBanner variant="728x90" />
                     </div>
-                  </div>
-                </Link>
+                  )}
+                </React.Fragment>
               );
             })}
           </div>
