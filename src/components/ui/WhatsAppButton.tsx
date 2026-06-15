@@ -15,18 +15,23 @@ export default function WhatsAppButton() {
     <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
       {/* Options Menu */}
       <div className={`flex flex-col gap-3 transition-all duration-300 transform ${isOpen ? 'translate-y-0 opacity-100 scale-100' : 'translate-y-10 opacity-0 scale-90 pointer-events-none'}`}>
-        {contacts.map((contact, idx) => (
-          <a
-            key={idx}
-            href={`https://wa.me/${contact.phone}?text=Hi!%20I%27m%20interested%20in%20your%20construction%20services.`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-3 px-4 py-2.5 rounded-full bg-[#F97316] text-white shadow-lg hover:scale-105 transition-transform"
-          >
-            <span className="text-xs font-bold font-mono tracking-tight">{contact.phone.slice(2)}</span>
-            <WhatsAppLogo className="w-5 h-5 fill-white" />
-          </a>
-        ))}
+        {contacts.map((contact, idx) => {
+          const currentUrl = typeof window !== 'undefined' ? window.location.href : 'your website';
+          const message = encodeURIComponent(`Hi AMS Civil! I am looking at your page: ${currentUrl} and I want a quote.`);
+          
+          return (
+            <a
+              key={idx}
+              href={`https://wa.me/${contact.phone}?text=${message}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 px-4 py-2.5 rounded-full bg-[#F97316] text-white shadow-lg hover:scale-105 transition-transform"
+            >
+              <span className="text-xs font-bold font-mono tracking-tight">{contact.phone.slice(2)}</span>
+              <WhatsAppLogo className="w-5 h-5 fill-white" />
+            </a>
+          );
+        })}
       </div>
 
       {/* Toggle Button */}
