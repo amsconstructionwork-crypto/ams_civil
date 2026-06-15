@@ -62,8 +62,10 @@ export async function generateMetadata(
 
   const emoji = serviceEmojiMap[svc.slug] || '👷';
   const exactMatchKeyword = `Top ${svc.title} Contractor in ${loc.name}`;
-  const title = `${exactMatchKeyword} (2026) | Free Quote`;
-  const description = `${emoji} Looking for the best ${svc.title.toLowerCase()} in ${loc.name}, ${loc.district}? AMS Civil offers premium quality, 25+ yrs exp, and 100% Guaranteed Work. ${svc.benefits[0]}. Call for a Free Site Visit: +91 87793 91690.`;
+  
+  // High-CTR Optimized Title & Description
+  const title = `✓ Best ${svc.title} in ${loc.name} [2026] | 100% Free Quote`;
+  const description = `⭐ 4.9/5 Rated. Looking for expert ${svc.title.toLowerCase()} in ${loc.name}, ${loc.district}? Get premium quality, 25+ yrs exp & 100% Guaranteed Work. Call for a FREE Site Visit!`;
 
   return {
     title,

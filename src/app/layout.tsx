@@ -45,12 +45,12 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://www.amscivilwork.in'),
 
   title: {
-    default: 'Top Civil Contractor in Mumbai (2026) | Free Quote | AMS Civil',
+    default: '✓ Top Civil Contractor in Mumbai [2026] | 100% Free Quote',
     template: '%s | AMS Civil Construction',
   },
 
   description:
-    '🏗️ Looking for the best civil contractor in Mumbai? AMS Civil offers premium bungalow construction & renovations. 25+ Yrs Exp. 100% Free Estimate! Call +91 87793 91690.',
+    '⭐ 4.9/5 Rated. Looking for the best civil contractor in Mumbai? AMS Civil offers premium bungalow construction & renovations. 25+ Yrs Exp. 100% Free Estimate!',
 
   keywords: [
     /* ── Brand ──────────────────────────────────────────── */
