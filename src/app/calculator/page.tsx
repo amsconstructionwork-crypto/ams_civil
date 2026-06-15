@@ -149,10 +149,10 @@ export default function CalculatorPage() {
                 <div className="absolute left-0 top-1/2 -translate-y-1/2 w-full h-1 bg-[#1E2D45] -z-10" />
                 <div 
                   className="absolute left-0 top-1/2 -translate-y-1/2 h-1 bg-orange-500 -z-10 transition-all duration-500" 
-                  style={{ width: \`\${((step - 1) / 3) * 100}%\` }}
+                  style={{ width: `${((step - 1) / 3) * 100}%` }}
                 />
                 {[1, 2, 3, 4].map((num) => (
-                  <div key={num} className={\`w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm transition-colors \${step >= num ? 'bg-orange-500 text-white shadow-[0_0_15px_rgba(249,115,22,0.5)]' : 'bg-[#1E2D45] text-slate-400'}\`}>
+                  <div key={num} className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm transition-colors ${step >= num ? 'bg-orange-500 text-white shadow-[0_0_15px_rgba(249,115,22,0.5)]' : 'bg-[#1E2D45] text-slate-400'}`}>
                     {step > num ? <CheckCircle2 size={20} /> : num === 4 ? <Lock size={16} /> : num}
                   </div>
                 ))}
@@ -167,7 +167,7 @@ export default function CalculatorPage() {
                     <button
                       key={opt.id}
                       onClick={() => setPropertyType(opt.id)}
-                      className={\`p-4 rounded-xl border flex flex-col items-center justify-center gap-3 transition-all \${propertyType === opt.id ? 'border-orange-500 bg-orange-500/10 text-orange-400' : 'border-[#1E2D45] bg-white/5 text-slate-300 hover:border-orange-500/50 hover:bg-white/10'}\`}
+                      className={`p-4 rounded-xl border flex flex-col items-center justify-center gap-3 transition-all ${propertyType === opt.id ? 'border-orange-500 bg-orange-500/10 text-orange-400' : 'border-[#1E2D45] bg-white/5 text-slate-300 hover:border-orange-500/50 hover:bg-white/10'}`}
                     >
                       <opt.icon size={32} className={propertyType === opt.id ? 'text-orange-500' : 'text-slate-500'} />
                       <span className="font-medium text-center">{opt.label}</span>
@@ -190,13 +190,13 @@ export default function CalculatorPage() {
                     <button
                       key={opt.id}
                       onClick={() => toggleService(opt.id)}
-                      className={\`p-5 rounded-xl border text-left flex items-start gap-4 transition-all \${services.includes(opt.id) ? 'border-orange-500 bg-orange-500/10' : 'border-[#1E2D45] bg-white/5 hover:border-orange-500/50 hover:bg-white/10'}\`}
+                      className={`p-5 rounded-xl border text-left flex items-start gap-4 transition-all ${services.includes(opt.id) ? 'border-orange-500 bg-orange-500/10' : 'border-[#1E2D45] bg-white/5 hover:border-orange-500/50 hover:bg-white/10'}`}
                     >
-                      <div className={\`p-3 rounded-lg \${services.includes(opt.id) ? 'bg-orange-500 text-white' : 'bg-[#1E2D45] text-slate-400'}\`}>
+                      <div className={`p-3 rounded-lg ${services.includes(opt.id) ? 'bg-orange-500 text-white' : 'bg-[#1E2D45] text-slate-400'}`}>
                         <opt.icon size={24} />
                       </div>
                       <div>
-                        <h3 className={\`font-bold text-lg mb-1 \${services.includes(opt.id) ? 'text-orange-400' : 'text-white'}\`}>{opt.label}</h3>
+                        <h3 className={`font-bold text-lg mb-1 ${services.includes(opt.id) ? 'text-orange-400' : 'text-white'}`}>{opt.label}</h3>
                         <p className="text-slate-400 text-sm">{opt.desc}</p>
                       </div>
                     </button>
@@ -225,9 +225,9 @@ export default function CalculatorPage() {
                     <button
                       key={opt.id}
                       onClick={() => setCondition(opt.id)}
-                      className={\`p-5 rounded-xl border text-center transition-all \${condition === opt.id ? 'border-orange-500 bg-orange-500/10' : 'border-[#1E2D45] bg-white/5 hover:border-orange-500/50 hover:bg-white/10'}\`}
+                      className={`p-5 rounded-xl border text-center transition-all ${condition === opt.id ? 'border-orange-500 bg-orange-500/10' : 'border-[#1E2D45] bg-white/5 hover:border-orange-500/50 hover:bg-white/10'}`}
                     >
-                      <h3 className={\`font-bold text-xl mb-2 \${condition === opt.id ? 'text-orange-400' : 'text-white'}\`}>{opt.label}</h3>
+                      <h3 className={`font-bold text-xl mb-2 ${condition === opt.id ? 'text-orange-400' : 'text-white'}`}>{opt.label}</h3>
                       <p className="text-slate-400 text-sm">{opt.desc}</p>
                     </button>
                   ))}
