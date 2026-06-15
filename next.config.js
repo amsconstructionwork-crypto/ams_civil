@@ -40,6 +40,17 @@ const nextConfig = {
       { source: '/areas/lower parel/:path*', destination: '/areas/lower-parel/:path*', permanent: true },
       { source: '/areas/navi mumbai', destination: '/areas/navi-mumbai', permanent: true },
       { source: '/areas/navi mumbai/:path*', destination: '/areas/navi-mumbai/:path*', permanent: true },
+      
+      // Catch garbage URLs generated from old broken link tags
+      { source: '/areas/:location/<a%20href=', destination: '/areas/:location', permanent: true },
+      { source: '/areas/:location/%3Ca%20href=', destination: '/areas/:location', permanent: true },
+      { source: '/areas/:location/%3Ca%20href%3D', destination: '/areas/:location', permanent: true },
+      { source: '/blog/terrace-<a%20href=', destination: '/blog', permanent: true },
+      { source: '/blog/terrace-%3Ca%20href=', destination: '/blog', permanent: true },
+      { source: '/blog/terrace-%3Ca%20href%3D', destination: '/blog', permanent: true },
+      
+      // Redirect deleted/old blogs
+      { source: '/blog/civil-contractor-agreement-rules-tips-marathi', destination: '/blog', permanent: true },
     ];
   },
   // SEO + Security headers
