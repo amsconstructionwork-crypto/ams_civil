@@ -104,8 +104,7 @@ export default function LandingPage() {
               <div className="flex items-center justify-center lg:justify-start gap-4">
                 <div className="flex -space-x-4">
                   {[1, 2, 3, 4].map(i => (
-                    <img key={i} src={`/images/user${i}.jpg`} alt="Client" className="w-12 h-12 rounded-full border-2 border-[#0B1120] bg-slate-800 object-cover" 
-                         onError={(e) => { (e.target as HTMLImageElement).src = 'https://ui-avatars.com/api/?name=C&background=1E2D45&color=fff' }} />
+                    <Image key={i} src={`/images/user${i}.jpg`} alt="Client" width={48} height={48} className="w-12 h-12 rounded-full border-2 border-[#0B1120] bg-slate-800 object-cover" />
                   ))}
                 </div>
                 <div className="text-left">
