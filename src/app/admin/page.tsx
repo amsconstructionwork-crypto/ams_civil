@@ -35,7 +35,7 @@ interface Project {
 interface Enquiry {
   id: string; name: string; phone: string; email?: string;
   service: string; location?: string; message?: string; status: EnqStatus;
-  source: string; createdAt: string;
+  source: string; createdAt: string; details?: any;
 }
 
 interface GalleryItem {
@@ -818,6 +818,19 @@ function EnquiryCard({
             <div className="px-3 py-2 text-xs text-slate-400 leading-relaxed"
               style={{ background: 'rgba(11,17,32,0.5)', borderLeft: '2px solid rgba(249,115,22,0.4)' }}>
               {enq.message}
+            </div>
+          )}
+          {enq.details && enq.source === 'calculator' && (
+            <div className="mt-3 px-4 py-3 rounded-lg text-xs" style={{ background: 'rgba(20, 28, 43, 0.6)', border: '1px solid rgba(249,115,22,0.2)' }}>
+              <div className="font-semibold text-orange-400 mb-2 flex items-center gap-1.5">
+                <BarChart3 size={12} /> Calculator Result Details
+              </div>
+              <div className="grid grid-cols-2 gap-2 text-slate-300">
+                <div><span className="text-slate-500">Property:</span> {enq.details.propertyType}</div>
+                <div><span className="text-slate-500">Quality:</span> {enq.details.condition} Finish</div>
+                <div className="col-span-2"><span className="text-slate-500">Services:</span> {Array.isArray(enq.details.services) ? enq.details.services.join(', ') : enq.details.services}</div>
+                <div className="col-span-2 mt-1"><span className="text-slate-500">Shown Estimate:</span> <span className="font-bold text-green-400">{enq.details.estimateMin} - {enq.details.estimateMax}</span></div>
+              </div>
             </div>
           )}
         </div>
