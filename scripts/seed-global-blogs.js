@@ -317,7 +317,7 @@ async function seedGlobalBlogs() {
   const client = new MongoClient(uri);
   try {
     await client.connect();
-    const db = client.db('amscivil');
+    const db = client.db('mandal_civil');
     const collection = db.collection('blogs');
 
     console.log('Clearing old global blogs if any...');
