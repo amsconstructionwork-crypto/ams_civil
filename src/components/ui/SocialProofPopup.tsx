@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MapPin, CheckCircle, X } from 'lucide-react';
 
+const names = ['Rahul', 'Priya', 'Amit', 'Neha', 'Sanjay', 'Pooja', 'Vikram', 'Anjali', 'Rakesh', 'Sneha', 'Deepak', 'Kavita', 'Sunil', 'Rajesh', 'Shruti'];
+
 const locations = [
   'Bandra', 'Andheri', 'Thane', 'Navi Mumbai', 'Worli', 
   'Goregaon', 'Dadar', 'Borivali', 'Kandivali', 'Powai'
@@ -28,7 +30,7 @@ function getRandomTime() {
 
 export default function SocialProofPopup() {
   const [isVisible, setIsVisible] = useState(false);
-  const [notification, setNotification] = useState({ loc: '', svc: '', time: 0 });
+  const [notification, setNotification] = useState({ name: '', loc: '', svc: '', time: 0 });
 
   useEffect(() => {
     // Show first popup after 10 seconds
@@ -41,6 +43,7 @@ export default function SocialProofPopup() {
 
   const triggerNewNotification = () => {
     setNotification({
+      name: getRandomItem(names),
       loc: getRandomItem(locations),
       svc: getRandomItem(services),
       time: getRandomTime()
@@ -89,7 +92,7 @@ export default function SocialProofPopup() {
 
             <div className="flex-1 pr-4">
               <p className="text-white text-[13px] leading-snug font-medium mb-1">
-                Someone from <span className="text-orange-400">{notification.loc}</span> {notification.svc}.
+                <span className="font-bold text-slate-200">{notification.name}</span> from <span className="text-orange-400">{notification.loc}</span> {notification.svc}.
               </p>
               <div className="flex items-center gap-1 text-slate-400 text-[10px] font-mono uppercase tracking-wider">
                 <MapPin size={10} /> Mumbai • {notification.time} mins ago
