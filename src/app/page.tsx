@@ -18,6 +18,7 @@ import { openQuotePopup } from '@/components/ui/QuotePopup';
 import CountUp from '@/components/ui/CountUp';
 import GalleryCarouselSection from '@/components/ui/GalleryCarousel';
 import ModernCTA from '@/components/ui/ModernCTA';
+import BeforeAfterSlider from '@/components/ui/BeforeAfterSlider';
 import AdsterraBanner from '@/components/ads/AdsterraBanner';
 
 /* ── Icon map ───────────────────────────────────────────────── */
@@ -70,6 +71,7 @@ export default function HomePage() {
       <TickerSection />
       <IntroSection />
       <ServicesSection />
+      <BeforeAfterSection />
       <ProjectsCarousel />
       <GalleryCarouselSection />
       {/* Adsterra Homepage Middle Ad */}
@@ -426,6 +428,37 @@ function ServicesSection() {
           <Link href="/services" className="btn-primary">
             All Services <ArrowRight size={16} />
           </Link>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ─────────────────────────────────────────────────────────────
+   BEFORE / AFTER PORTFOLIO SLIDER
+─────────────────────────────────────────────────────────────── */
+function BeforeAfterSection() {
+  return (
+    <section className="section-y" style={{ background: '#080D1A' }}>
+      <div className="container-custom">
+        <div className="text-center max-w-2xl mx-auto mb-12">
+          <div className="section-label justify-center animate-on-scroll">Real Results</div>
+          <h2 className="font-display text-3xl lg:text-4xl xl:text-5xl text-white leading-tight mb-3 animate-on-scroll">
+            Experience the <span className="text-gradient">Transformation</span>
+          </h2>
+          <p className="text-slate-400 animate-on-scroll text-sm">
+            Drag the slider to see how we transform ordinary spaces into luxury living areas.
+          </p>
+        </div>
+
+        <div className="animate-on-scroll max-w-5xl mx-auto">
+          {/* Using realistic architecture photos for demo */}
+          <BeforeAfterSlider 
+            beforeImage="https://images.unsplash.com/photo-1588854337221-4cfb468624f1?w=1200&q=80"
+            afterImage="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&q=80"
+            beforeLabel="Old Structure"
+            afterLabel="Finished Bungalow"
+          />
         </div>
       </div>
     </section>

@@ -55,12 +55,28 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   /* ── Location pages & Location × Service pages ────────────── */
   const locationPages: MetadataRoute.Sitemap = [];
   locations.forEach(loc => {
-    // Always include the main location page
+    // English Main Location
     locationPages.push({
       url:             `${BASE}/areas/${loc.slug}`,
       lastModified:    SITE_UPDATED,
       changeFrequency: 'weekly' as const,
       priority:        getLocationPriority(loc.zone),
+    });
+    
+    // Hindi Main Location
+    locationPages.push({
+      url:             `${BASE}/hi/areas/${loc.slug}`,
+      lastModified:    SITE_UPDATED,
+      changeFrequency: 'weekly' as const,
+      priority:        getLocationPriority(loc.zone) * 0.9,
+    });
+
+    // Marathi Main Location
+    locationPages.push({
+      url:             `${BASE}/mr/areas/${loc.slug}`,
+      lastModified:    SITE_UPDATED,
+      changeFrequency: 'weekly' as const,
+      priority:        getLocationPriority(loc.zone) * 0.9,
     });
     
     // SEO SCALING: Generate granular Location × Service pages for ALL zones to maximize impressions.
