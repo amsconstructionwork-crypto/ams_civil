@@ -46,5 +46,29 @@ export function sanitizeBlogHtml(html: string): string {
   sanitized = sanitized.replace(/&lt;a\s+href=&quot;[^&]*&quot;&gt;/gi, '');
   sanitized = sanitized.replace(/&lt;\/a&gt;/gi, '');
 
+  // Fix 5: Auto Internal Linking for SEO Impressions
+  // Replaces the first occurrence of valuable keywords with a link to the service page
+  const seoKeywords = [
+    { word: 'bathroom renovation', link: '/services/bathroom-renovation' },
+    { word: 'bungalow construction', link: '/services/bungalow-construction' },
+    { word: 'modular kitchen', link: '/services/kitchen-work' },
+    { word: 'kitchen renovation', link: '/services/kitchen-work' },
+    { word: 'tiles work', link: '/services/tiles-work' },
+    { word: 'flooring work', link: '/services/flooring-work' },
+    { word: 'pop false ceiling', link: '/services/pop-work' },
+    { word: 'pop work', link: '/services/pop-work' },
+    { word: 'painting work', link: '/services/painting' },
+    { word: 'waterproofing', link: '/services/waterproofing' },
+    { word: 'civil contractor', link: '/areas/mumbai' },
+    { word: 'civil work', link: '/services' }
+  ];
+
+  seoKeywords.forEach(({ word, link }) => {
+    // Regex ensures we don't match inside existing HTML tags (like inside <a href="...">)
+    // Matches only the FIRST occurrence (no 'g' flag)
+    const regex = new RegExp(`(?<!<[^>]*)\\b(${word})\\b(?![^<]*>)`, 'i');
+    sanitized = sanitized.replace(regex, `<a href="${link}" class="text-orange-500 font-bold hover:underline" title="${word} in Mumbai">$1</a>`);
+  });
+
   return sanitized;
 }
