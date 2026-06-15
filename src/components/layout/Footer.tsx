@@ -235,10 +235,15 @@ export default function Footer() {
       {/* Bottom bar */}
       <div className="py-4" style={{ borderTop: '1px solid #0E1827' }}>
         <div className="container-custom flex flex-col sm:flex-row items-center justify-between gap-2 text-slate-700 text-xs text-center sm:text-left">
-          <p>
-            © {new Date().getFullYear()} AMS Civil Construction. All rights reserved. A Mandal Group Venture
-            <Link href="/admin" className="ml-1 text-slate-700 hover:text-orange-500 transition-colors cursor-default" title="Admin">.</Link>
-          </p>
+          <div className="flex flex-col gap-1">
+            <p>
+              © {new Date().getFullYear()} AMS Civil Construction. All rights reserved. A Mandal Group Venture
+              <Link href="/admin" className="ml-1 text-slate-700 hover:text-orange-500 transition-colors cursor-default" title="Admin">.</Link>
+            </p>
+            <p className="text-[10px] text-slate-500">
+              Developed by: <a href="https://www.webxcrafting.in/" target="_blank" rel="noopener noreferrer" className="text-orange-500 hover:underline">WebX Crafting</a>
+            </p>
+          </div>
           <div className="flex items-center gap-4">
             <Link href="/terms" className="hover:text-orange-500 transition-colors">Terms & Conditions</Link>
             <p>Mumbai, Maharashtra, India</p>
