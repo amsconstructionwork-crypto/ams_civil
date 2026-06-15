@@ -43,12 +43,12 @@ export default function WhatsAppButton() {
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-[60] flex flex-col items-end" ref={chatRef}>
+    <div className="fixed bottom-6 right-6 z-[60] flex flex-col items-end pointer-events-none" ref={chatRef}>
       
       {/* ── The Chat Window (Lead Magnet) ── */}
       <div 
-        className={`mb-4 w-[320px] sm:w-[350px] bg-[#0F172A] border border-slate-700 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] overflow-hidden transition-all duration-300 origin-bottom-right ${
-          isOpen ? 'scale-100 opacity-100 translate-y-0' : 'scale-90 opacity-0 translate-y-10 pointer-events-none'
+        className={`mb-4 w-[320px] sm:w-[350px] bg-[#0F172A] border border-slate-700 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] overflow-hidden transition-all duration-300 origin-bottom-right pointer-events-auto ${
+          isOpen ? 'scale-100 opacity-100 translate-y-0' : 'scale-90 opacity-0 translate-y-10 pointer-events-none hidden'
         }`}
       >
         {/* Header */}
@@ -101,14 +101,14 @@ export default function WhatsAppButton() {
             </button>
           </form>
           <div className="mt-2 flex flex-wrap gap-2">
-            <button onClick={() => setMessage('I need a free quote')} className="text-[10px] bg-[#1E2D45] text-slate-300 hover:text-white px-2 py-1 rounded-full border border-slate-700 hover:border-slate-500 transition-colors">Free Quote</button>
-            <button onClick={() => setMessage('Bathroom Renovation details')} className="text-[10px] bg-[#1E2D45] text-slate-300 hover:text-white px-2 py-1 rounded-full border border-slate-700 hover:border-slate-500 transition-colors">Bathroom Reno</button>
+            <button type="button" onClick={() => setMessage('I need a free quote')} className="text-[10px] bg-[#1E2D45] text-slate-300 hover:text-white px-2 py-1 rounded-full border border-slate-700 hover:border-slate-500 transition-colors">Free Quote</button>
+            <button type="button" onClick={() => setMessage('Bathroom Renovation details')} className="text-[10px] bg-[#1E2D45] text-slate-300 hover:text-white px-2 py-1 rounded-full border border-slate-700 hover:border-slate-500 transition-colors">Bathroom Reno</button>
           </div>
         </div>
       </div>
 
       {/* ── Floating Toggle Button ── */}
-      <div className="relative flex items-center gap-4">
+      <div className="relative flex items-center gap-4 pointer-events-auto">
         {/* Tooltip */}
         {!isOpen && showTooltip && (
           <div className="absolute right-full mr-4 bg-white text-slate-800 text-xs font-semibold px-4 py-2.5 rounded-2xl shadow-[0_10px_25px_rgba(0,0,0,0.2)] animate-fadeRight flex items-center gap-2 whitespace-nowrap cursor-pointer hover:bg-slate-50" onClick={() => setIsOpen(true)}>
