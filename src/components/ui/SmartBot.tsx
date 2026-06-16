@@ -206,14 +206,14 @@ export default function SmartBot() {
 
   return (
     <>
-      <div className="fixed bottom-[100px] right-6 z-50 flex flex-col items-end pointer-events-none">
+      <div className="fixed bottom-[100px] right-6 z-50 flex flex-col items-end">
         <AnimatePresence>
           {isOpen && (
             <motion.div
               initial={{ opacity: 0, y: 20, scale: 0.9 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 20, scale: 0.9 }}
-              className="mb-4 w-[340px] h-[500px] max-w-[calc(100vw-32px)] bg-white rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.3)] flex flex-col overflow-hidden border border-slate-200 pointer-events-auto"
+              className="mb-4 w-[340px] h-[500px] max-w-[calc(100vw-32px)] bg-white rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.3)] flex flex-col overflow-hidden border border-slate-200"
             >
               {/* Premium Header */}
               <div className="bg-[#0f172a] p-4 flex items-center justify-between shadow-md z-10 relative">
@@ -317,7 +317,7 @@ export default function SmartBot() {
         </AnimatePresence>
 
         {/* Floating Toggler with Badge */}
-        <div className="relative pointer-events-auto">
+        <div className="relative">
           {!isOpen && (
             <motion.div 
               initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: 2 }}

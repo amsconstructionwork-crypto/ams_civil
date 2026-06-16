@@ -19,19 +19,10 @@ export const dynamicParams = true;
 
 /* ── Pre-render top paths ───── */
 export async function generateStaticParams() {
-  const CORE_ZONES = ['South Mumbai', 'Western Line', 'Central Line', 'Navi Mumbai'];
-  const params: { location: string; service: string }[] = [];
-  
-  locations.forEach(loc => {
-    // ANTI-BLOAT FIX: Only pre-render the highest value locations at build time.
-    // The rest will generate on-demand, saving massive crawl budget and build time.
-    if (CORE_ZONES.includes(loc.zone)) {
-      services.forEach(svc => {
-        params.push({ location: loc.slug, service: svc.slug });
-      });
-    }
-  });
-  return params;
+  // ANTI-BLOAT FIX: We return an empty array to prevent JavaScript heap out of memory
+  // during Next.js build. Vercel hobby tier has memory limits that get exhausted 
+  // when pre-building 1500+ pages. They will generate on-demand instead.
+  return [];
 }
 
 /* ── Realistic Service-Specific Emojis for Google CTR ── */

@@ -47,8 +47,8 @@ export default function WhatsAppButton() {
       
       {/* ── The Chat Window (Lead Magnet) ── */}
       <div 
-        className={`mb-4 w-[320px] sm:w-[350px] bg-[#0F172A] border border-slate-700 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] overflow-hidden transition-all duration-300 origin-bottom-right pointer-events-auto ${
-          isOpen ? 'scale-100 opacity-100 translate-y-0' : 'scale-90 opacity-0 translate-y-10 pointer-events-none hidden'
+        className={`mb-4 w-[320px] sm:w-[350px] bg-[#0F172A] border border-slate-700 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] overflow-hidden transition-all duration-300 origin-bottom-right ${
+          isOpen ? 'scale-100 opacity-100 translate-y-0 pointer-events-auto' : 'scale-90 opacity-0 translate-y-10 pointer-events-none'
         }`}
       >
         {/* Header */}
