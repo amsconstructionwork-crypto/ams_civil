@@ -14,7 +14,7 @@ import { serviceDetailsData } from '@/data/serviceDetails';
 import { WhatsAppLogo } from '@/components/ui/BrandIcons';
 
 export async function generateStaticParams() {
-  return services.map(s => ({ slug: s.slug }));
+  return [];
 }
 
 /* ── Service Emojis for Metadata ── */

@@ -11,7 +11,7 @@ import ModernCTA from '@/components/ui/ModernCTA';
 import { getDb } from '@/lib/mongodb';
 
 export async function generateStaticParams() {
-  return locations.map(l => ({ location: l.slug }));
+  return [];
 }
 
 export async function generateMetadata({ params }: { params: { location: string } }): Promise<Metadata> {

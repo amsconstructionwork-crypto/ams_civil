@@ -15,7 +15,7 @@ import { getDb } from '@/lib/mongodb';
 
 /* ── Generate all static paths at build time ──────────────── */
 export async function generateStaticParams() {
-  return locations.map(l => ({ location: l.slug }));
+  return [];
 }
 
 /* ── Generate unique metadata per location ────────────────── */
