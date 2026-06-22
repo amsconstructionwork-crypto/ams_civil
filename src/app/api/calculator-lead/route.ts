@@ -18,7 +18,13 @@ const TO = process.env.EMAIL_TO || process.env.EMAIL_USER!;
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { name, phone, propertyType, services, condition, estimateMin, estimateMax } = body;
+    const { name, phone, propertyType, services, condition, estimateMin, estimateMax, websiteUrl } = body;
+
+    // Honeypot check
+    if (websiteUrl) {
+      console.warn('🤖 Spam bot blocked by honeypot in /api/calculator-lead:', { name, phone, websiteUrl });
+      return NextResponse.json({ success: true, message: 'Lead saved successfully' });
+    }
 
     if (!name?.trim() || !phone?.trim()) {
       return NextResponse.json({ success: false, error: 'Name and Phone are required.' }, { status: 400 });

@@ -15,6 +15,7 @@ interface ContactFormData {
   email: string;
   service: string;
   message: string;
+  websiteUrl?: string;
 }
 
 function useScrollReveal() {
@@ -286,6 +287,18 @@ export default function ContactPage() {
                   {errors.message && (
                     <p className="text-red-400 text-xs mt-1">{errors.message.message}</p>
                   )}
+                </div>
+
+                {/* Honeypot Field */}
+                <div style={{ display: 'none' }} aria-hidden="true">
+                  <label htmlFor="websiteUrl">Website URL</label>
+                  <input
+                    {...register('websiteUrl')}
+                    type="text"
+                    id="websiteUrl"
+                    tabIndex={-1}
+                    autoComplete="off"
+                  />
                 </div>
 
                 {/* Submit */}

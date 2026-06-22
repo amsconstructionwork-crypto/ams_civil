@@ -12,6 +12,7 @@ interface LeadFormData {
   email: string;
   service: string;
   location: string;
+  websiteUrl?: string;
 }
 
 export default function LeadGenPopup() {
@@ -211,6 +212,12 @@ export default function LeadGenPopup() {
                     <option value="Interior Work" className="bg-[#0B1120]">Interior Work</option>
                   </select>
                   {errors.service && <p className="text-red-500 text-[10px] font-bold uppercase">{errors.service.message}</p>}
+                </div>
+
+                {/* Honeypot Field */}
+                <div style={{ display: 'none' }} aria-hidden="true">
+                  <label htmlFor="websiteUrlLead">Website URL</label>
+                  <input {...register('websiteUrl')} type="text" id="websiteUrlLead" tabIndex={-1} autoComplete="off" />
                 </div>
 
                 <button

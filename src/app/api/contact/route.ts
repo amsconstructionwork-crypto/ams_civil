@@ -26,9 +26,18 @@ const TO   = process.env.EMAIL_TO || process.env.EMAIL_USER!;
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { name, phone, email, service, message } = body as {
-      name: string; phone: string; email?: string; service: string; message: string;
+    const { name, phone, email, service, message, websiteUrl } = body as {
+      name: string; phone: string; email?: string; service: string; message: string; websiteUrl?: string;
     };
+
+    // Honeypot check: If the hidden field is filled, it's a bot
+    if (websiteUrl) {
+      console.warn('🤖 Spam bot blocked by honeypot in /api/contact:', { name, phone, websiteUrl });
+      return NextResponse.json({
+        success: true,
+        message: 'Your enquiry has been received. We will contact you within 24 hours.',
+      });
+    }
 
     /* ── Validation ─────────────────────────────────────────── */
     if (!name?.trim() || !phone?.trim() || !email?.trim() || !service?.trim() || !message?.trim()) {

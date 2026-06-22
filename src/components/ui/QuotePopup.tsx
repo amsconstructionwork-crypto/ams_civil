@@ -13,6 +13,7 @@ interface QuoteFormData {
   email: string;
   service: string;
   message: string;
+  websiteUrl?: string;
 }
 
 export default function QuotePopup() {
@@ -176,6 +177,12 @@ export default function QuotePopup() {
                 <textarea {...register('message')} rows={3}
                   placeholder="Briefly describe your project…"
                   className="form-input resize-none" />
+              </div>
+
+              {/* Honeypot Field */}
+              <div style={{ display: 'none' }} aria-hidden="true">
+                <label htmlFor="websiteUrlQuote">Website URL</label>
+                <input {...register('websiteUrl')} type="text" id="websiteUrlQuote" tabIndex={-1} autoComplete="off" />
               </div>
 
               {/* Submit */}

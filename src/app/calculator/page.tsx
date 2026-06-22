@@ -15,6 +15,7 @@ export default function CalculatorPage() {
   // Lead Capture State
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
+  const [websiteUrl, setWebsiteUrl] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
 
@@ -102,7 +103,8 @@ export default function CalculatorPage() {
           services,
           condition,
           estimateMin: estimate.min,
-          estimateMax: estimate.max
+          estimateMax: estimate.max,
+          websiteUrl
         }),
       });
 
@@ -279,6 +281,19 @@ export default function CalculatorPage() {
                         placeholder="10-digit number"
                       />
                     </div>
+                  </div>
+
+                  {/* Honeypot Field */}
+                  <div style={{ display: 'none' }} aria-hidden="true">
+                    <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Website URL</label>
+                    <input 
+                      type="text" 
+                      value={websiteUrl}
+                      onChange={(e) => setWebsiteUrl(e.target.value)}
+                      className="w-full bg-[#060B14] border border-[#1E2D45] rounded-xl px-4 py-3.5 text-white"
+                      tabIndex={-1}
+                      autoComplete="off"
+                    />
                   </div>
 
                   {error && <p className="text-red-400 text-sm text-center font-medium bg-red-400/10 py-2 rounded-lg">{error}</p>}

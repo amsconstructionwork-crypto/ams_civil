@@ -23,9 +23,18 @@ const TO   = process.env.EMAIL_TO || process.env.EMAIL_USER!;
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { name, phone, email, service, location } = body as {
-      name: string; phone: string; email: string; service: string; location: string;
+    const { name, phone, email, service, location, websiteUrl } = body as {
+      name: string; phone: string; email: string; service: string; location: string; websiteUrl?: string;
     };
+
+    // Honeypot check
+    if (websiteUrl) {
+      console.warn('🤖 Spam bot blocked by honeypot in /api/leads:', { name, phone, websiteUrl });
+      return NextResponse.json({
+        success: true,
+        message: 'Thank you! We will contact you shortly.',
+      });
+    }
 
     /* ── Validation ─────────────────────────────────────────── */
     if (!phone?.trim() || !email?.trim() || !service?.trim() || !location?.trim()) {

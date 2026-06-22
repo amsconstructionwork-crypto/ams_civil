@@ -12,6 +12,7 @@ export default function LandingPage() {
     phone: '',
     email: '',
     service: 'Bungalow Construction',
+    websiteUrl: '',
   });
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -191,6 +192,19 @@ export default function LandingPage() {
                           <option value="Tiles & Flooring">Tiles & Flooring</option>
                           <option value="Painting & POP">Painting & POP</option>
                         </select>
+                      </div>
+
+                      {/* Honeypot Field */}
+                      <div style={{ display: 'none' }} aria-hidden="true">
+                        <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Website URL</label>
+                        <input
+                          type="text"
+                          value={formData.websiteUrl}
+                          onChange={e => setFormData({ ...formData, websiteUrl: e.target.value })}
+                          className="w-full bg-[#161F2E] border border-[#1E2D45] rounded-xl px-4 py-3 text-white focus:outline-none focus:border-orange-500 transition-colors"
+                          tabIndex={-1}
+                          autoComplete="off"
+                        />
                       </div>
 
                       <button
