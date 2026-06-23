@@ -31,8 +31,7 @@ async function getRelatedBlogs(currentSlug: string) {
       .aggregate([
         { $match: { 
           slug: { $ne: currentSlug }, 
-          published: true,
-          $or: [{ publishDate: { $lte: new Date() } }, { publishDate: { $exists: false } }]
+          published: true
         }},
         { $sample: { size: 6 } }
       ])
