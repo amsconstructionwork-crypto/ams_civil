@@ -42,6 +42,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${BASE}/blog`,     lastModified: SITE_UPDATED, changeFrequency: 'daily',   priority: 0.9 },
     { url: `${BASE}/areas`,    lastModified: SITE_UPDATED, changeFrequency: 'monthly', priority: 0.8 },
     { url: `${BASE}/calculator`, lastModified: SITE_UPDATED, changeFrequency: 'monthly', priority: 0.95 },
+    { url: `${BASE}/terms`,      lastModified: SITE_UPDATED, changeFrequency: 'monthly', priority: 0.5 },
+    { url: `${BASE}/privacy`,    lastModified: SITE_UPDATED, changeFrequency: 'monthly', priority: 0.5 },
   ];
 
   /* ── Individual service pages /services/[slug] ──────────── */
@@ -95,8 +97,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   try {
     const db = await getDb();
     const blogs = await db.collection('blogs').find({
-      published: true,
-      $or: [{ publishDate: { $lte: new Date() } }, { publishDate: { $exists: false } }]
+      published: true
     }).toArray();
     
     blogPages = blogs.map(blog => ({
