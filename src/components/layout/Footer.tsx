@@ -245,6 +245,7 @@ export default function Footer() {
             </p>
           </div>
           <div className="flex items-center gap-4">
+            <Link href="/privacy" className="hover:text-orange-500 transition-colors">Privacy Policy</Link>
             <Link href="/terms" className="hover:text-orange-500 transition-colors">Terms & Conditions</Link>
             <p>Mumbai, Maharashtra, India</p>
           </div>
