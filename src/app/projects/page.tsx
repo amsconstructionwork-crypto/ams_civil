@@ -236,9 +236,10 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
       <div className="relative h-56 overflow-hidden" style={{ background: '#161F2E' }}>
         {project.images?.[0] ? (
           <Image
-            src={project.images[activeImage] ?? project.images[0]}
+            src={encodeURI(project.images[activeImage] ?? project.images[0])}
             alt={project.title}
             fill
+            unoptimized={true}
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             className="object-cover group-hover:scale-105 transition-transform duration-500"
           />

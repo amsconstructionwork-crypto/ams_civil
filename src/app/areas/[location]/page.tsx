@@ -499,7 +499,7 @@ export default async function LocationPage({ params }: { params: { location: str
                 <div key={project._id.toString()} className="card p-5">
                   <div className="relative aspect-video rounded-xl overflow-hidden mb-4">
                     {project.images?.[0] ? (
-                      <Image src={project.images[0]} alt={project.title} fill className="object-cover" />
+                      <Image src={encodeURI(project.images[0])} alt={project.title} fill unoptimized={true} className="object-cover" />
                     ) : (
                       <div className="w-full h-full bg-white/5 flex items-center justify-center">No Image</div>
                     )}

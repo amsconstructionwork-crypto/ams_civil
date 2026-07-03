@@ -608,7 +608,8 @@ function ProjectsCarousel() {
                   {/* Image */}
                   <div className="relative h-52 overflow-hidden watermark-container">
                     {project.images?.[0] ? (
-                      <Image src={project.images[0]} alt={`${project.title} — Construction Project in ${project.location}`} fill
+                      <Image src={encodeURI(project.images[0])} alt={`${project.title} — Construction Project in ${project.location}`} fill
+                        unoptimized={true}
                         className="object-cover group-hover:scale-105 transition-transform duration-500" />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center"
