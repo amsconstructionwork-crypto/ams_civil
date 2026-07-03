@@ -11,10 +11,14 @@ export default function WhatsAppButton() {
 
   const adminPhone = '918779391690'; // Primary WhatsApp number
 
-  // Show a pulsing tooltip after 5 seconds to grab attention
+  // Show a pulsing tooltip after 5 seconds to grab attention, then hide it after 15 seconds
   useEffect(() => {
-    const timer = setTimeout(() => setShowTooltip(true), 5000);
-    return () => clearTimeout(timer);
+    const showTimer = setTimeout(() => setShowTooltip(true), 5000);
+    const hideTimer = setTimeout(() => setShowTooltip(false), 20000); // 5s wait + 15s show = 20s total
+    return () => {
+      clearTimeout(showTimer);
+      clearTimeout(hideTimer);
+    };
   }, []);
 
   // Close when clicking outside
