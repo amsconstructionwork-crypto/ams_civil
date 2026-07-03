@@ -115,7 +115,6 @@ export default function HomePage() {
       <GoogleReviewsWidget />
       <GalleryCarouselSection />
       <WhyUsSection />
-      <TestimonialsSection />
       <FAQSection />
       <NetworkSection />
       <ModernCTA />
@@ -861,132 +860,7 @@ function WhyUsSection() {
   );
 }
 
-/* ─────────────────────────────────────────────────────────────
-   TESTIMONIALS
-─────────────────────────────────────────────────────────────── */
-interface Testimonial {
-  id: string; name: string; location: string; rating: number; text: string;
-  service: string; avatar: string;
-}
 
-function TestimonialsSection() {
-  const [data, setData] = useState<Testimonial[]>([]);
-  const [loading, setLoading] = useState(true);
-  const trackRef = useRef<HTMLDivElement>(null);
-  const timerRef = useRef<NodeJS.Timeout | null>(null);
-
-  useEffect(() => {
-    fetch('/api/testimonials')
-      .then(res => res.json())
-      .then(j => { if (j.success) setData(j.data); })
-      .catch(err => console.error('Failed to fetch testimonials:', err))
-      .finally(() => setLoading(false));
-  }, []);
-
-  /* Auto-advance every 4.5s */
-  useEffect(() => {
-    if (data.length <= 1) return;
-    
-    timerRef.current = setInterval(() => {
-      const track = trackRef.current;
-      if (track) {
-        let cardW = track.children[0]?.clientWidth || 0;
-        let gap = 20; // gap-5 is 20px
-        let scrollAmt = cardW + gap;
-        let maxScroll = track.scrollWidth - track.clientWidth;
-        
-        // If we are at the end, rewind smoothly to the start
-        if (track.scrollLeft >= maxScroll - 5) {
-          track.scrollTo({ left: 0, behavior: 'smooth' });
-        } else {
-          track.scrollBy({ left: scrollAmt, behavior: 'smooth' });
-        }
-      }
-    }, 4500);
-
-    return () => { if (timerRef.current) clearInterval(timerRef.current); };
-  }, [data.length]);
-
-  if (!loading && data.length === 0) return null;
-
-  return (
-    <section className="section-y" style={{ background: '#0B1120' }}>
-      <div className="container-custom">
-        <div className="text-center max-w-2xl mx-auto mb-12">
-          <div className="section-label justify-center animate-on-scroll">Happy Clients</div>
-          <h2 className="font-display text-3xl lg:text-4xl xl:text-5xl text-white mb-3 animate-on-scroll">
-            What Our Clients <span className="text-gradient">Say</span>
-          </h2>
-        </div>
-
-        {loading ? (
-          <div className="flex items-center justify-center py-12 gap-3 text-slate-500">
-            <span className="w-5 h-5 border-2 border-slate-700 border-t-orange-500 rounded-full animate-spin" />
-            Loading reviews...
-          </div>
-        ) : (
-          <div className="relative group">
-            {/* Scroll Left Button */}
-            <button onClick={() => {
-                const track = trackRef.current;
-                if (track) {
-                  let cardW = track.children[0]?.clientWidth || 0;
-                  track.scrollBy({ left: -(cardW + 20), behavior: 'smooth' });
-                }
-              }}
-              className="absolute -left-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full items-center justify-center bg-[#1E2D45] text-white hover:bg-[#F97316] transition-colors shadow-lg hidden md:flex border border-slate-700 opacity-0 group-hover:opacity-100">
-              <ChevronLeft size={20} />
-            </button>
-
-            {/* Scroll Right Button */}
-            <button onClick={() => {
-                const track = trackRef.current;
-                if (track) {
-                  let cardW = track.children[0]?.clientWidth || 0;
-                  track.scrollBy({ left: (cardW + 20), behavior: 'smooth' });
-                }
-              }}
-              className="absolute -right-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full items-center justify-center bg-[#1E2D45] text-white hover:bg-[#F97316] transition-colors shadow-lg hidden md:flex border border-slate-700 opacity-0 group-hover:opacity-100">
-              <ChevronRight size={20} />
-            </button>
-
-            {/* Track */}
-            <div ref={trackRef} className="flex gap-5 overflow-x-auto pb-4 pt-2 no-scrollbar scroll-snap-x items-stretch">
-              {data.map((t, i) => (
-                <div key={t.id} className="scroll-snap-start flex-shrink-0 w-[85vw] md:w-[calc(50%-10px)] lg:w-[calc(33.333%-14px)] card p-6 flex flex-col gap-4 animate-fadeUp opacity-0 h-auto"
-                  style={{ animationDelay: `${i * 70}ms`, animationFillMode: 'forwards' }}>
-                  {/* Stars */}
-                  <div className="flex gap-0.5">
-                    {Array.from({ length: t.rating }).map((_, j) => (
-                      <Star key={j} size={13} style={{ fill: '#F97316', color: '#F97316' }} />
-                    ))}
-                  </div>
-
-                  {/* Opening quote mark */}
-                  <div className="text-4xl font-display leading-none" style={{ color: '#F97316', opacity: 0.4 }}>&ldquo;</div>
-
-                  <p className="text-slate-400 text-sm leading-relaxed flex-1 -mt-4">{t.text}</p>
-
-                  {/* Author */}
-                  <div className="flex items-center gap-3 pt-3 border-t" style={{ borderColor: '#1E2D45' }}>
-                    <div className="w-10 h-10 flex items-center justify-center font-bold text-sm flex-shrink-0 rounded-full"
-                      style={{ background: 'linear-gradient(135deg, #F97316, #EA580C)', color: '#fff' }}>
-                      {t.avatar}
-                    </div>
-                    <div>
-                      <p className="text-white text-sm font-semibold">{t.name}</p>
-                      <p className="text-slate-500 text-xs">{t.location} · {t.service}</p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-      </div>
-    </section>
-  );
-}
 
 /* ─────────────────────────────────────────────────────────────
    FAQ — FIXED: uses top-level useState, NOT require()
