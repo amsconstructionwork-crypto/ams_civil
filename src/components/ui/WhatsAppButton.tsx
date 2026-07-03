@@ -132,7 +132,7 @@ export default function WhatsAppButton() {
           {isOpen ? (
             <X className="text-white relative z-10" size={26} />
           ) : (
-            <MessageSquare className="text-white relative z-10 fill-white/20 group-hover:fill-white/40 transition-all" size={28} />
+            <WhatsAppLogo className="text-white relative z-10 transition-all w-8 h-8" fill="currentColor" />
           )}
         </button>
       </div>

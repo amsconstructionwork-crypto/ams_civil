@@ -37,7 +37,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Validate image URL format
-    if (!src.startsWith('https://') && !src.startsWith('/images/')) {
+    if (!src.startsWith('https://') && !src.startsWith('/images/') && !src.startsWith('/real-projects/')) {
       return NextResponse.json({ success: false, error: 'Invalid image URL.' }, { status: 400 });
     }
 

@@ -5,8 +5,7 @@ const path = require('path');
 function getMongoUri() {
   if (process.env.MONGODB_URI) return process.env.MONGODB_URI;
   const envPaths = [
-    path.join(__dirname, '.env.local'),
-    path.join(__dirname, '..', '.env.local')
+    path.join(__dirname, '..', '..', '.env.local')
   ];
   for (const envPath of envPaths) {
     if (fs.existsSync(envPath)) {

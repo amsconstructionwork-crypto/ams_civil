@@ -18,7 +18,6 @@ import { openQuotePopup } from '@/components/ui/QuotePopup';
 import CountUp from '@/components/ui/CountUp';
 import GalleryCarouselSection from '@/components/ui/GalleryCarousel';
 import ModernCTA from '@/components/ui/ModernCTA';
-import AdsterraBanner from '@/components/ads/AdsterraBanner';
 
 /* ── Icon map ───────────────────────────────────────────────── */
 const iconMap: Record<string, React.ElementType> = {
@@ -71,11 +70,10 @@ export default function HomePage() {
       <IntroSection />
       <ServicesSection />
       <ProjectsCarousel />
+      <ProcessSection />
+      <FounderSection />
       <GalleryCarouselSection />
-      {/* Adsterra Homepage Middle Ad */}
-      <div className="w-full bg-[#080D1A] py-12 flex justify-center">
-        <AdsterraBanner variant="728x90" />
-      </div>
+      {/* Adsterra Homepage Middle Ad - REMOVED for trust building */}
       <WhyUsSection />
       <TestimonialsSection />
       <FAQSection />
@@ -121,10 +119,6 @@ function NetworkSection() {
 
   return (
     <section className="py-20 bg-[#080D1A] border-t border-white/5 relative group">
-      {/* Adsterra Homepage Top Ad */}
-      <div className="w-full bg-[#0B1120] py-8 border-b border-[#1E2D45] flex justify-center">
-        <AdsterraBanner variant="728x90" />
-      </div>
       <div className="container-custom">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
           <div className="max-w-2xl">
@@ -637,6 +631,91 @@ function ProjectsCarousel() {
           <Link href="/projects" className="btn-outline">
             View All Projects <ArrowRight size={16} />
           </Link>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ─────────────────────────────────────────────────────────────
+   PROCESS SECTION (3-Step Lead Process)
+─────────────────────────────────────────────────────────────── */
+function ProcessSection() {
+  const steps = [
+    { num: '01', title: 'Free Site Visit & Consultation', desc: 'Our engineer visits your property to understand your requirements, take measurements, and discuss ideas.' },
+    { num: '02', title: 'Transparent Quote', desc: 'You receive a detailed, itemized quotation with zero hidden costs and exact timelines.' },
+    { num: '03', title: 'Flawless Execution', desc: 'Our skilled team starts the work under senior supervision, keeping you updated at every milestone.' }
+  ];
+
+  return (
+    <section className="section-y stripe-bg" style={{ background: '#101827' }}>
+      <div className="container-custom">
+        <div className="text-center max-w-2xl mx-auto mb-16">
+          <div className="section-label justify-center animate-on-scroll">How It Works</div>
+          <h2 className="font-display text-3xl lg:text-4xl text-white mb-3 animate-on-scroll">
+            Our Simple <span className="text-gradient">3-Step Process</span>
+          </h2>
+          <p className="text-slate-400 animate-on-scroll text-sm">
+            We've made building your dream home completely stress-free.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+          {/* Connecting Line (Desktop) */}
+          <div className="hidden md:block absolute top-12 left-[15%] right-[15%] h-[2px] bg-gradient-to-r from-orange-500/10 via-orange-500/40 to-orange-500/10" />
+
+          {steps.map((step, i) => (
+            <div key={step.num} className="relative flex flex-col items-center text-center animate-on-scroll" style={{ transitionDelay: `${i * 150}ms` }}>
+              <div className="w-24 h-24 rounded-full bg-[#0B1120] border-2 border-[#1E2D45] flex items-center justify-center font-display font-black text-4xl text-orange-500 shadow-lg relative z-10 mb-6">
+                {step.num}
+              </div>
+              <h3 className="text-white font-bold text-xl mb-3">{step.title}</h3>
+              <p className="text-slate-400 text-sm leading-relaxed">{step.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ─────────────────────────────────────────────────────────────
+   MEET THE FOUNDER / TRUST SECTION
+─────────────────────────────────────────────────────────────── */
+function FounderSection() {
+  return (
+    <section className="section-y bg-[#0B1120] border-t border-[#1E2D45]/50">
+      <div className="container-custom">
+        <div className="max-w-4xl mx-auto">
+          <div className="card p-8 md:p-12 flex flex-col md:flex-row gap-8 items-center animate-on-scroll"
+               style={{ background: 'linear-gradient(135deg, #101827, #1E2D45)' }}>
+            <div className="w-32 h-32 md:w-40 md:h-40 bg-gradient-to-br from-orange-400 to-orange-600 text-white rounded-full flex 
+                            items-center justify-center font-display font-bold text-4xl md:text-5xl flex-shrink-0 shadow-lg border-4 border-[#0B1120]">
+              KM
+            </div>
+            <div className="text-center md:text-left flex-1">
+              <div className="section-label justify-center md:justify-start mb-2">Meet The Founder</div>
+              <div className="flex flex-col md:flex-row md:items-center gap-3 mb-4 justify-center md:justify-start">
+                <h3 className="text-white font-display text-2xl md:text-3xl">Kedar Mandal</h3>
+                <span className="text-orange-400 font-mono text-xs border border-orange-500/30 bg-orange-500/10 px-2 py-1 rounded">
+                  25+ Years Experience
+                </span>
+              </div>
+              <p className="text-slate-300 leading-relaxed text-sm md:text-base mb-6 italic">
+                &ldquo;At AMS Civil, we don't just build structures; we build trust. When a family hires us for their bungalow or renovation, they are placing their hard-earned money and dreams in our hands. My personal promise is 100% transparency, zero hidden costs, and uncompromised quality on every single project.&rdquo;
+              </p>
+              <div className="flex items-center gap-4 justify-center md:justify-start">
+                <div className="flex items-center gap-2">
+                  <CheckCircle size={16} className="text-orange-500" />
+                  <span className="text-slate-300 text-sm font-medium">On-Site Supervision</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle size={16} className="text-orange-500" />
+                  <span className="text-slate-300 text-sm font-medium">Direct Communication</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

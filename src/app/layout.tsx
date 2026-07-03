@@ -15,7 +15,6 @@ import SmartBot from '@/components/ui/SmartBot';
 import PageTracker from '@/components/tracking/PageTracker';
 import { Toaster } from 'react-hot-toast';
 import ConditionalLayout from '@/components/layout/ConditionalLayout';
-import AdsterraSocialBar from '@/components/ads/AdsterraSocialBar';
 
 const playfair = Playfair_Display({
   subsets: ['latin'],
@@ -414,7 +413,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {children}
         </ConditionalLayout>
         <PageTracker />
-        <AdsterraSocialBar />
       </body>
     </html>
   );

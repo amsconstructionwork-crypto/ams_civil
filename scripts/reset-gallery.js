@@ -34,7 +34,7 @@ async function main() {
     const collection = db.collection('gallery');
 
     console.log('Deleting old gallery entries...');
-    await collection.deleteMany({});
+    // await collection.deleteMany({});
 
     console.log('Seeding new realistic images...');
     const now = new Date();

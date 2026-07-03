@@ -85,9 +85,13 @@ export default function SocialProofPopup() {
           </button>
 
           <div className="flex gap-3 items-center">
-            <div className="w-10 h-10 rounded-full bg-orange-500/20 flex flex-shrink-0 items-center justify-center relative border border-orange-500/30">
-              <CheckCircle size={18} className="text-orange-500" />
-              <div className="absolute top-0 right-0 w-2.5 h-2.5 bg-green-500 border-2 border-[#0f172a] rounded-full animate-pulse" />
+            {/* Realistic User Avatar */}
+            <div className="w-10 h-10 rounded-full flex flex-shrink-0 items-center justify-center relative font-display font-bold text-white text-lg shadow-inner"
+              style={{ background: `linear-gradient(135deg, hsl(${notification.name.charCodeAt(0) * 20}, 70%, 50%), hsl(${notification.name.charCodeAt(0) * 30}, 80%, 40%))` }}>
+              {notification.name.charAt(0)}
+              <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 border-2 border-[#0f172a] rounded-full flex items-center justify-center">
+                <CheckCircle size={8} className="text-white" />
+              </div>
             </div>
 
             <div className="flex-1 pr-4">

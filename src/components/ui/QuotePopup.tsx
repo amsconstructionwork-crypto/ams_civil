@@ -194,6 +194,18 @@ export default function QuotePopup() {
                   <><Send size={16} />Send Quote Request</>
                 )}
               </button>
+              
+              {/* Trust Badges */}
+              <div className="flex items-center justify-center gap-4 mt-3 pt-3 border-t border-[#1E2D45]">
+                <div className="flex items-center gap-1.5 text-slate-400 text-[10px] font-mono uppercase tracking-wider">
+                  <CheckCircle size={12} className="text-orange-500" />
+                  100% Free Estimate
+                </div>
+                <div className="flex items-center gap-1.5 text-slate-400 text-[10px] font-mono uppercase tracking-wider">
+                  <CheckCircle size={12} className="text-orange-500" />
+                  No Spam Guarantee
+                </div>
+              </div>
             </form>
           )}
         </div>
