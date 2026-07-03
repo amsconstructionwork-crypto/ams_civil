@@ -140,11 +140,11 @@ export default function GalleryPage() {
                   className="group relative overflow-hidden aspect-square gallery-item watermark-container"
                   style={{ animationDelay: `${Math.min(i * 40, 400)}ms` }}>
 
-                  {/* Image */}
                   <Image
-                    src={img.src}
+                    src={encodeURI(img.src)}
                     alt={img.alt}
                     fill
+                    unoptimized={true}
                     sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                     className="object-cover group-hover:scale-110 transition-transform duration-500"
                   />
@@ -212,9 +212,10 @@ export default function GalleryPage() {
           <div className="relative flex items-center justify-center w-full h-full max-w-6xl max-h-[80vh] mx-auto px-6 sm:px-20">
             <div className="relative w-full h-full watermark-container shadow-2xl">
               <Image
-                src={filtered[lightboxIndex].src}
+                src={encodeURI(filtered[lightboxIndex].src)}
                 alt={filtered[lightboxIndex].alt}
                 fill
+                unoptimized={true}
                 sizes="(max-width: 1200px) 100vw, 1200px"
                 className="object-contain rounded-sm"
               />
