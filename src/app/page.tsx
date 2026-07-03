@@ -469,10 +469,9 @@ function TransformationSection() {
         </div>
         
         <div className="animate-on-scroll max-w-5xl mx-auto border-[8px] border-white/5 rounded-3xl p-2 bg-[#0B1120]/50 backdrop-blur-sm shadow-2xl">
-          {/* We use high-quality placeholders for now, the client can replace these with real projects later */}
           <BeforeAfterSlider 
-            beforeImage="https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=2000&auto=format&fit=crop" 
-            afterImage="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2000&auto=format&fit=crop"
+            beforeImage="/real-projects/before.png" 
+            afterImage="/real-projects/after.png"
             beforeLabel="Raw Site"
             afterLabel="Finished Project"
           />
