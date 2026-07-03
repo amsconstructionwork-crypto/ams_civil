@@ -112,9 +112,9 @@ export default function HomePage() {
       <ProjectsCarousel />
       <ProcessSection />
       <FounderSection />
-      <GoogleReviewsWidget />
       <GalleryCarouselSection />
       <WhyUsSection />
+      <GoogleReviewsWidget />
       <FAQSection />
       <NetworkSection />
       <ModernCTA />
