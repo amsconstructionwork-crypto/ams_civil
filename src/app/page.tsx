@@ -19,7 +19,6 @@ import CountUp from '@/components/ui/CountUp';
 import GalleryCarouselSection from '@/components/ui/GalleryCarousel';
 import ModernCTA from '@/components/ui/ModernCTA';
 import BeforeAfterSlider from '@/components/ui/BeforeAfterSlider';
-import LiveActivityPopup from '@/components/ui/LiveActivityPopup';
 import GoogleReviewsWidget from '@/components/ui/GoogleReviewsWidget';
 
 /* ── Icon map ───────────────────────────────────────────────── */
@@ -102,7 +101,6 @@ export default function HomePage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessLd) }} />
-      <LiveActivityPopup />
       <HeroSection />
       <TrustBannerSection />
       <TickerSection />
