@@ -19,6 +19,8 @@ import CountUp from '@/components/ui/CountUp';
 import GalleryCarouselSection from '@/components/ui/GalleryCarousel';
 import ModernCTA from '@/components/ui/ModernCTA';
 import BeforeAfterSlider from '@/components/ui/BeforeAfterSlider';
+import LiveActivityPopup from '@/components/ui/LiveActivityPopup';
+import GoogleReviewsWidget from '@/components/ui/GoogleReviewsWidget';
 
 /* ── Icon map ───────────────────────────────────────────────── */
 const iconMap: Record<string, React.ElementType> = {
@@ -63,9 +65,44 @@ export default function HomePage() {
     }))
   };
 
+  const localBusinessLd = {
+    '@context': 'https://schema.org',
+    '@type': 'LocalBusiness',
+    'name': 'AMS Civil Construction',
+    'image': 'https://www.amscivilwork.in/og-image.jpg',
+    '@id': 'https://www.amscivilwork.in',
+    'url': 'https://www.amscivilwork.in',
+    'telephone': '+918779391690',
+    'address': {
+      '@type': 'PostalAddress',
+      'streetAddress': 'Andheri West',
+      'addressLocality': 'Mumbai',
+      'addressRegion': 'Maharashtra',
+      'postalCode': '400053',
+      'addressCountry': 'IN'
+    },
+    'geo': {
+      '@type': 'GeoCoordinates',
+      'latitude': 19.1136,
+      'longitude': 72.8297
+    },
+    'aggregateRating': {
+      '@type': 'AggregateRating',
+      'ratingValue': '4.9',
+      'reviewCount': '124'
+    },
+    'areaServed': [
+      'Mumbai',
+      'Navi Mumbai',
+      'Thane'
+    ]
+  };
+
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessLd) }} />
+      <LiveActivityPopup />
       <HeroSection />
       <TrustBannerSection />
       <TickerSection />
@@ -75,6 +112,7 @@ export default function HomePage() {
       <ProjectsCarousel />
       <ProcessSection />
       <FounderSection />
+      <GoogleReviewsWidget />
       <GalleryCarouselSection />
       <WhyUsSection />
       <TestimonialsSection />
