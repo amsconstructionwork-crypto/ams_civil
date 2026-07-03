@@ -18,6 +18,7 @@ import { openQuotePopup } from '@/components/ui/QuotePopup';
 import CountUp from '@/components/ui/CountUp';
 import GalleryCarouselSection from '@/components/ui/GalleryCarousel';
 import ModernCTA from '@/components/ui/ModernCTA';
+import BeforeAfterSlider from '@/components/ui/BeforeAfterSlider';
 
 /* ── Icon map ───────────────────────────────────────────────── */
 const iconMap: Record<string, React.ElementType> = {
@@ -66,20 +67,51 @@ export default function HomePage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <HeroSection />
+      <TrustBannerSection />
       <TickerSection />
       <IntroSection />
       <ServicesSection />
+      <TransformationSection />
       <ProjectsCarousel />
       <ProcessSection />
       <FounderSection />
       <GalleryCarouselSection />
-      {/* Adsterra Homepage Middle Ad - REMOVED for trust building */}
       <WhyUsSection />
       <TestimonialsSection />
       <FAQSection />
       <NetworkSection />
       <ModernCTA />
     </>
+  );
+}
+
+/* ─────────────────────────────────────────────────────────────
+   TRUST BANNER SECTION
+─────────────────────────────────────────────────────────────── */
+function TrustBannerSection() {
+  return (
+    <div className="bg-[#050914] border-y border-white/5 py-10 relative z-20 shadow-2xl">
+      <div className="container-custom">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 lg:gap-10 text-center">
+          {[
+            { icon: Award, title: "25+ Years Legacy", subtitle: "Building since 2001" },
+            { icon: Star, title: "5-Star Rated", subtitle: "Top Civil Contractor" },
+            { icon: Shield, title: "100% Guaranteed", subtitle: "Quality Materials" },
+            { icon: Users, title: "In-House Experts", subtitle: "No Middlemen" },
+          ].map((item, i) => (
+            <div key={i} className="flex flex-col items-center justify-center gap-3 group animate-fadeUp" style={{ animationDelay: `${i * 100}ms` }}>
+              <div className="w-14 h-14 rounded-full bg-orange-500/10 border border-orange-500/20 flex items-center justify-center text-orange-500 group-hover:bg-orange-500 group-hover:text-white group-hover:scale-110 transition-all duration-300 shadow-lg">
+                <item.icon size={28} />
+              </div>
+              <div>
+                <h4 className="text-white font-bold text-sm tracking-wide">{item.title}</h4>
+                <p className="text-slate-500 text-xs mt-1">{item.subtitle}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
   );
 }
 
@@ -257,16 +289,6 @@ function HeroSection() {
                 </Link>
               </motion.div>
             </div>
-
-            {/* Trust badges */}
-            <div className="flex flex-wrap gap-x-6 gap-y-2 animate-fadeIn" style={{ animationDelay: '.85s', opacity: 0 }}>
-              {['350+ Projects Done', '50+ Skilled Team', 'Free Consultation', '1-Year Warranty'].map(b => (
-                <span key={b} className="flex items-center gap-1.5 text-slate-400 text-xs">
-                  <CheckCircle size={12} style={{ color: '#F97316' }} />
-                  {b}
-                </span>
-              ))}
-            </div>
           </div>
 
           {/* Stat cards — repositioned to prevent overlap */}
@@ -420,6 +442,40 @@ function ServicesSection() {
           <Link href="/services" className="btn-primary">
             All Services <ArrowRight size={16} />
           </Link>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ─────────────────────────────────────────────────────────────
+   TRANSFORMATION SECTION
+─────────────────────────────────────────────────────────────── */
+function TransformationSection() {
+  return (
+    <section className="section-y bg-[#050914] border-y border-white/5 relative overflow-hidden">
+      {/* Decorative Blur */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-orange-500/5 rounded-full blur-[120px] pointer-events-none" />
+      
+      <div className="container-custom relative z-10">
+        <div className="text-center max-w-2xl mx-auto mb-12">
+          <div className="section-label justify-center animate-on-scroll">Real Results</div>
+          <h2 className="font-display text-3xl lg:text-4xl xl:text-5xl text-white mb-3 animate-on-scroll">
+            See the <span className="text-gradient">Transformation</span>
+          </h2>
+          <p className="text-slate-400 animate-on-scroll text-sm">
+            Drag the slider to see how we transform bare structures into premium living spaces.
+          </p>
+        </div>
+        
+        <div className="animate-on-scroll max-w-5xl mx-auto border-[8px] border-white/5 rounded-3xl p-2 bg-[#0B1120]/50 backdrop-blur-sm shadow-2xl">
+          {/* We use high-quality placeholders for now, the client can replace these with real projects later */}
+          <BeforeAfterSlider 
+            beforeImage="https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=2000&auto=format&fit=crop" 
+            afterImage="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2000&auto=format&fit=crop"
+            beforeLabel="Raw Site"
+            afterLabel="Finished Project"
+          />
         </div>
       </div>
     </section>
