@@ -216,13 +216,14 @@ export default function Footer() {
               <span className="hidden sm:inline"> A Mandal Group Venture</span>
               <Link href="/admin" className="ml-1 text-slate-800 hover:text-orange-500 transition-colors cursor-default" title="Admin">.</Link>
             </p>
+            <p className="text-slate-500 text-xs font-medium">
+              Developed by <a href="https://www.webxcrafting.in/" target="_blank" rel="noopener noreferrer" className="text-orange-500 hover:text-orange-400 transition-colors font-semibold">WebX Crafting</a>
+            </p>
           </div>
           
-          <div className="flex items-center flex-wrap justify-center gap-6 text-xs font-medium text-slate-500">
+          <div className="flex items-center flex-wrap justify-center gap-6 text-xs font-medium text-slate-500 pr-12 md:pr-0">
             <Link href="/privacy" className="hover:text-orange-400 transition-colors">Privacy Policy</Link>
             <Link href="/terms" className="hover:text-orange-400 transition-colors">Terms & Conditions</Link>
-            <span className="hidden sm:inline w-1 h-1 rounded-full bg-slate-700" />
-            <p>Developed by <a href="https://www.webxcrafting.in/" target="_blank" rel="noopener noreferrer" className="text-orange-500 hover:text-orange-400 transition-colors font-semibold">WebX Crafting</a></p>
           </div>
         </div>
       </div>
