@@ -5,10 +5,11 @@ import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { getLocation, locations } from '@/data/locations';
 import { services } from '@/data/siteData';
-import { MapPin, CheckCircle, ArrowRight, Star, ShieldCheck, Clock, Users, HardHat } from 'lucide-react';
+import { MapPin, CheckCircle, ArrowRight, Star, ShieldCheck, Clock, Users, HardHat, Navigation } from 'lucide-react';
 import { WhatsAppLogo, PhoneLogo } from '@/components/ui/BrandIcons';
 import ModernCTA from '@/components/ui/ModernCTA';
 import { getDb } from '@/lib/mongodb';
+import { getSeededRandom, zoneContext } from '@/data/localContent';
 
 export async function generateStaticParams() {
   return [];
@@ -65,6 +66,15 @@ export default async function LocationPageMarathi({ params }: { params: { locati
     { icon: Star, label: '4.9/5', desc: 'रेटिंग' },
   ];
 
+  // Dynamic Content for Entropy
+  const layoutSeed = getSeededRandom(loc.slug + 'mr');
+  const paras = [
+    `AMS Civil Construction ${loc.name} मध्ये उत्कृष्ट बांधकाम आणि नूतनीकरण (renovation) सेवा प्रदान करते. बंगला बांधणीपासून ते किचन पर्यंत, आम्ही 25+ वर्षांच्या अनुभवासह काम करतो.`,
+    `जर आपण ${loc.name} (${loc.district}) मध्ये विश्वासार्ह सिव्हिल कंत्राटदार शोधत असाल, तर AMS Civil Construction हा सर्वोत्तम पर्याय आहे. आम्ही विशेषतः ${loc.landmarks[0] || loc.name} जवळ काम करतो.`,
+    `${loc.name} मध्ये प्रीमियम सिव्हिल कामासाठी आम्ही ओळखले जातो. घर बांधणी असो वा नूतनीकरण, आमची टीम ${loc.zone} भागात सर्वोत्तम गुणवत्ता देते.`
+  ];
+  const selectedPara = paras[Math.floor(layoutSeed * paras.length)];
+
   return (
     <main className="min-h-screen bg-[#080D1A] font-body">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
@@ -91,8 +101,7 @@ export default async function LocationPageMarathi({ params }: { params: { locati
             </h1>
 
             <p className="text-slate-400 text-lg sm:text-xl leading-relaxed max-w-2xl mb-10">
-              AMS Civil Construction {loc.name} मध्ये उत्कृष्ट बांधकाम आणि नूतनीकरण (renovation) सेवा प्रदान करते.
-              बंगला बांधणीपासून ते किचन पर्यंत, आम्ही 25+ वर्षांच्या अनुभवासह काम करतो.
+              {selectedPara}
             </p>
 
             <div className="flex flex-wrap gap-4">
@@ -117,10 +126,31 @@ export default async function LocationPageMarathi({ params }: { params: { locati
         </div>
       </section>
 
-      <section className="py-16 bg-[#0B1120] border-t border-white/5">
+      {/* Internal Linking Mesh for nearby areas */}
+      <section className="section-y bg-[#0B1120]">
+        <div className="container-custom">
+           <h3 className="text-white font-bold mb-6 flex items-center gap-2 text-xl">
+             <MapPin className="text-orange-400" /> {loc.name} जवळची आमची कामे
+           </h3>
+           <div className="flex flex-wrap gap-3">
+             {loc.nearby.slice(0, 8).map(near => {
+                const nearLoc = getLocation(near);
+                if (!nearLoc) return null;
+                return (
+                  <Link key={near} href={`/mr/areas/${nearLoc.slug}`} 
+                    className="px-5 py-3 text-sm font-medium text-slate-300 hover:text-white border border-white/10 hover:border-orange-500/50 rounded-xl transition-all bg-white/5">
+                    {nearLoc.name} मध्ये सिव्हिल काम
+                  </Link>
+                );
+             })}
+           </div>
+        </div>
+      </section>
+
+      <section className="py-16 bg-[#080D1A] border-t border-white/5">
         <div className="container-custom">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div>
+            <div className={layoutSeed > 0.5 ? "order-2" : "order-1"}>
               <div className="section-label">{loc.name} मधील सिव्हिल काम</div>
               <h2 className="font-display text-3xl lg:text-4xl text-white mt-4 mb-6">
                 आम्हाला का निवडावे? <span className="text-gradient">AMS Civil</span>
@@ -128,6 +158,7 @@ export default async function LocationPageMarathi({ params }: { params: { locati
               <div className="space-y-6 text-slate-400 leading-relaxed">
                 <p>
                   {loc.name} मध्ये एक विश्वासार्ह कंत्राटदार शोधणे कठीण असू शकते. AMS Civil Construction तुम्हाला 100% पारदर्शक किंमतीवर दर्जेदार काम देते.
+                  {layoutSeed > 0.5 ? ` आम्ही विशेषतः ${loc.landmarks[0] || loc.name} च्या परिसरात अनेक प्रकल्प यशस्वीपणे पूर्ण केले आहेत.` : ''}
                 </p>
               </div>
               <div className="flex flex-wrap gap-6 mt-10">
@@ -136,11 +167,20 @@ export default async function LocationPageMarathi({ params }: { params: { locati
                 <div className="flex items-center gap-2 text-orange-400 font-bold"><CheckCircle size={18} /> वेळेवर काम पूर्ण</div>
               </div>
             </div>
+
+            <div className={`bg-white/5 rounded-3xl p-8 border border-white/10 ${layoutSeed > 0.5 ? 'order-1' : 'order-2'}`}>
+                <h3 className="text-white font-bold text-xl mb-4">आमची वैशिष्ट्ये</h3>
+                <ul className="space-y-4 text-slate-400">
+                    <li className="flex gap-3"><Star className="text-orange-400 flex-shrink-0 mt-1" size={16}/> {loc.district} मध्ये 350+ पेक्षा जास्त प्रकल्पांचे यशस्वी काम.</li>
+                    <li className="flex gap-3"><Star className="text-orange-400 flex-shrink-0 mt-1" size={16}/> कोणत्याही छुप्या शुल्काशिवाय (Hidden Costs) स्पष्ट कोटेशन.</li>
+                    <li className="flex gap-3"><Star className="text-orange-400 flex-shrink-0 mt-1" size={16}/> प्रत्यक्ष कामावर सुपरवायझरची 100% देखरेख.</li>
+                </ul>
+            </div>
           </div>
         </div>
       </section>
 
-      <section className="section-y relative overflow-hidden bg-[#080D1A]">
+      <section className="section-y relative overflow-hidden bg-[#0B1120]">
         <div className="container-custom relative z-10">
           <ModernCTA 
             title={`आपण ${loc.name} मध्ये घर बांधू किंवा नूतनीकरण करू इच्छिता?`}

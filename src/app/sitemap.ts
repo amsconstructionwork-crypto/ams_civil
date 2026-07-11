@@ -56,11 +56,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   /* ── Location pages & Location × Service pages ────────────── */
   const locationPages: MetadataRoute.Sitemap = [];
-  locations.forEach(loc => {
+  locations.forEach((loc, index) => {
+    // Generate a slightly staggered lastModified date based on location index
+    // This helps avoid the "1000 pages published at the exact same second" footprint
+    const staggeredDate = new Date(SITE_UPDATED.getTime());
+    staggeredDate.setDate(staggeredDate.getDate() + (index % 14)); // Spread over 14 days
+
     // English Main Location
     locationPages.push({
       url:             `${BASE}/areas/${loc.slug}`,
-      lastModified:    SITE_UPDATED,
+      lastModified:    staggeredDate,
       changeFrequency: 'weekly' as const,
       priority:        getLocationPriority(loc.zone),
     });
@@ -68,7 +73,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // Hindi Main Location
     locationPages.push({
       url:             `${BASE}/hi/areas/${loc.slug}`,
-      lastModified:    SITE_UPDATED,
+      lastModified:    staggeredDate,
       changeFrequency: 'weekly' as const,
       priority:        getLocationPriority(loc.zone) * 0.9,
     });
@@ -76,16 +81,21 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // Marathi Main Location
     locationPages.push({
       url:             `${BASE}/mr/areas/${loc.slug}`,
-      lastModified:    SITE_UPDATED,
+      lastModified:    staggeredDate,
       changeFrequency: 'weekly' as const,
       priority:        getLocationPriority(loc.zone) * 0.9,
     });
     
     // SEO SCALING: Generate granular Location × Service pages for ALL zones to maximize impressions.
     services.forEach(svc => {
+      // Further stagger by service
+      const svcStaggeredDate = new Date(staggeredDate.getTime());
+      const svcHash = svc.slug.length % 5;
+      svcStaggeredDate.setHours(svcStaggeredDate.getHours() + svcHash);
+
       locationPages.push({
         url:             `${BASE}/areas/${loc.slug}/${svc.slug}`,
-        lastModified:    SITE_UPDATED,
+        lastModified:    svcStaggeredDate,
         changeFrequency: 'weekly' as const,
         priority:        getLocationServicePriority(loc.zone),
       });

@@ -5,10 +5,11 @@ import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { getLocation, locations } from '@/data/locations';
 import { services } from '@/data/siteData';
-import { MapPin, CheckCircle, ArrowRight, Star, ShieldCheck, Clock, Users, HardHat } from 'lucide-react';
+import { MapPin, CheckCircle, ArrowRight, Star, ShieldCheck, Clock, Users, HardHat, Navigation } from 'lucide-react';
 import { WhatsAppLogo, PhoneLogo } from '@/components/ui/BrandIcons';
 import ModernCTA from '@/components/ui/ModernCTA';
 import { getDb } from '@/lib/mongodb';
+import { getSeededRandom, zoneContext } from '@/data/localContent';
 
 export async function generateStaticParams() {
   return [];
@@ -80,6 +81,15 @@ export default async function LocationPageHindi({ params }: { params: { location
     { icon: Star, label: '4.9/5', desc: 'रेटिंग' },
   ];
 
+  // Dynamic Content for Entropy
+  const layoutSeed = getSeededRandom(loc.slug + 'hi');
+  const paras = [
+    `AMS Civil Construction ${loc.name} में बेहतरीन निर्माण और रिनोवेशन सेवाएँ प्रदान करता है। बंगला बनाने से लेकर मॉड्यूलर किचन तक, हम 25+ सालों के अनुभव के साथ काम करते हैं।`,
+    `अगर आप ${loc.name} (${loc.district}) में एक भरोसेमंद ठेकेदार की तलाश में हैं, तो AMS Civil Construction सबसे सही विकल्प है। हम ${loc.landmarks[0] || loc.name} के आस-पास विशेष तौर पर काम करते हैं।`,
+    `${loc.name} में प्रीमियम सिविल वर्क के लिए हम जाने जाते हैं। चाहे घर का रिनोवेशन हो या नया कंस्ट्रक्शन, हमारी टीम ${loc.zone} इलाके में सबसे उम्दा क्वालिटी देती है।`
+  ];
+  const selectedPara = paras[Math.floor(layoutSeed * paras.length)];
+
   return (
     <main className="min-h-screen bg-[#080D1A] font-body">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
@@ -106,8 +116,7 @@ export default async function LocationPageHindi({ params }: { params: { location
             </h1>
 
             <p className="text-slate-400 text-lg sm:text-xl leading-relaxed max-w-2xl mb-10">
-              AMS Civil Construction {loc.name} में बेहतरीन निर्माण और रिनोवेशन सेवाएँ प्रदान करता है।
-              बंगला बनाने से लेकर मॉड्यूलर किचन तक, हम 25+ सालों के अनुभव के साथ काम करते हैं।
+              {selectedPara}
             </p>
 
             <div className="flex flex-wrap gap-4">
@@ -132,10 +141,31 @@ export default async function LocationPageHindi({ params }: { params: { location
         </div>
       </section>
 
-      <section className="py-16 bg-[#0B1120] border-t border-white/5">
+      {/* Internal Linking Mesh for nearby areas */}
+      <section className="section-y bg-[#0B1120]">
+        <div className="container-custom">
+           <h3 className="text-white font-bold mb-6 flex items-center gap-2 text-xl">
+             <MapPin className="text-orange-400" /> {loc.name} के आस-पास हमारी सेवाएँ
+           </h3>
+           <div className="flex flex-wrap gap-3">
+             {loc.nearby.slice(0, 8).map(near => {
+                const nearLoc = getLocation(near);
+                if (!nearLoc) return null;
+                return (
+                  <Link key={near} href={`/hi/areas/${nearLoc.slug}`} 
+                    className="px-5 py-3 text-sm font-medium text-slate-300 hover:text-white border border-white/10 hover:border-orange-500/50 rounded-xl transition-all bg-white/5">
+                    {nearLoc.name} में सिविल वर्क
+                  </Link>
+                );
+             })}
+           </div>
+        </div>
+      </section>
+
+      <section className="py-16 bg-[#080D1A] border-t border-white/5">
         <div className="container-custom">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div>
+            <div className={layoutSeed > 0.5 ? "order-2" : "order-1"}>
               <div className="section-label">{loc.name} में सिविल वर्क</div>
               <h2 className="font-display text-3xl lg:text-4xl text-white mt-4 mb-6">
                 हमें क्यों चुनें? <span className="text-gradient">AMS Civil</span>
@@ -143,7 +173,7 @@ export default async function LocationPageHindi({ params }: { params: { location
               <div className="space-y-6 text-slate-400 leading-relaxed">
                 <p>
                   {loc.name} में एक भरोसेमंद ठेकेदार खोजना मुश्किल हो सकता है। AMS Civil Construction आपको 100% पारदर्शी कीमत पर क्वालिटी काम देता है।
-                  चाहे प्लास्टर करना हो, टाइल्स लगानी हों या नया बंगला बनाना हो, हमारी टीम हर काम में माहिर है।
+                  {layoutSeed > 0.5 ? ` खास तौर पर ${loc.landmarks[0] || loc.name} के इलाके में हमने कई प्रोजेक्ट्स पूरे किए हैं।` : ''}
                 </p>
               </div>
               <div className="flex flex-wrap gap-6 mt-10">
@@ -152,11 +182,20 @@ export default async function LocationPageHindi({ params }: { params: { location
                 <div className="flex items-center gap-2 text-orange-400 font-bold"><CheckCircle size={18} /> तय समय पर काम पूरा</div>
               </div>
             </div>
+            
+            <div className={`bg-white/5 rounded-3xl p-8 border border-white/10 ${layoutSeed > 0.5 ? 'order-1' : 'order-2'}`}>
+                <h3 className="text-white font-bold text-xl mb-4">हमारी विशेषताएँ</h3>
+                <ul className="space-y-4 text-slate-400">
+                    <li className="flex gap-3"><Star className="text-orange-400 flex-shrink-0 mt-1" size={16}/> {loc.district} में 350+ से ज्यादा घरों का निर्माण और रिनोवेशन।</li>
+                    <li className="flex gap-3"><Star className="text-orange-400 flex-shrink-0 mt-1" size={16}/> बिना किसी छुपे हुए खर्च के स्पष्ट कोटेशन।</li>
+                    <li className="flex gap-3"><Star className="text-orange-400 flex-shrink-0 mt-1" size={16}/> काम के दौरान सुपरवाइजर की 100% निगरानी।</li>
+                </ul>
+            </div>
           </div>
         </div>
       </section>
 
-      <section className="section-y relative overflow-hidden bg-[#080D1A]">
+      <section className="section-y relative overflow-hidden bg-[#0B1120]">
         <div className="container-custom relative z-10">
           <ModernCTA 
             title={`क्या आप ${loc.name} में घर बनवाना या रिनोवेट करना चाहते हैं?`}
