@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic';
 // src/app/api/testimonials/route.ts
 // GET  /api/testimonials  — fetch all testimonials (public)
 // POST /api/testimonials  — save a new testimonial (admin only)

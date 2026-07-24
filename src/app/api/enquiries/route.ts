@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic';
 // src/app/api/enquiries/route.ts
 // GET  /api/enquiries  — list all enquiries (admin)
 // PATCH /api/enquiries?id=xxx — update status

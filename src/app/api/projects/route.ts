@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic';
 // src/app/api/projects/route.ts
 // GET  /api/projects          — fetch all projects (public)
 // POST /api/projects          — create a new project (admin only)

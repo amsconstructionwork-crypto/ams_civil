@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic';
 // src/app/api/blogs/route.ts
 // GET  /api/blogs          - Fetch all blogs (public)
 // POST /api/blogs          - Create a new blog post (admin only)

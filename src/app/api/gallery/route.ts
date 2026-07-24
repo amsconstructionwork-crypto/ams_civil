@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic';
 // src/app/api/gallery/route.ts
 // GET  /api/gallery  — fetch all gallery items (public)
 // POST /api/gallery  — save a new gallery item (admin only)
