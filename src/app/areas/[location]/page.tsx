@@ -94,6 +94,22 @@ export async function generateMetadata(
 /* ═══════════════════════════════════════════════════════════════
    PAGE COMPONENT
    ═══════════════════════════════════════════════════════════════ */
+function getGeoCoordinates(district: string) {
+  const coords: Record<string, { lat: string, lon: string }> = {
+    'Mumbai City': { lat: '18.9750', lon: '72.8258' },
+    'Mumbai Suburban': { lat: '19.1136', lon: '72.8697' },
+    'Thane': { lat: '19.2183', lon: '72.9781' },
+    'Palghar': { lat: '19.6967', lon: '72.7699' },
+    'Pune': { lat: '18.5204', lon: '73.8567' },
+    'Nashik': { lat: '20.0110', lon: '73.7903' },
+    'Nagpur': { lat: '21.1458', lon: '79.0882' },
+    'Ranchi': { lat: '23.3441', lon: '85.3096' },
+    'Kolkata': { lat: '22.5726', lon: '88.3639' },
+    'Bangalore Urban': { lat: '12.9716', lon: '77.5946' },
+  };
+  return coords[district] || { lat: '19.0760', lon: '72.8777' }; // Fallback to Mumbai
+}
+
 export default async function LocationPage({ params }: { params: { location: string } }) {
   const loc = getLocation(params.location);
   if (!loc) notFound();
@@ -139,6 +155,11 @@ export default async function LocationPage({ params }: { params: { location: str
           addressCountry:    'IN',
           ...(loc.pincode ? { postalCode: loc.pincode } : {}),
         },
+        geo: {
+          '@type': 'GeoCoordinates',
+          latitude: getGeoCoordinates(loc.district).lat,
+          longitude: getGeoCoordinates(loc.district).lon,
+        },
         sameAs: [
           'https://www.facebook.com/profile.php?id=61570712849063',
           'https://www.instagram.com/ams.constructionwork/',
@@ -174,6 +195,15 @@ export default async function LocationPage({ params }: { params: { location: str
             reviewBody: `We hired AMS for bathroom renovation and kitchen work in ${loc.name}. The team was punctual, skilled, and used premium materials. 100% satisfied with the result.`,
             datePublished: '2025-09-10',
           },
+        ],
+      },
+      /* Breadcrumb Schema for structure */
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.amscivilwork.in' },
+          { '@type': 'ListItem', position: 2, name: 'Areas', item: 'https://www.amscivilwork.in/areas' },
+          { '@type': 'ListItem', position: 3, name: loc.name, item: `https://www.amscivilwork.in/areas/${loc.slug}` },
         ],
       },
       {
