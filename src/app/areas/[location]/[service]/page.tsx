@@ -13,6 +13,25 @@ import { MapPin, CheckCircle, ArrowRight, ShieldCheck, Star, Clock, Sparkles, He
 import { WhatsAppLogo, PhoneLogo } from '@/components/ui/BrandIcons';
 import ModernCTA from '@/components/ui/ModernCTA';
 import { getDb } from '@/lib/mongodb';
+import { unstable_cache } from 'next/cache';
+
+const getCachedRelatedBlogs = unstable_cache(
+  async () => {
+    try {
+      const db = await getDb();
+      const blogs = await db.collection('blogs').find({ 
+        published: true 
+      }).sort({ createdAt: -1 }).limit(3).toArray();
+      // Serialize ObjectId to string to prevent cache serialization errors
+      return JSON.parse(JSON.stringify(blogs));
+    } catch (e) {
+      console.error('Failed to fetch blogs', e);
+      return [];
+    }
+  },
+  ['global-related-blogs-cache'],
+  { revalidate: 604800 } // Cache for 1 week across all serverless invocations
+);
 
 /* ── Allow on-demand generation for non-pre-rendered paths ── */
 export const dynamicParams = true;
@@ -120,16 +139,8 @@ export default async function AreaServicePage({ params }: { params: { location: 
   
   if (!loc || !svc) notFound();
 
-  /* ── Fetch Dynamic Blog Content ── */
-  let relatedBlogs: any[] = [];
-  try {
-    const db = await getDb();
-    relatedBlogs = await db.collection('blogs').find({ 
-      published: true 
-    }).sort({ createdAt: -1 }).limit(3).toArray();
-  } catch (e) {
-    console.error('Failed to fetch blogs', e);
-  }
+  /* ── Fetch Dynamic Blog Content (Heavily Cached) ── */
+  const relatedBlogs = await getCachedRelatedBlogs();
 
   const exactMatchKeyword = `${svc.title} in ${loc.name}`;
   const localParagraph = generateLocalParagraph(loc, svc);
