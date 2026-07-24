@@ -71,9 +71,8 @@ export default function SmartBot() {
               </button>
             </div>
 
-            {/* Chat Area */}
             <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-[#0B1120]/50 scrollbar-thin">
-              {messages.map((m) => (
+              {messages.map((m: { id: string; role: string; content: string }) => (
                 <motion.div 
                   key={m.id}
                   initial={{ opacity: 0, y: 10 }}

@@ -42,7 +42,7 @@ export async function POST(req: Request) {
             serviceRequested: z.string().optional().describe('What service they are looking for'),
             location: z.string().optional().describe('Where they want the work done'),
           }),
-          execute: async ({ name, phone, serviceRequested, location }) => {
+          execute: async ({ name, phone, serviceRequested, location }: { name: string; phone: string; serviceRequested?: string; location?: string }) => {
             // In a real app, you would save this to MongoDB or send an email/SMS
             console.log(`[LEAD CAPTURED] Name: ${name}, Phone: ${phone}, Service: ${serviceRequested}, Location: ${location}`);
             return {
