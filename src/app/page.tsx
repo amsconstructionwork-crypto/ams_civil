@@ -113,9 +113,9 @@ export default function HomePage() {
       <GalleryCarouselSection />
       <WhyUsSection />
       <GoogleReviewsWidget />
-      <FAQSection />
       <NetworkSection />
       <ModernCTA />
+      <FAQSection />
     </>
   );
 }
