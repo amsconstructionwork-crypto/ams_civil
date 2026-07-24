@@ -10,7 +10,7 @@ import ShareButtons from '@/components/ui/ShareButtons';
 import AdsterraBanner from '@/components/ads/AdsterraBanner';
 import AdsterraNative from '@/components/ads/AdsterraNative';
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 3600; // Cache for 1 hour
 
 async function getBlogData(slug: string) {
   try {

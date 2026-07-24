@@ -13,6 +13,9 @@ import ModernCTA from '@/components/ui/ModernCTA';
 import { serviceDetailsData } from '@/data/serviceDetails';
 import { WhatsAppLogo } from '@/components/ui/BrandIcons';
 
+export const dynamicParams = true;
+export const revalidate = 604800; // Cache for 1 week
+
 export async function generateStaticParams() {
   return [];
 }

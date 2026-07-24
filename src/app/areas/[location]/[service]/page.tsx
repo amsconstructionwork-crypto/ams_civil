@@ -17,11 +17,14 @@ import { getDb } from '@/lib/mongodb';
 /* ── Allow on-demand generation for non-pre-rendered paths ── */
 export const dynamicParams = true;
 
+/* ── ISR: Cache generated pages for 1 week at Edge ── */
+export const revalidate = 604800;
+
 /* ── Pre-render top paths ───── */
 export async function generateStaticParams() {
   // ANTI-BLOAT FIX: We return an empty array to prevent JavaScript heap out of memory
   // during Next.js build. Vercel hobby tier has memory limits that get exhausted 
-  // when pre-building 1500+ pages. They will generate on-demand instead.
+  // when pre-building 1500+ pages. They will generate on-demand instead, and be cached by ISR.
   return [];
 }
 
@@ -78,7 +81,14 @@ export async function generateMetadata(
     openGraph: {
       title,
       description,
-      images: [{ url: svc.image, width: 800, height: 600, alt: exactMatchKeyword }],
+      images: [
+        {
+          url: `https://www.amscivilwork.in/api/og?title=${encodeURIComponent(`Top ${svc.title} in ${loc.name}`)}&location=${encodeURIComponent(`${loc.name}, ${loc.district}`)}&service=${encodeURIComponent(svc.title)}`,
+          width: 1200,
+          height: 630,
+          alt: exactMatchKeyword,
+        }
+      ],
       type: 'website',
       url: `https://www.amscivilwork.in/areas/${loc.slug}/${svc.slug}`,
     },
