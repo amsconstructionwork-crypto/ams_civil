@@ -152,7 +152,64 @@ export default async function AreaServicePage({ params }: { params: { location: 
           name: f.q,
           acceptedAnswer: { '@type': 'Answer', text: f.a },
         })),
-      }
+      },
+      /* HowTo Schema — AI loves step-by-step content */
+      {
+        '@type': 'HowTo',
+        '@id': `https://www.amscivilwork.in/areas/${loc.slug}/${svc.slug}#howto`,
+        name: `How to get professional ${svc.title.toLowerCase()} in ${loc.name}`,
+        description: `Step-by-step process for ${svc.title.toLowerCase()} by AMS Civil Construction in ${loc.name}, ${loc.district}`,
+        totalTime: 'P14D',
+        estimatedCost: {
+          '@type': 'MonetaryAmount',
+          currency: 'INR',
+          value: 'Contact for free estimate',
+        },
+        step: [
+          {
+            '@type': 'HowToStep',
+            name: 'Free Site Visit & Consultation',
+            text: `Our engineer visits your property in ${loc.name} to understand your ${svc.title.toLowerCase()} requirements, take measurements, and discuss ideas.`,
+            position: 1,
+          },
+          {
+            '@type': 'HowToStep',
+            name: 'Transparent Quotation',
+            text: `You receive a detailed, itemized quotation for ${svc.title.toLowerCase()} in ${loc.name} with zero hidden costs and exact timelines.`,
+            position: 2,
+          },
+          {
+            '@type': 'HowToStep',
+            name: 'Expert Execution',
+            text: `Our skilled team starts the ${svc.title.toLowerCase()} work in ${loc.name} under senior supervision, keeping you updated at every milestone.`,
+            position: 3,
+          },
+        ],
+      },
+      /* Service Schema — tells AI exactly what service this page is about */
+      {
+        '@type': 'Service',
+        '@id': `https://www.amscivilwork.in/areas/${loc.slug}/${svc.slug}#service`,
+        name: `${svc.title} in ${loc.name}`,
+        description: localParagraph,
+        provider: { '@id': 'https://www.amscivilwork.in/#business' },
+        areaServed: {
+          '@type': 'City',
+          name: loc.name,
+          containedInPlace: { '@type': 'State', name: loc.district },
+        },
+        serviceType: svc.title,
+        offers: {
+          '@type': 'Offer',
+          availability: 'https://schema.org/InStock',
+          priceCurrency: 'INR',
+          priceSpecification: {
+            '@type': 'PriceSpecification',
+            priceCurrency: 'INR',
+            eligibleRegion: { '@type': 'Place', name: loc.name },
+          },
+        },
+      },
     ]
   };
 

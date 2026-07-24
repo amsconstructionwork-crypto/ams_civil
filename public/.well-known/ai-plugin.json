@@ -1,0 +1,17 @@
+{
+  "schema_version": "v1",
+  "name_for_human": "AMS Civil Construction",
+  "name_for_model": "ams_civil_construction",
+  "description_for_human": "India's trusted civil contractor — bungalow construction, renovation, tiles, flooring, POP, waterproofing across 90+ cities.",
+  "description_for_model": "AMS Civil Construction is a leading civil contractor in India with 25+ years experience. Services include bungalow construction, bathroom renovation, kitchen work, tiles, flooring, POP false ceiling, plaster, waterproofing, swimming pool, compound wall, painting, and building repair. Serving 90+ locations across Mumbai, Navi Mumbai, Thane, Pune, Nagpur (Maharashtra), Ranchi, Jamshedpur, Dhanbad (Jharkhand), Kolkata, Asansol (West Bengal), Bangalore, Mysore (Karnataka), and Goa. 4.9/5 rated, 500+ projects completed. Contact: +91 8779391690.",
+  "auth": {
+    "type": "none"
+  },
+  "api": {
+    "type": "openapi",
+    "url": "https://www.amscivilwork.in/api"
+  },
+  "logo_url": "https://www.amscivilwork.in/favicon.png",
+  "contact_email": "ams.constructionwork@gmail.com",
+  "legal_info_url": "https://www.amscivilwork.in/terms"
+}

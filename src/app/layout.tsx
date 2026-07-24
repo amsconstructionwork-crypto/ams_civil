@@ -224,7 +224,9 @@ export const metadata: Metadata = {
   /* ── Verification (add your codes from Google/Bing Search Console) */
   verification: {
     google: 'a-NPUUlhFt4ndck1sIedFhwSQG-oqFwumbqeujTHc-g',
-    // bing: 'ADD_YOUR_BING_CODE_HERE',
+    other: {
+      'msvalidate.01': 'ADD_YOUR_BING_CODE_HERE', // Get from bing.com/webmasters
+    },
   },
 
   /* ── App / PWA ───────────────────────────────────────────── */
@@ -250,23 +252,26 @@ export const metadata: Metadata = {
 const jsonLd = {
   '@context': 'https://schema.org',
   '@graph': [
-    /* ── Local Business ─────────────────────────────────── */
+    /* ── Organization (AI Knowledge Graph) ───────────── */
     {
-      '@type':       'LocalBusiness',
+      '@type':       ['LocalBusiness', 'Organization', 'HomeAndConstructionBusiness'],
       '@id':         'https://www.amscivilwork.in/#business',
       name:          'AMS Civil Construction',
-      alternateName: 'AMS Construction',
-      description:   'Mumbai\'s trusted construction company. Specialising in bungalow construction, bathroom renovation, kitchen work, tiles, flooring, POP & plaster work across all Mumbai areas.',
+      alternateName: ['AMS Construction', 'AMS Civil', 'AMS Civil Work', 'Mandal Civil Construction'],
+      description:   'India\'s trusted civil contractor with 25+ years experience. Premium bungalow construction, bathroom & kitchen renovation, tiles, flooring, POP, plaster, waterproofing, swimming pool, and compound wall work across 90+ cities in Maharashtra, Jharkhand, West Bengal, Karnataka & Goa.',
       url:           'https://www.amscivilwork.in',
       telephone:     ['+918779391690', '+919004298911'],
       email:         'ams.constructionwork@gmail.com',
       founder: {
         '@type': 'Person',
-        name:    'AMS Civil Team',
-        jobTitle:'Director',
+        name:    'Kedar Mandal',
+        jobTitle:'Founder & Director',
         telephone:['+918779391690', '+919004298911'],
+        worksFor: { '@id': 'https://www.amscivilwork.in/#business' },
       },
-      foundingDate: '2014',
+      foundingDate: '2001',
+      numberOfEmployees: { '@type': 'QuantitativeValue', minValue: 50, maxValue: 100 },
+      slogan: 'Building Dreams, Delivering Trust',
       address: {
         '@type':           'PostalAddress',
         addressLocality:   'Mumbai',
@@ -279,17 +284,37 @@ const jsonLd = {
         latitude:    '19.0760',
         longitude:   '72.8777',
       },
+      /* ── ALL 90+ Locations ─────────────────────────── */
       areaServed: [
         /* South Mumbai */
-        'Dadar','Lower Parel','Worli','Prabhadevi','Colaba','Marine Lines','Byculla','Mahalaxmi',
+        'Dadar','Lower Parel','Worli','Prabhadevi','Colaba','Fort','Marine Lines','Byculla','Mahalaxmi','Churchgate','Tardeo','Parel','Mahim','Matunga','Grant Road',
         /* Western Line */
-        'Bandra','Khar','Santacruz','Vile Parle','Andheri','Jogeshwari','Goregaon',
-        'Malad','Kandivali','Borivali','Dahisar','Mira Road','Bhayandar','Vasai','Nalasopara','Virar',
+        'Bandra','Khar','Santacruz','Vile Parle','Andheri','Juhu','Jogeshwari','Goregaon','Malad','Kandivali','Borivali','Dahisar','Mira Road','Bhayandar','Vasai','Naigaon','Nalasopara','Virar',
         /* Central Line */
-        'Sion','Kurla','Ghatkopar','Vikhroli','Bhandup','Mulund','Thane','Dombivli','Kalyan',
+        'Sion','Kurla','Ghatkopar','Vikhroli','Powai','Chembur','Bhandup','Mulund','Thane','Dombivli','Kalyan','Ulhasnagar','Ambernath','Badlapur',
         /* Navi Mumbai */
-        'Vashi','Nerul','Belapur','Airoli','Ghansoli','Koparkhairane','Panvel',
-        'Mumbai','Navi Mumbai','Thane',
+        'Vashi','Nerul','Belapur','Airoli','Ghansoli','Koparkhairane','Kharghar','Panvel','Uran',
+        /* Maharashtra */
+        'Pune','Hadapsar','Pimpri Chinchwad','Lonavala','Nasik','Nagpur','Aurangabad','Boisar','Igatpuri','Sinnar','Deolali','Wardha','Paithan','Waluj','Kamptee',
+        /* Jharkhand */
+        'Ranchi','Namkum','Bariatu','Jamshedpur','Sakchi','Dhanbad','Mango','Sindri','Hatia','Adityapur','Jharia',
+        /* West Bengal */
+        'Kolkata','Asansol','Siliguri','Salt Lake','Howrah','New Town','Durgapur','Raniganj',
+        /* Karnataka */
+        'Bangalore','Mysore','Davangere','Whitefield','Electronic City','Koramangala','Hunsur','Mandya',
+        /* Goa */
+        'Panjim','Margao','Vasco','Calangute',
+        /* Broad */
+        'Mumbai','Navi Mumbai','Maharashtra','India',
+      ],
+      /* ── AI Knowledge Signals ───────────────────────── */
+      knowsAbout: [
+        'Civil Construction','Bungalow Construction','Residential Construction','Home Renovation',
+        'Bathroom Renovation','Kitchen Remodeling','Tiles Installation','Flooring Work',
+        'POP False Ceiling','Plaster Work','Waterproofing','Swimming Pool Construction',
+        'Compound Wall Construction','Building Repair','Structural Engineering','RCC Construction',
+        'Interior Civil Work','Wall Construction','Painting Services','Construction Cost Estimation',
+        'Mumbai Construction','Real Estate Construction India',
       ],
       openingHoursSpecification: [
         {
@@ -310,16 +335,22 @@ const jsonLd = {
       paymentAccepted:  'Cash, Bank Transfer, UPI',
       hasOfferCatalog: {
         '@type': 'OfferCatalog',
-        name:    'Construction Services',
+        name:    'Construction & Renovation Services',
         itemListElement: [
-          { '@type':'Offer', itemOffered: { '@type':'Service', name:'Bungalow Construction', areaServed:'Mumbai' } },
-          { '@type':'Offer', itemOffered: { '@type':'Service', name:'Bathroom Renovation',   areaServed:'Mumbai' } },
-          { '@type':'Offer', itemOffered: { '@type':'Service', name:'Kitchen Work',          areaServed:'Mumbai' } },
-          { '@type':'Offer', itemOffered: { '@type':'Service', name:'Tiles Work',            areaServed:'Mumbai' } },
-          { '@type':'Offer', itemOffered: { '@type':'Service', name:'Flooring Work',         areaServed:'Mumbai' } },
-          { '@type':'Offer', itemOffered: { '@type':'Service', name:'POP Work',              areaServed:'Mumbai' } },
-          { '@type':'Offer', itemOffered: { '@type':'Service', name:'Plaster Work',          areaServed:'Mumbai' } },
-          { '@type':'Offer', itemOffered: { '@type':'Service', name:'Wall Work',             areaServed:'Mumbai' } },
+          { '@type':'Offer', itemOffered: { '@type':'Service', name:'Bungalow Construction',  description:'End-to-end luxury bungalow building from foundation to finishing', areaServed:'India', provider:{'@id':'https://www.amscivilwork.in/#business'} } },
+          { '@type':'Offer', itemOffered: { '@type':'Service', name:'Bathroom Renovation',    description:'Complete bathroom remodeling with waterproofing, tiling, and modern fixtures', areaServed:'India', provider:{'@id':'https://www.amscivilwork.in/#business'} } },
+          { '@type':'Offer', itemOffered: { '@type':'Service', name:'Kitchen Work',           description:'Modular kitchen construction with countertops, cabinets, and plumbing', areaServed:'India', provider:{'@id':'https://www.amscivilwork.in/#business'} } },
+          { '@type':'Offer', itemOffered: { '@type':'Service', name:'Full Interior Work',     description:'Complete interior civil construction including partition, ceiling, electrical, finishing', areaServed:'India', provider:{'@id':'https://www.amscivilwork.in/#business'} } },
+          { '@type':'Offer', itemOffered: { '@type':'Service', name:'Tiles Work',             description:'Premium tile installation for walls and floors — vitrified, ceramic, porcelain, mosaic', areaServed:'India', provider:{'@id':'https://www.amscivilwork.in/#business'} } },
+          { '@type':'Offer', itemOffered: { '@type':'Service', name:'Flooring Work',          description:'Italian marble, granite, vitrified tile, and wooden flooring installation', areaServed:'India', provider:{'@id':'https://www.amscivilwork.in/#business'} } },
+          { '@type':'Offer', itemOffered: { '@type':'Service', name:'POP Work',               description:'Designer POP false ceilings, cornices, and decorative moldings', areaServed:'India', provider:{'@id':'https://www.amscivilwork.in/#business'} } },
+          { '@type':'Offer', itemOffered: { '@type':'Service', name:'Plaster Work',           description:'Internal & external plastering — sand-faced, gypsum, and cement plaster', areaServed:'India', provider:{'@id':'https://www.amscivilwork.in/#business'} } },
+          { '@type':'Offer', itemOffered: { '@type':'Service', name:'Wall Work',              description:'Brick masonry, AAC block walls, partition walls, and retaining walls', areaServed:'India', provider:{'@id':'https://www.amscivilwork.in/#business'} } },
+          { '@type':'Offer', itemOffered: { '@type':'Service', name:'Painting',               description:'Interior & exterior painting — texture, emulsion, waterproof coats', areaServed:'India', provider:{'@id':'https://www.amscivilwork.in/#business'} } },
+          { '@type':'Offer', itemOffered: { '@type':'Service', name:'Waterproofing',          description:'Terrace, bathroom, basement waterproofing with Dr. Fixit & Sika systems', areaServed:'India', provider:{'@id':'https://www.amscivilwork.in/#business'} } },
+          { '@type':'Offer', itemOffered: { '@type':'Service', name:'Swimming Pool Work',     description:'Private pool construction — excavation, RCC, waterproofing, filtration', areaServed:'India', provider:{'@id':'https://www.amscivilwork.in/#business'} } },
+          { '@type':'Offer', itemOffered: { '@type':'Service', name:'Compound Wall Work',     description:'Boundary wall construction — foundation, RCC columns, brick masonry', areaServed:'India', provider:{'@id':'https://www.amscivilwork.in/#business'} } },
+          { '@type':'Offer', itemOffered: { '@type':'Service', name:'Building Repair Work',   description:'Structural repair, crack treatment, and concrete restoration', areaServed:'India', provider:{'@id':'https://www.amscivilwork.in/#business'} } },
         ],
       },
       aggregateRating: {
@@ -337,14 +368,19 @@ const jsonLd = {
       ],
     },
 
-    /* ── Website ────────────────────────────────────────── */
+    /* ── Website (with Speakable for voice search) ──── */
     {
       '@type':          'WebSite',
       '@id':            'https://www.amscivilwork.in/#website',
       url:              'https://www.amscivilwork.in',
       name:             'AMS Civil Construction',
-      description:      'Mumbai construction company — bungalows, bathrooms, kitchens, tiles, POP & more',
+      description:      'India\'s trusted construction company — bungalows, renovations, tiles, flooring, POP, waterproofing & more across 90+ cities',
       publisher:        { '@id': 'https://www.amscivilwork.in/#business' },
+      inLanguage:       ['en-IN', 'hi-IN', 'mr-IN'],
+      speakable: {
+        '@type': 'SpeakableSpecification',
+        cssSelector: ['h1', '.section-label', '.text-gradient'],
+      },
     },
   ],
 };
@@ -368,6 +404,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preconnect" href="https://res.cloudinary.com" />
         {/* PWA Manifest */}
         <link rel="manifest" href="/manifest.json" />
+
+        {/* AI Discoverability — llms.txt standard */}
+        <link rel="help" href="/llms.txt" type="text/plain" title="LLM Information" />
+        <link rel="alternate" href="/llms-full.txt" type="text/plain" title="LLM Full Information" />
 
         {/* Geo tags for local SEO */}
         <meta name="geo.region"      content="IN-MH" />
