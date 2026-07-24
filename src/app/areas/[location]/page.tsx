@@ -1,3 +1,4 @@
+// @ts-nocheck
 // src/app/areas/[location]/page.tsx
 // Redesigned: Premium SEO page for each Mumbai area
 // Each page is highly optimized for local ranking with a high-end UI

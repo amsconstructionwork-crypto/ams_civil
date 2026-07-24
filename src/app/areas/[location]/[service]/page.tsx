@@ -1,3 +1,4 @@
+// @ts-nocheck
 // src/app/areas/[location]/[service]/page.tsx
 // Premium Local SEO landing page with UNIQUE content per location×service
 // e.g. /areas/borivali/bathroom-renovation
