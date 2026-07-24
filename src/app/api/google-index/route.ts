@@ -36,13 +36,11 @@ export async function POST(request: NextRequest) {
     const serviceAccount = JSON.parse(Buffer.from(serviceAccountBase64, 'base64').toString('utf-8'));
 
     // Authenticate with Google
-    const jwtClient = new google.auth.JWT(
-      serviceAccount.client_email,
-      undefined,
-      serviceAccount.private_key,
-      ['https://www.googleapis.com/auth/indexing'],
-      undefined
-    );
+    const jwtClient = new google.auth.JWT({
+      email: serviceAccount.client_email,
+      key: serviceAccount.private_key,
+      scopes: ['https://www.googleapis.com/auth/indexing'],
+    });
 
     await jwtClient.authorize();
 
