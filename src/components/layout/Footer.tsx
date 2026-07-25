@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { HardHat, Mail, MapPin, Facebook, Instagram, Youtube } from 'lucide-react';
 import { WhatsAppLogo, PhoneLogo } from '../ui/BrandIcons';
+import SEOCrossLinks from '../ui/SEOCrossLinks';
 
 const serviceLinks = [
   { label: 'Bungalow Construction',   href: '/services#bungalow-construction' },
@@ -194,6 +195,8 @@ export default function Footer() {
           </div>
 
         </div>
+        
+        <SEOCrossLinks limit={30} />
       </div>
 
       {/* ── SEO Hidden Block (Keeps keywords for bots but hides from UI) ── */}

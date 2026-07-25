@@ -12,6 +12,7 @@ import { services } from '@/data/siteData';
 import { MapPin, CheckCircle, ArrowRight, Star, ShieldCheck, Clock, Users, HardHat } from 'lucide-react';
 import { WhatsAppLogo, PhoneLogo } from '@/components/ui/BrandIcons';
 import ModernCTA from '@/components/ui/ModernCTA';
+import SEOCrossLinks from '@/components/ui/SEOCrossLinks';
 import { getDb } from '@/lib/mongodb';
 import { unstable_cache } from 'next/cache';
 
@@ -579,6 +580,10 @@ export default async function LocationPage({ params }: { params: { location: str
           </div>
         </section>
       )}
+
+      <section className="container-custom pb-12">
+        <SEOCrossLinks currentLocationSlug={loc.slug} limit={20} />
+      </section>
 
       {/* ── CTA ─────────────────────────────────────────── */}
       <section className="py-24 relative overflow-hidden">

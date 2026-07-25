@@ -20,6 +20,7 @@ import GalleryCarouselSection from '@/components/ui/GalleryCarousel';
 import ModernCTA from '@/components/ui/ModernCTA';
 import BeforeAfterSlider from '@/components/ui/BeforeAfterSlider';
 import GoogleReviewsWidget from '@/components/ui/GoogleReviewsWidget';
+import SEOCrossLinks from '@/components/ui/SEOCrossLinks';
 
 /* ── Icon map ───────────────────────────────────────────────── */
 const iconMap: Record<string, React.ElementType> = {
@@ -116,6 +117,11 @@ export default function HomePage() {
       <NetworkSection />
       <ModernCTA />
       <FAQSection />
+      <section className="bg-[#0B1120] py-10 border-t border-white/5">
+        <div className="container-custom">
+          <SEOCrossLinks />
+        </div>
+      </section>
     </>
   );
 }
