@@ -331,30 +331,6 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* ── Google Maps ──────────────────────────────────────── */}
-      <section className="py-12" style={{ background: '#101827' }}>
-        <div className="container-custom">
-          <div className="section-label animate-on-scroll">Find Us</div>
-          <h2 className="font-display text-2xl text-white mb-6 animate-on-scroll">
-            Our <span className="text-gradient">Location</span>
-          </h2>
-          <div className="w-full h-[380px] overflow-hidden animate-on-scroll"
-            style={{ border: '1px solid #1E2D45' }}>
-            <iframe
-              title="AMS Civil Construction — Mumbai"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d241317.11609823357!2d72.74109995709657!3d19.08219783958221!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7b63aceef0c55%3A0xe0b9a2a9e4e3e7f5!2sMumbai%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1234567890"
-              width="100%" height="100%"
-              style={{ border: 0, filter: 'invert(90%) hue-rotate(180deg)' }}
-              allowFullScreen loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            />
-          </div>
-          <p className="text-slate-500 text-xs mt-2 flex items-center gap-2">
-            <MapPin size={11} style={{ color: '#F97316' }} />
-            Mumbai, Maharashtra, India · +91 87793 91690 / +91 90042 98911
-          </p>
-        </div>
-      </section>
     </>
   );
 }
