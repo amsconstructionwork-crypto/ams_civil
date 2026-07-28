@@ -86,9 +86,11 @@ export default function GoogleReviewsWidget() {
             </div>
           </div>
         </div>
+      </div>
 
-        {/* Scrolling Carousel Container */}
-        <div className="flex gap-6 overflow-x-auto pb-6 snap-x snap-mandatory scroll-smooth" style={{ scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' }}>
+      {/* Scrolling Carousel Container - Outside to bleed to edges */}
+      <div className="relative z-10 w-full max-w-[100vw]">
+        <div className="flex gap-6 overflow-x-auto pb-6 px-4 sm:px-6 lg:px-8 xl:px-[calc((100vw-1280px)/2+2rem)] snap-x snap-mandatory scroll-smooth custom-scrollbar" style={{ scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' }}>
           {/* Hide scrollbar for webkit in a style block just to be safe, but scrollbarWidth handles Firefox */}
           <style dangerouslySetInnerHTML={{__html: `
             .overflow-x-auto::-webkit-scrollbar {
@@ -99,7 +101,7 @@ export default function GoogleReviewsWidget() {
             <div 
               key={i} 
               className="w-[85vw] sm:w-[400px] shrink-0 snap-start bg-[#0B1120] border border-white/10 rounded-2xl p-6 hover:border-blue-500/30 transition-colors animate-fadeUp"
-              style={{ animationDelay: `${i * 150}ms` }}
+              style={{ animationDelay: \`\${i * 150}ms\` }}
             >
               <div className="flex items-center gap-4 mb-4">
                 <div className="w-12 h-12 rounded-full bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 font-bold text-lg">
@@ -134,6 +136,9 @@ export default function GoogleReviewsWidget() {
             </div>
           ))}
         </div>
+      </div>
+      
+      <div className="container-custom relative z-10">
         
         <div className="mt-12 flex justify-center">
           <a href="https://www.google.com/maps/search/AMS+Civil+Construction/" target="_blank" rel="noopener noreferrer" 
