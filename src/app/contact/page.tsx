@@ -113,11 +113,6 @@ export default function ContactPage() {
             Have a project in mind? Reach out for a free consultation.
             Our team responds within 24 hours.
           </p>
-          <nav className="flex items-center gap-2 mt-4 text-slate-500 text-sm animate-fadeIn">
-            <Link href="/" className="hover:text-orange-400 transition-colors">Home</Link>
-            <span>/</span>
-            <span style={{ color: '#F97316' }}>Contact</span>
-          </nav>
         </div>
       </section>
 

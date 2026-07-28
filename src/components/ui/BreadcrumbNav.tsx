@@ -13,7 +13,7 @@ export default function BreadcrumbNav() {
   const paths = pathname.split('/').filter(Boolean);
   
   return (
-    <nav aria-label="Breadcrumb" className="mt-[80px] md:mt-[100px] py-3 px-4 bg-white/5 border-y border-white/10 mb-4 overflow-x-auto whitespace-nowrap">
+    <nav aria-label="Breadcrumb" className="absolute top-[80px] md:top-[90px] w-full z-30 py-3 px-4 bg-white/5 border-y border-white/10 overflow-x-auto whitespace-nowrap">
       <ol className="flex items-center space-x-2 text-sm text-slate-400 container-custom">
         <li>
           <Link href="/" className="hover:text-orange-400 transition-colors flex items-center gap-1">
