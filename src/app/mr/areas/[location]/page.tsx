@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: { params: { location: string 
   const loc = getLocation(params.location);
   if (!loc) return { title: 'Not Found' };
 
-  const title = `✓ ${loc.name} मधील सर्वोत्कृष्ट सिव्हिल कंत्राटदार (Contractor) [2026]`;
+  const title = `${loc.name} Civil Contractor in Marathi | सर्वोत्कृष्ट कंत्राटदार [2026]`;
   const description = `⭐ 4.9/5 रेटिंग. ${loc.name}, ${loc.district} मधील नंबर 1 सिव्हिल कन्स्ट्रक्शन कंपनी. घर बांधणी, नूतनीकरण (Renovation) आणि इंटिरियरसाठी संपर्क साधा.`;
 
   return {

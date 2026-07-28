@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: { params: { location: string 
   const loc = getLocation(params.location);
   if (!loc) return { title: 'Not Found' };
 
-  const title = `✓ ${loc.name} में सर्वश्रेष्ठ सिविल ठेकेदार (Contractor) [2026] | मुफ्त विजिट`;
+  const title = `✓ ${loc.name} में सर्वश्रेष्ठ सिविल कॉन्ट्रॅक्टर (Contractor) [2026] | मुफ्त विजिट`;
   const description = `⭐ 4.9/5 रेटिंग। ${loc.name}, ${loc.district} में नंबर 1 सिविल कंस्ट्रक्शन कंपनी। घर बनाने, रिनोवेशन और इंटीरियर के लिए संपर्क करें। 100% गारंटीड क्वालिटी।`;
 
   return {

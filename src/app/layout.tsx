@@ -50,12 +50,12 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://www.amscivilwork.in'),
 
   title: {
-    default: '✓ Top Civil Contractor in Mumbai [2026] | 100% Free Quote',
+    default: 'AMS Civil Work Mumbai | Top Civil Contractor [2026]',
     template: '%s | AMS Civil Construction',
   },
 
   description:
-    '⭐ 4.9/5 Rated. Looking for the best civil contractor in Mumbai? AMS Civil offers premium bungalow construction & renovations. 25+ Yrs Exp. 100% Free Estimate!',
+    '⭐ 4.9/5 Rated. Looking for AMS Civil Work in Mumbai? We are the best civil contractor offering premium bungalow construction & renovations. 100% Free Estimate!',
 
   keywords: [
     /* ── Brand ──────────────────────────────────────────── */
