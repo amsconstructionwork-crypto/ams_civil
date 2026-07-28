@@ -12,7 +12,7 @@ import { CheckCircle, ArrowRight, ShieldCheck, MapPin, Star, Wrench, Hammer, Awa
 import ModernCTA from '@/components/ui/ModernCTA';
 import { serviceDetailsData } from '@/data/serviceDetails';
 import { WhatsAppLogo } from '@/components/ui/BrandIcons';
-import SEOCrossLinks from '@/components/ui/SEOCrossLinks';
+
 
 export const dynamicParams = true;
 export const revalidate = 604800; // Cache for 1 week
@@ -366,10 +366,6 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
             ))}
           </div>
         </div>
-      </section>
-
-      <section className="container-custom pb-12">
-        <SEOCrossLinks currentServiceSlug={svc.slug} limit={20} />
       </section>
 
       <ModernCTA

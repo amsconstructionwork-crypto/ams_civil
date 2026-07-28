@@ -13,7 +13,7 @@ import { generateLocalParagraph, generateWhyChooseUs, generateFAQs, zoneContext,
 import { MapPin, CheckCircle, ArrowRight, ShieldCheck, Star, Clock, Sparkles, HelpCircle, Navigation } from 'lucide-react';
 import { WhatsAppLogo, PhoneLogo } from '@/components/ui/BrandIcons';
 import ModernCTA from '@/components/ui/ModernCTA';
-import SEOCrossLinks from '@/components/ui/SEOCrossLinks';
+
 import { getDb } from '@/lib/mongodb';
 import { unstable_cache } from 'next/cache';
 
@@ -553,10 +553,6 @@ export default async function AreaServicePage({ params }: { params: { location: 
             ))}
           </div>
         </div>
-      </section>
-
-      <section className="container-custom pb-12">
-        <SEOCrossLinks currentLocationSlug={loc.slug} currentServiceSlug={svc.slug} limit={20} />
       </section>
 
       {/* ── CTA ─────────────────────────────────────────── */}

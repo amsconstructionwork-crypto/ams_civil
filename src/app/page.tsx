@@ -20,7 +20,7 @@ import GalleryCarouselSection from '@/components/ui/GalleryCarousel';
 import ModernCTA from '@/components/ui/ModernCTA';
 import BeforeAfterSlider from '@/components/ui/BeforeAfterSlider';
 import GoogleReviewsWidget from '@/components/ui/GoogleReviewsWidget';
-import SEOCrossLinks from '@/components/ui/SEOCrossLinks';
+
 import LocalBusinessSchema from '@/components/seo/LocalBusinessSchema';
 import SocialProofStrip from '@/components/ui/SocialProofStrip';
 
@@ -121,7 +121,7 @@ export default function HomePage() {
       <FAQSection />
       <section className="bg-[#0B1120] py-10 border-t border-white/5">
         <div className="container-custom">
-          <SEOCrossLinks />
+
         </div>
       </section>
     </>
