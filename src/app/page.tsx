@@ -874,8 +874,10 @@ function WhyUsSection() {
 function FAQSection() {
   // ✅ Correct — useState from module-level import, not require()
   const [open, setOpen] = useState<number | null>(null);
+  const [showAll, setShowAll] = useState(false);
 
   const toggle = (i: number) => setOpen(prev => prev === i ? null : i);
+  const visibleFaqs = showAll ? faqs : faqs.slice(0, 5);
 
   return (
     <section className="section-y" style={{ background: '#101827' }}>
@@ -888,7 +890,7 @@ function FAQSection() {
         </div>
 
         <div className="flex flex-col gap-2">
-          {faqs.map((faq, i) => (
+          {visibleFaqs.map((faq, i) => (
             <div key={i} className="animate-on-scroll overflow-hidden transition-all duration-200"
               style={{
                 transitionDelay: `${i * 40}ms`,
@@ -923,6 +925,17 @@ function FAQSection() {
             </div>
           ))}
         </div>
+
+        {!showAll && faqs.length > 5 && (
+          <div className="mt-8 flex justify-center animate-on-scroll">
+            <button 
+              onClick={() => setShowAll(true)}
+              className="px-6 py-3 border border-orange-500/30 text-orange-400 font-bold rounded-full hover:bg-orange-500/10 transition-colors"
+            >
+              View More FAQs
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );
