@@ -20,6 +20,7 @@
     "framer-motion": "^11.0.0",
     "googleapis": "^172.0.0",
     "lucide-react": "^0.363.0",
+    "marked": "^18.0.7",
     "mongodb": "^6.3.0",
     "next": "14.2.29",
     "nodemailer": "^6.9.0",
@@ -33,6 +34,7 @@
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.19",
+    "@types/marked": "^5.0.2",
     "@types/node": "^20",
     "@types/nodemailer": "^6.4.14",
     "@types/react": "^18",

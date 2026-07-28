@@ -2,16 +2,20 @@
 // Sanitizes blog HTML content to prevent malformed links from generating
 // garbage URLs that Google crawls (e.g., /blog/<a href=)
 
+import { marked } from 'marked';
+
 /**
  * Sanitizes HTML content to fix common issues:
- * 1. Removes broken/malformed anchor tags that could produce garbage crawlable URLs
- * 2. Fixes double-encoded HTML entities
- * 3. Ensures all links have proper href attributes
+ * 1. Converts Markdown to HTML
+ * 2. Removes broken/malformed anchor tags that could produce garbage crawlable URLs
+ * 3. Fixes double-encoded HTML entities
+ * 4. Ensures all links have proper href attributes
  */
-export function sanitizeBlogHtml(html: string): string {
-  if (!html) return '';
+export function sanitizeBlogHtml(htmlOrMarkdown: string): string {
+  if (!htmlOrMarkdown) return '';
 
-  let sanitized = html;
+  // Parse markdown into HTML first (works fine if it's already HTML too)
+  let sanitized = marked.parse(htmlOrMarkdown, { async: false }) as string;
 
   // Fix 1: Remove completely broken anchor tags where <a href= leaked as text
   // e.g., text that contains literal "<a href=" as visible text (not actual tags)
