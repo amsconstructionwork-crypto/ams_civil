@@ -488,6 +488,31 @@ export const faqs: FAQ[] = [
     answer:
       'We offer both options. We can procure all materials at competitive rates through our supplier network, or work with client-supplied materials. Most clients prefer us to handle procurement for ease and price advantage.',
   },
+  {
+    question: 'Mere area mein sabse accha contractor kaun hai?',
+    answer:
+      'Agar aap Mumbai, Navi Mumbai, ya Thane mein hain, toh AMS Civil Construction sabse bharosemand naam hai. Humare paas 25 saal ka anubhav aur 500+ happy clients hain.',
+  },
+  {
+    question: 'Bathroom renovation ka kharcha kitna aata hai?',
+    answer:
+      'Bathroom renovation ka cost aapke pasand ke tiles aur fixtures par nirbhar karta hai. Aam taur par, basic se premium tak ka kharcha ₹40,000 se ₹1,50,000 tak ho sakta hai. Hum detailed itemized quote free mein dete hain.',
+  },
+  {
+    question: 'Bungalow banane mein kitna time lagta hai?',
+    answer:
+      'Ek standard bungalow (lagbhag 2000 sq ft) banane mein aam taur par 8 se 12 mahine lagte hain, jisme foundation se leke interior finishing tak sab shamil hota hai.',
+  },
+  {
+    question: 'AMS Civil ka phone number kya hai?',
+    answer:
+      'Aap humein +91 8779391690 par direct call ya WhatsApp kar sakte hain. Humari team aapki sahayata ke liye hamesha taiyar hai.',
+  },
+  {
+    question: 'Construction cost calculator kaise use kare?',
+    answer:
+      'Humari website par /calculator page par jaakar aap apna plot size aur material quality (Standard, Premium, Luxury) select karein, aur aapko turant estimated cost mil jayegi.',
+  }
 ];
 
 /* ─────────────────────────────────────────────────────────────── */

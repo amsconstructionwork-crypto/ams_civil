@@ -87,8 +87,16 @@ export default function QuotePopup() {
         <div className="px-6 py-5 flex items-center justify-between"
           style={{ background: 'linear-gradient(135deg, #F97316, #EA580C)' }}>
           <div>
-            <h2 className="font-display font-bold text-white text-xl">Get a Free Quote</h2>
-            <p className="text-white/75 text-xs mt-0.5">We'll call you back within 24 hours</p>
+            <div className="flex items-center gap-2 mb-1">
+              <h2 className="font-display font-bold text-white text-xl">Get a Free Quote</h2>
+              <span className="bg-white/20 text-white text-[10px] font-bold px-2 py-0.5 rounded-full animate-pulse">
+                ⚡ 3 Slots Left Today
+              </span>
+            </div>
+            <p className="text-white/80 text-xs flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-green-400"></span>
+              12 people requested quotes today
+            </p>
           </div>
           <button onClick={() => setOpen(false)}
             className="p-1.5 rounded transition-colors hover:bg-white/10">

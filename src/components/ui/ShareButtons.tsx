@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Share2, Facebook, Twitter, Linkedin, Link as LinkIcon, Check } from 'lucide-react';
+import { Share2, Facebook, Twitter, Linkedin, Link as LinkIcon, Check, Send } from 'lucide-react';
 import toast from 'react-hot-toast';
 
 interface ShareButtonsProps {
@@ -78,6 +78,17 @@ export default function ShareButtons({ title }: ShareButtonsProps) {
           title="Share on LinkedIn"
         >
           <Linkedin className="w-5 h-5" />
+        </a>
+
+        {/* Telegram */}
+        <a
+          href={`https://t.me/share/url?url=${encodedUrl}&text=${encodedTitle}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center justify-center w-10 h-10 rounded-full bg-[#0088cc] hover:bg-[#0077b3] transition-colors text-white"
+          title="Share on Telegram"
+        >
+          <Send className="w-5 h-5 ml-0.5" />
         </a>
 
         {/* Copy Link */}

@@ -15,6 +15,10 @@ import SmartBot from '@/components/ui/SmartBot';
 import PageTracker from '@/components/tracking/PageTracker';
 import { Toaster } from 'react-hot-toast';
 import ConditionalLayout from '@/components/layout/ConditionalLayout';
+import StickyBottomCTA from '@/components/ui/StickyBottomCTA';
+import ExitIntentCTA from '@/components/ui/ExitIntentCTA';
+import BreadcrumbNav from '@/components/ui/BreadcrumbNav';
+import SeoHead from '@/components/seo/SeoHead';
 
 const playfair = Playfair_Display({
   subsets: ['latin'],
@@ -191,16 +195,17 @@ export const metadata: Metadata = {
 
   /* ── Open Graph (Facebook, WhatsApp preview) ──────────────── */
   openGraph: {
-    type:        'website',
-    locale:      'en_IN',
-    url:         'https://www.amscivilwork.in',
-    siteName:    'AMS Civil Construction',
-    title:       'AMS Civil Construction | Best Construction Company in Mumbai',
+    type: 'website',
+    locale: 'en_IN',
+    alternateLocale: ['hi_IN', 'mr_IN'],
+    url: 'https://www.amscivilwork.in',
+    siteName: 'AMS Civil Construction',
+    title: 'AMS Civil Construction | Best Construction Company in Mumbai',
     description: '20+ years of expert construction across all Mumbai areas. Bungalows, bathrooms, kitchens, tiles, POP, flooring & more. Free quote: +91 87793 91690 / +91 90042 98911',
     images: [
       {
-        url:    '/og-image.jpg',
-        width:  1200,
+        url: '/og-image.jpg',
+        width: 1200,
         height: 630,
         alt:    'AMS Civil Construction Mumbai',
       },
@@ -254,7 +259,7 @@ const jsonLd = {
   '@graph': [
     /* ── Organization (AI Knowledge Graph) ───────────── */
     {
-      '@type':       ['LocalBusiness', 'Organization', 'HomeAndConstructionBusiness'],
+      '@type':       ['LocalBusiness', 'Organization', 'HomeAndConstructionBusiness', 'ProfessionalService'],
       '@id':         'https://www.amscivilwork.in/#business',
       name:          'AMS Civil Construction',
       alternateName: ['AMS Construction', 'AMS Civil', 'AMS Civil Work', 'Mandal Civil Construction'],
@@ -414,6 +419,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="geo.placename"   content="Mumbai, Maharashtra, India" />
         <meta name="geo.position"    content="19.0760;72.8777" />
         <meta name="ICBM"            content="19.0760, 72.8777" />
+        <meta property="place:name"  content="Mumbai" />
 
         {/* Mobile / PWA */}
         <meta name="theme-color"     content="#F97316" />
@@ -426,6 +432,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
 
       <body className="antialiased" style={{ background: '#0B1120', color: '#CBD5E1' }}>
+        <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-orange-500 focus:text-white focus:rounded-lg">
+          Skip to main content
+        </a>
+        <noscript>
+          <div className="bg-orange-500 text-white p-4 text-center">
+            For full functionality of this site it is necessary to enable JavaScript. Here are the <a href="https://www.enable-javascript.com/" target="_blank" rel="noopener noreferrer" className="underline">instructions how to enable JavaScript in your web browser</a>.
+          </div>
+        </noscript>
+        <SeoHead />
         <Toaster
           position="top-right"
           toastOptions={{
@@ -447,10 +462,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <LeadGenPopup />
               <SocialProofPopup />
               <SmartBot />
+              <StickyBottomCTA />
+              <ExitIntentCTA />
             </>
           }
         >
-          {children}
+          <BreadcrumbNav />
+          <main id="main-content">
+            {children}
+          </main>
         </ConditionalLayout>
         <PageTracker />
       </body>

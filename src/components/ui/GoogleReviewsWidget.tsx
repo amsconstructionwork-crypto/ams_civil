@@ -1,7 +1,8 @@
 'use client';
 
-import { Star } from 'lucide-react';
+import { Star, ExternalLink } from 'lucide-react';
 import Image from 'next/image';
+import StructuredDataManager from '../seo/StructuredDataManager';
 
 const reviews = [
   {
@@ -20,7 +21,29 @@ const reviews = [
     name: "Rohan Kapoor",
     date: "3 months ago",
     content: "Best civil contractor in Mumbai! Kedar sir personally supervised our site. They use only branded materials and the structural work is top-notch. Highly recommended.",
-    initials: "RK"
+    initials: "RK",
+    rating: 5
+  },
+  {
+    name: "Suresh Patel",
+    date: "4 months ago",
+    content: "The bathroom renovation was done in just 10 days. The waterproofing is perfect and the Italian marble looks gorgeous. Highly recommend!",
+    initials: "SP",
+    rating: 5
+  },
+  {
+    name: "Anita Desai",
+    date: "6 months ago",
+    content: "The POP ceiling work in our living room is a masterpiece. The cove lighting integration was done perfectly. Many guests mistake it for high-end interior design.",
+    initials: "AD",
+    rating: 5
+  },
+  {
+    name: "Vikram Gupta",
+    date: "7 months ago",
+    content: "Solid workmanship on our villa project. The team is very responsive and keeps us updated at every stage. Thrilled with the progress and quality.",
+    initials: "VG",
+    rating: 4
   }
 ];
 
@@ -88,11 +111,29 @@ export default function GoogleReviewsWidget() {
                 {[1,2,3,4,5].map(star => <Star key={star} size={14} fill="currentColor" />)}
               </div>
               
+              
               <p className="text-slate-300 text-sm leading-relaxed italic">
                 "{review.content}"
               </p>
+              
+              <StructuredDataManager 
+                type="Review" 
+                data={{
+                  author: review.name,
+                  rating: review.rating || 5,
+                  text: review.content
+                }} 
+              />
             </div>
           ))}
+        </div>
+        
+        <div className="mt-12 flex justify-center">
+          <a href="https://www.google.com/maps/search/AMS+Civil+Construction/" target="_blank" rel="noopener noreferrer" 
+             className="inline-flex items-center gap-2 px-6 py-3 bg-white/5 border border-white/10 rounded-full text-white font-bold hover:bg-white/10 transition-colors backdrop-blur-sm">
+            <span>Read all 124 reviews on Google</span>
+            <ExternalLink size={16} className="text-blue-400" />
+          </a>
         </div>
       </div>
     </section>

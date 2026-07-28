@@ -48,6 +48,15 @@ export default function robots(): MetadataRoute.Robots {
         allow: '/',
         disallow: ['/admin', '/api/'],
       },
+      { userAgent: 'ChatGPT-User', allow: '/' },
+      { userAgent: 'OAI-SearchBot', allow: '/' },
+      { userAgent: 'Meta-ExternalAgent', allow: '/' },
+      { userAgent: 'Meta-ExternalFetcher', allow: '/' },
+      { userAgent: 'Meta-Llama', allow: '/' },
+      { userAgent: 'YouBot', allow: '/' },
+      { userAgent: 'Applebot-Extended', allow: '/' },
+      { userAgent: 'cohere-ai', allow: '/' },
+      { userAgent: 'Amazonbot', allow: '/' },
       // CCBot (Common Crawl — feeds many AI models)
       {
         userAgent: 'CCBot',
@@ -56,6 +65,7 @@ export default function robots(): MetadataRoute.Robots {
       },
     ],
     sitemap: 'https://www.amscivilwork.in/sitemap.xml',
+    host: 'https://www.amscivilwork.in',
     // Note: Next.js MetadataRoute.Robots doesn't support custom fields,
     // but llms.txt is discoverable at /llms.txt by convention
   };

@@ -3,7 +3,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { HardHat, Mail, MapPin, Facebook, Instagram, Youtube } from 'lucide-react';
+import { HardHat, Mail, MapPin, Facebook, Instagram, Youtube, Linkedin, Send, Star } from 'lucide-react';
 import { WhatsAppLogo, PhoneLogo } from '../ui/BrandIcons';
 import SEOCrossLinks from '../ui/SEOCrossLinks';
 
@@ -56,6 +56,8 @@ const socialLinks = [
   { Icon: Facebook,  href: 'https://www.facebook.com/profile.php?id=61570712849063', label: 'Facebook'  },
   { Icon: Instagram, href: 'https://www.instagram.com/ams.constructionwork/', label: 'Instagram' },
   { Icon: Youtube,   href: '#', label: 'YouTube'   },
+  { Icon: Linkedin,  href: '#', label: 'LinkedIn'  },
+  { Icon: Send,      href: '#', label: 'Telegram'  },
 ];
 
 export default function Footer() {

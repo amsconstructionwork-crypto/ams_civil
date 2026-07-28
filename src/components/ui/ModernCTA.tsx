@@ -52,6 +52,14 @@ export default function ModernCTA({
               </span>
             </div>
 
+            {/* Limited Time Offer Countdown */}
+            <div className="flex items-center gap-3 mb-6 bg-orange-500/10 border border-orange-500/20 w-fit px-4 py-2 rounded-lg backdrop-blur-sm">
+              <Zap size={18} className="text-orange-500 animate-pulse" />
+              <div className="text-sm font-bold text-white">
+                Festive Offer Ends In: <span className="text-orange-400 font-mono tracking-wider ml-2">12 : 45 : 30</span>
+              </div>
+            </div>
+
             {/* Heading */}
             <h2 className="font-display font-black text-white text-3xl sm:text-4xl lg:text-6xl leading-[1.1] mb-6">
               {title}
@@ -68,7 +76,7 @@ export default function ModernCTA({
             </p>
 
             {/* Action Row */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 mb-12">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 mb-8">
               <button 
                 onClick={openQuotePopup}
                 className="btn-primary text-base px-10 py-5 shadow-[0_0_30px_rgba(249,115,22,0.3)] hover:shadow-[0_0_50px_rgba(249,115,22,0.5)]"
@@ -82,9 +90,27 @@ export default function ModernCTA({
                   <WhatsAppLogo className="w-7 h-7 fill-white" />
                 </a>
                 <a href="tel:+918779391690"
-                  className="w-14 h-14 rounded-full flex items-center justify-center border border-white/10 bg-white/5 backdrop-blur-xl text-white hover:bg-orange-500 hover:border-transparent transition-all duration-300 group">
-                  <PhoneLogo className="w-7 h-7 fill-white" />
+                  className="flex items-center gap-3 px-6 py-4 rounded-full border border-white/10 bg-white/5 backdrop-blur-xl hover:bg-orange-500 hover:border-transparent transition-all duration-300 group">
+                  <PhoneLogo className="w-6 h-6 fill-white" />
+                  <div className="flex flex-col">
+                    <span className="text-[10px] text-slate-400 group-hover:text-orange-100 uppercase tracking-widest font-bold">Call Now</span>
+                    <span className="text-white font-bold tracking-wider">+91 87793 91690</span>
+                  </div>
                 </a>
+              </div>
+            </div>
+
+            {/* Video Testimonial Thumbnail */}
+            <div className="flex items-center gap-4 bg-white/5 border border-white/10 p-3 rounded-xl w-fit backdrop-blur-sm cursor-pointer hover:bg-white/10 transition-colors">
+              <div className="w-12 h-12 rounded-lg bg-orange-500/20 flex items-center justify-center relative overflow-hidden group">
+                <div className="absolute inset-0 bg-cover bg-center opacity-50 transition-transform group-hover:scale-110" style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=200")' }}></div>
+                <div className="w-6 h-6 rounded-full bg-orange-500 flex items-center justify-center relative z-10 shadow-lg">
+                  <svg className="w-3 h-3 text-white ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                </div>
+              </div>
+              <div>
+                <p className="text-white text-sm font-bold">"Best interior contractor!"</p>
+                <p className="text-slate-400 text-xs">Watch client review • 1:24</p>
               </div>
             </div>
           </div>

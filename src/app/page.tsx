@@ -21,6 +21,8 @@ import ModernCTA from '@/components/ui/ModernCTA';
 import BeforeAfterSlider from '@/components/ui/BeforeAfterSlider';
 import GoogleReviewsWidget from '@/components/ui/GoogleReviewsWidget';
 import SEOCrossLinks from '@/components/ui/SEOCrossLinks';
+import LocalBusinessSchema from '@/components/seo/LocalBusinessSchema';
+import SocialProofStrip from '@/components/ui/SocialProofStrip';
 
 /* ── Icon map ───────────────────────────────────────────────── */
 const iconMap: Record<string, React.ElementType> = {
@@ -62,46 +64,45 @@ export default function HomePage() {
         '@type': 'Answer',
         'text': f.answer
       }
-    }))
+    })),
+    'speakable': {
+      '@type': 'SpeakableSpecification',
+      'xpath': [
+        "/html/head/title",
+        "/html/head/meta[@name='description']/@content"
+      ]
+    }
   };
 
-  const localBusinessLd = {
+  const howToLd = {
     '@context': 'https://schema.org',
-    '@type': 'LocalBusiness',
-    'name': 'AMS Civil Construction',
-    'image': 'https://www.amscivilwork.in/og-image.jpg',
-    '@id': 'https://www.amscivilwork.in',
-    'url': 'https://www.amscivilwork.in',
-    'telephone': '+918779391690',
-    'address': {
-      '@type': 'PostalAddress',
-      'streetAddress': 'Andheri West',
-      'addressLocality': 'Mumbai',
-      'addressRegion': 'Maharashtra',
-      'postalCode': '400053',
-      'addressCountry': 'IN'
-    },
-    'geo': {
-      '@type': 'GeoCoordinates',
-      'latitude': 19.1136,
-      'longitude': 72.8297
-    },
-    'aggregateRating': {
-      '@type': 'AggregateRating',
-      'ratingValue': '4.9',
-      'reviewCount': '124'
-    },
-    'areaServed': [
-      'Mumbai',
-      'Navi Mumbai',
-      'Thane'
+    '@type': 'HowTo',
+    'name': 'How to Hire the Best Civil Contractor in Mumbai',
+    'description': 'A simple 3-step process to get your home built or renovated stress-free.',
+    'step': [
+      {
+        '@type': 'HowToStep',
+        'name': 'Free Site Visit & Consultation',
+        'text': 'Our engineer visits your property to understand your requirements, take measurements, and discuss ideas.'
+      },
+      {
+        '@type': 'HowToStep',
+        'name': 'Transparent Quote',
+        'text': 'You receive a detailed, itemized quotation with zero hidden costs and exact timelines.'
+      },
+      {
+        '@type': 'HowToStep',
+        'name': 'Flawless Execution',
+        'text': 'Our skilled team starts the work under senior supervision, keeping you updated at every milestone.'
+      }
     ]
   };
 
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(howToLd) }} />
+      <LocalBusinessSchema />
       <HeroSection />
       <TrustBannerSection />
       <TickerSection />
@@ -114,6 +115,7 @@ export default function HomePage() {
       <GalleryCarouselSection />
       <WhyUsSection />
       <GoogleReviewsWidget />
+      <SocialProofStrip />
       <NetworkSection />
       <ModernCTA />
       <FAQSection />
