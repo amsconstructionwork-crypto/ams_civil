@@ -80,11 +80,11 @@ export default function QuotePopup() {
       <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" onClick={() => setOpen(false)} />
 
       {/* Modal */}
-      <div className="relative w-full max-w-lg shadow-2xl animate-scaleIn overflow-hidden"
+      <div className="relative w-full max-w-lg max-h-[95vh] md:max-h-[90vh] flex flex-col shadow-2xl animate-scaleIn overflow-hidden rounded-xl"
         style={{ background: '#101827', border: '1px solid #1E2D45' }}>
 
         {/* Header */}
-        <div className="px-6 py-5 flex items-center justify-between"
+        <div className="px-6 py-5 flex items-center justify-between shrink-0"
           style={{ background: 'linear-gradient(135deg, #F97316, #EA580C)' }}>
           <div>
             <div className="flex items-center gap-2 mb-1">
@@ -105,7 +105,7 @@ export default function QuotePopup() {
         </div>
 
         {/* Body */}
-        <div className="p-6">
+        <div className="p-6 overflow-y-auto custom-scrollbar">
           {submitted ? (
             <div className="flex flex-col items-center py-10 gap-4 text-center">
               <div className="w-16 h-16 rounded-full flex items-center justify-center"
@@ -199,7 +199,7 @@ export default function QuotePopup() {
                 {isSubmitting ? (
                   <><span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin1" />Saving…</>
                 ) : (
-                  <><Send size={16} />Send Quote Request</>
+                  <><Send size={16} />SEND QUOTE REQUEST</>
                 )}
               </button>
               
