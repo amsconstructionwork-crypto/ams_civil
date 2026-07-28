@@ -87,11 +87,18 @@ export default function GoogleReviewsWidget() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {/* Scrolling Carousel Container */}
+        <div className="flex gap-6 overflow-x-auto pb-6 snap-x snap-mandatory scroll-smooth" style={{ scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' }}>
+          {/* Hide scrollbar for webkit in a style block just to be safe, but scrollbarWidth handles Firefox */}
+          <style dangerouslySetInnerHTML={{__html: `
+            .overflow-x-auto::-webkit-scrollbar {
+              display: none;
+            }
+          `}} />
           {reviews.map((review, i) => (
             <div 
               key={i} 
-              className="bg-[#0B1120] border border-white/10 rounded-2xl p-6 hover:border-blue-500/30 transition-colors animate-fadeUp"
+              className="w-[85vw] sm:w-[400px] shrink-0 snap-start bg-[#0B1120] border border-white/10 rounded-2xl p-6 hover:border-blue-500/30 transition-colors animate-fadeUp"
               style={{ animationDelay: `${i * 150}ms` }}
             >
               <div className="flex items-center gap-4 mb-4">
