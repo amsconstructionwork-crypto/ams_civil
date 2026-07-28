@@ -101,7 +101,7 @@ export default function GoogleReviewsWidget() {
             <div 
               key={i} 
               className="w-[85vw] sm:w-[400px] shrink-0 snap-start bg-[#0B1120] border border-white/10 rounded-2xl p-6 hover:border-blue-500/30 transition-colors animate-fadeUp"
-              style={{ animationDelay: \`\${i * 150}ms\` }}
+              style={{ animationDelay: `${i * 150}ms` }}
             >
               <div className="flex items-center gap-4 mb-4">
                 <div className="w-12 h-12 rounded-full bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 font-bold text-lg">
