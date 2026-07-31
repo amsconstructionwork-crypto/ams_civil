@@ -63,7 +63,7 @@ export default function AboutPage() {
         description: 'Mumbai\'s leading construction and civil contractor specializing in bungalows and premium renovations.',
         sameAs: [
           'https://www.facebook.com/profile.php?id=61570712849063',
-          'https://www.instagram.com/ams.constructionwork/',
+          'https://www.instagram.com/amscivilwork/',
         ],
       },
       {

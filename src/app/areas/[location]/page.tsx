@@ -177,7 +177,7 @@ export default async function LocationPage({ params }: { params: { location: str
         },
         sameAs: [
           'https://www.facebook.com/profile.php?id=61570712849063',
-          'https://www.instagram.com/ams.constructionwork/',
+          'https://www.instagram.com/amscivilwork/',
           'https://wa.me/918779391690',
         ],
         aggregateRating: {

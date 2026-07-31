@@ -367,7 +367,7 @@ const jsonLd = {
       },
       sameAs: [
         'https://www.facebook.com/profile.php?id=61570712849063',
-        'https://www.instagram.com/ams.constructionwork/',
+        'https://www.instagram.com/amscivilwork/',
         'https://wa.me/918779391690',
         'https://wa.me/919004298911',
       ],

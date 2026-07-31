@@ -30,7 +30,7 @@ const C = {
 // Social Media Links
 const SOCIAL = {
   fb:    'https://www.facebook.com/profile.php?id=61570712849063',
-  insta: 'https://www.instagram.com/ams.constructionwork/',
+  insta: 'https://www.instagram.com/amscivilwork/',
   wa:    'https://wa.me/918779391690',
   web:   'https://www.amscivilwork.in'
 };

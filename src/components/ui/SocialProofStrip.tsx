@@ -22,7 +22,7 @@ export default function SocialProofStrip() {
           </div>
           
           <a 
-            href="https://www.instagram.com/ams.constructionwork/" 
+            href="https://www.instagram.com/amscivilwork/" 
             target="_blank" 
             rel="noopener noreferrer"
             className="group flex items-center gap-2 hover:text-white transition-colors"
