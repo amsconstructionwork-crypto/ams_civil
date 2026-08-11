@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { PhoneLogo } from '@/components/ui/BrandIcons';
 import { Home, PaintRoller, Droplet, Hammer, ArrowRight, ShieldCheck, CheckCircle2, Lock, Loader2 } from 'lucide-react';
 import Navbar from '@/components/layout/Navbar';
-import Footer from '@/components/layout/Footer';
 
 export default function CalculatorPage() {
   const [step, setStep] = useState(1);
@@ -352,7 +351,6 @@ export default function CalculatorPage() {
           </div>
         </div>
       </main>
-      <Footer />
     </>
   );
 }
