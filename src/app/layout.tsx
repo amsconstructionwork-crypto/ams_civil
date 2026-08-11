@@ -2,6 +2,7 @@
 // Root layout with comprehensive SEO — targeting all Mumbai areas
 
 import type { Metadata } from 'next';
+import Script from 'next/script';
 import { Playfair_Display, DM_Sans, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
 import Navbar from '@/components/layout/Navbar';
@@ -429,6 +430,21 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
         {/* Language */}
         <meta httpEquiv="content-language" content="en-IN" />
+
+        {/* Google Analytics */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-ETLY0QEP6L"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-ETLY0QEP6L');
+          `}
+        </Script>
       </head>
 
       <body className="antialiased" style={{ background: '#0B1120', color: '#CBD5E1' }}>
