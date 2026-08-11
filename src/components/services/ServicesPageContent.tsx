@@ -173,7 +173,7 @@ export default function ServicesPageContent() {
                       <Link href={`/services/${svc.slug}`} className="btn-primary text-xs px-5 py-2.5 flex items-center gap-1.5">
                         Detailed Service Page <ArrowRight size={14} />
                       </Link>
-                      <button onClick={() => openQuotePopup(svc.title)} className="btn-outline text-xs px-4 py-2.5 hover:border-brand-amber hover:text-brand-amber transition-colors">
+                      <button onClick={() => openQuotePopup(svc.title)} className="btn-outline text-xs px-4 py-2.5">
                         Quick Estimate
                       </button>
                       <div className="flex gap-2">
