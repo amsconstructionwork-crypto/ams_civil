@@ -4,6 +4,7 @@ export const dynamic = 'force-dynamic';
 // POST /api/blogs          - Create a new blog post (admin only)
 
 import { NextRequest, NextResponse } from 'next/server';
+import { revalidatePath } from 'next/cache';
 import { getDb } from '@/lib/mongodb';
 import { requireAuth, sanitizeInput } from '@/lib/auth';
 import { pingSearchEngines } from '@/lib/seo';
@@ -23,6 +24,7 @@ export async function GET(request: NextRequest) {
     // Map `_id` to `id` for client components
     const blogs = docs.map(({ _id, ...rest }) => ({ id: _id.toString(), ...rest }));
 
+    revalidatePath('/blog'); revalidatePath('/');
     return NextResponse.json({ success: true, data: blogs });
   } catch (error) {
     console.error('GET /api/blogs error:', error);
@@ -78,8 +80,8 @@ export async function POST(request: NextRequest) {
       pingSearchEngines().catch(console.error);
     }
 
-    return NextResponse.json(
-      { success: true, data: { id: result.insertedId.toString(), ...newBlog } },
+    revalidatePath('/blog'); revalidatePath('/');
+    return NextResponse.json({ success: true, data: { id: result.insertedId.toString(), ...newBlog } },
       { status: 201 },
     );
   } catch (error) {

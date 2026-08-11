@@ -39,7 +39,6 @@ const getCachedRelatedBlogs = unstable_cache(
 export const dynamicParams = true;
 
 /* ── ISR: Cache generated pages for 1 week at Edge ── */
-export const revalidate = 604800;
 
 /* ── Pre-render top paths ───── */
 export async function generateStaticParams() {

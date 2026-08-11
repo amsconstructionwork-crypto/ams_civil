@@ -15,7 +15,6 @@ import { WhatsAppLogo } from '@/components/ui/BrandIcons';
 
 
 export const dynamicParams = true;
-export const revalidate = 604800; // Cache for 1 week
 
 export async function generateStaticParams() {
   return [];

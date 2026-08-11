@@ -4,6 +4,7 @@ export const dynamic = 'force-dynamic';
 // POST /api/projects          — create a new project (admin only)
 
 import { NextRequest, NextResponse } from 'next/server';
+import { revalidatePath } from 'next/cache';
 import { getDb } from '@/lib/mongodb';
 import { requireAuth, sanitizeInput } from '@/lib/auth';
 
@@ -21,6 +22,7 @@ export async function GET(request: NextRequest) {
 
     const projects = docs.map(({ _id, ...rest }) => ({ id: _id.toString(), ...rest }));
 
+    revalidatePath('/projects'); revalidatePath('/');
     return NextResponse.json({ success: true, data: projects });
   } catch (error) {
     console.error('GET /api/projects error:', error);
@@ -73,8 +75,8 @@ export async function POST(request: NextRequest) {
 
     console.log('✅ Project saved to MongoDB:', newProject.title, result.insertedId);
 
-    return NextResponse.json(
-      { success: true, data: { id: result.insertedId.toString(), ...newProject } },
+    revalidatePath('/projects'); revalidatePath('/');
+    return NextResponse.json({ success: true, data: { id: result.insertedId.toString(), ...newProject } },
       { status: 201 },
     );
   } catch (error) {

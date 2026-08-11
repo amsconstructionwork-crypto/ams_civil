@@ -17,7 +17,6 @@ function getViewsFromSlug(slug: string) {
 }
 
 // Force dynamic rendering so new blogs appear immediately (no caching delays)
-export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
   title: 'Construction & Interior Design Blog | AMS Civil Construction',
