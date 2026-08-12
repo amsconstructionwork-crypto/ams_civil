@@ -54,7 +54,7 @@ export default function ModernCTA({
 
             {/* Limited Time Offer Countdown */}
             <div className="flex items-center gap-3 mb-6 bg-orange-500/10 border border-orange-500/20 w-fit px-4 py-2 rounded-lg backdrop-blur-sm">
-              <Zap size={18} className="text-orange-500 animate-pulse" />
+              <Zap size={18} className="text-orange-500" />
               <div className="text-sm font-bold text-white">
                 Festive Offer Ends In: <span className="text-orange-400 font-mono tracking-wider ml-2">12 : 45 : 30</span>
               </div>

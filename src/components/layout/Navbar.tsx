@@ -26,9 +26,13 @@ export default function Navbar() {
   const pathname = usePathname();
 
   useEffect(() => {
-    const fn = () => setScrolled(window.scrollY > 50);
+    let rafId = 0;
+    const fn = () => {
+      cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(() => setScrolled(window.scrollY > 50));
+    };
     window.addEventListener('scroll', fn, { passive: true });
-    return () => window.removeEventListener('scroll', fn);
+    return () => { window.removeEventListener('scroll', fn); cancelAnimationFrame(rafId); };
   }, []);
 
   useEffect(() => { setMenuOpen(false); }, [pathname]);

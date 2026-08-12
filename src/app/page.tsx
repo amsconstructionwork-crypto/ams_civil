@@ -282,11 +282,11 @@ function HeroSection() {
     <section className="relative min-h-screen flex items-center overflow-hidden"
       style={{ background: 'linear-gradient(135deg, #080D1A 0%, #0B1120 50%, #0A1628 100%)' }}>
 
-      {/* Animated glow orbs */}
-      <div className="glow-orb w-[600px] h-[600px] opacity-20 animate-pulse2"
+      {/* Static glow orbs — no animation (saves CPU) */}
+      <div className="glow-orb w-[600px] h-[600px] opacity-20"
         style={{ background: 'radial-gradient(circle, #F97316, transparent 70%)', top: '-10%', right: '-5%' }} />
-      <div className="glow-orb w-[400px] h-[400px] opacity-10 animate-pulse2"
-        style={{ background: 'radial-gradient(circle, #3B82F6, transparent 70%)', bottom: '-5%', left: '-5%', animationDelay: '1.2s' }} />
+      <div className="glow-orb w-[400px] h-[400px] opacity-10"
+        style={{ background: 'radial-gradient(circle, #3B82F6, transparent 70%)', bottom: '-5%', left: '-5%' }} />
 
       {/* Grid pattern */}
       <div className="absolute inset-0 opacity-[0.03]"
@@ -338,7 +338,7 @@ function HeroSection() {
           <div className="grid grid-cols-2 gap-4 animate-fadeIn"
             style={{ animationDelay: '1s', opacity: 0 }}>
             {stats.map((s, i) => (
-              <div key={s.label} className="glass px-5 py-6 flex flex-col items-center text-center animate-floatY"
+              <div key={s.label} className="glass px-5 py-6 flex flex-col items-center text-center"
                 style={{ animationDelay: `${i * 0.4}s` }}>
                 <div className="font-display font-black text-3xl text-gradient mb-1">
                   <CountUp value={s.value} />
@@ -568,20 +568,26 @@ function ProjectsCarousel() {
   const next = useCallback(() => scrollToIdx(Math.min(filtered.length - 1, activeIdx + 1)),
     [activeIdx, filtered.length, scrollToIdx]);
 
-  /* Auto-advance every 5s using scrollLeft — never jumps the page */
+  /* Auto-advance every 5s — pauses when tab is hidden */
   useEffect(() => {
     if (filtered.length <= 1) return;
-    timerRef.current = setInterval(() => {
-      setActiveIdx(prev => {
-        const nextIdx = (prev + 1) % filtered.length;
-        const track = trackRef.current;
-        if (track) {
-          const card = track.children[nextIdx] as HTMLElement | undefined;
-          if (card) track.scrollTo({ left: card.offsetLeft - track.offsetLeft, behavior: 'smooth' });
-        }
-        return nextIdx;
-      });
-    }, 5000);
+
+    const startTimer = () => {
+      timerRef.current = setInterval(() => {
+        if (document.visibilityState === 'hidden') return;
+        setActiveIdx(prev => {
+          const nextIdx = (prev + 1) % filtered.length;
+          const track = trackRef.current;
+          if (track) {
+            const card = track.children[nextIdx] as HTMLElement | undefined;
+            if (card) track.scrollTo({ left: card.offsetLeft - track.offsetLeft, behavior: 'smooth' });
+          }
+          return nextIdx;
+        });
+      }, 5000);
+    };
+
+    startTimer();
     return () => { if (timerRef.current) clearInterval(timerRef.current); };
   }, [filtered.length]);
 

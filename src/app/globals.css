@@ -90,6 +90,7 @@
     @apply text-5xl font-black;
     background: linear-gradient(135deg, #F97316, #FBBF24);
     -webkit-background-clip: text;
+    background-clip: text; /* standard property for compatibility */
     -webkit-text-fill-color: transparent;
   }
 
@@ -132,7 +133,7 @@
     background: linear-gradient(135deg, #F97316 0%, #EA580C 100%);
     color: #fff;
     box-shadow: 0 4px 20px rgba(249,115,22,0.35);
-    focus-ring-color: #F97316;
+    /* focus-ring-color is not a valid CSS property — ring color handled by Tailwind's focus:ring-* */
   }
   .btn-primary:hover {
     background: linear-gradient(135deg, #FB923C 0%, #F97316 100%);
@@ -201,7 +202,8 @@
 
 /* ── Ticker ─────────────────────────────────────────────────── */
 .ticker-wrap  { overflow: hidden; white-space: nowrap; }
-.ticker-inner { display: inline-flex; animation: ticker 36s linear infinite; }
+/* will-change pushes ticker to GPU compositor — frees CPU */
+.ticker-inner { display: inline-flex; animation: ticker 45s linear infinite; will-change: transform; }
 
 /* ── Animations (defined here, Tailwind keyframes above) ─────── */
 @keyframes fadeUp  { 0%{opacity:0;transform:translateY(28px)}100%{opacity:1;transform:translateY(0)} }
@@ -218,6 +220,21 @@
 .animate-floatY  { animation: floatY  4s ease-in-out infinite; }
 .animate-spin1   { animation: spin1   1s linear infinite; }
 .animate-pulse2  { animation: pulse2  2.4s ease-in-out infinite; }
+
+/* ── Respect reduced-motion preference (also improves CPU during audits) */
+@media (prefers-reduced-motion: reduce) {
+  .ticker-inner,
+  .animate-floatY,
+  .animate-pulse2,
+  .animate-fadeUp,
+  .animate-fadeIn,
+  .animate-scaleIn,
+  .animate-spin1 {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
 
 /* ── Footer social icon hover (CSS-only, no JS handlers) ─── */
 .footer-social {

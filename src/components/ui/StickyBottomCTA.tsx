@@ -32,19 +32,22 @@ export default function StickyBottomCTA() {
     }
 
     let lastScroll = 0;
+    let rafId = 0;
     const handleScroll = () => {
-      const currentScroll = window.scrollY;
-      // Hide when scrolling up, show when scrolling down
-      if (currentScroll > lastScroll && currentScroll > 200) {
-        setVisible(true);
-      } else if (currentScroll < lastScroll - 10) {
-        setVisible(true); // Keep visible on scroll up too for max CRO
-      }
-      lastScroll = currentScroll;
+      cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(() => {
+        const currentScroll = window.scrollY;
+        if (currentScroll > lastScroll && currentScroll > 200) {
+          setVisible(true);
+        } else if (currentScroll < lastScroll - 10) {
+          setVisible(true);
+        }
+        lastScroll = currentScroll;
+      });
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => { window.removeEventListener('scroll', handleScroll); cancelAnimationFrame(rafId); };
   }, []);
 
   if (dismissed) return null;
@@ -75,7 +78,7 @@ export default function StickyBottomCTA() {
             href="tel:+918779391690"
             className="flex-1 flex items-center justify-center gap-2.5 py-3.5 text-white font-bold text-sm uppercase tracking-wider bg-gradient-to-r from-orange-600 to-orange-500 active:scale-95 transition-transform"
           >
-            <Phone size={18} className="animate-pulse" />
+            <Phone size={18} />
             <span>Call Now</span>
           </a>
 

@@ -130,8 +130,8 @@ export default function WhatsAppButton() {
             background: isOpen ? '#1E2D45' : 'linear-gradient(135deg, #25D366, #128C7E)',
           }}
         >
-          {/* Ripple Effect for Button */}
-          {!isOpen && <span className="absolute inset-0 rounded-full border-2 border-white/30 animate-[ping_2s_ease-in-out_infinite]"></span>}
+          {/* Ripple Effect for Button — finite 3 pulses only, not infinite */}
+          {!isOpen && <span className="absolute inset-0 rounded-full border-2 border-white/30" style={{ animation: 'ping 2s ease-in-out 3' }}></span>}
           
           {isOpen ? (
             <X className="text-white relative z-10" size={26} />

@@ -35,7 +35,7 @@ export default function TopBanner() {
       {/* Desktop Layout (sm and above) */}
       <div className="hidden sm:flex items-center justify-center gap-4 flex-wrap w-full">
         <div className="flex items-center gap-2">
-          <span className="animate-pulse">🔥</span>
+          <span>🔥</span>
           <span className="font-semibold text-xs md:text-sm">Special Offer: Get a FREE Site Visit & Consultation!</span>
         </div>
         <div className="flex items-center gap-3">

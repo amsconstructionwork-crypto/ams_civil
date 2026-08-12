@@ -89,7 +89,7 @@ export default function QuotePopup() {
           <div>
             <div className="flex items-center gap-2 mb-1">
               <h2 className="font-display font-bold text-white text-xl">Get a Free Quote</h2>
-              <span className="bg-white/20 text-white text-[10px] font-bold px-2 py-0.5 rounded-full animate-pulse">
+              <span className="bg-white/20 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
                 ⚡ 3 Slots Left Today
               </span>
             </div>

@@ -21,14 +21,18 @@ export default function BeforeAfterSlider({
   const [isDragging, setIsDragging] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
+  const rafRef = useRef<number>(0);
+
   const handleMove = (clientX: number) => {
-    if (!containerRef.current || !isDragging) return;
-    
-    const rect = containerRef.current.getBoundingClientRect();
-    const x = Math.max(0, Math.min(clientX - rect.left, rect.width));
-    const percent = Math.max(0, Math.min((x / rect.width) * 100, 100));
-    
-    setSliderPosition(percent);
+    if (!isDragging) return;
+    cancelAnimationFrame(rafRef.current);
+    rafRef.current = requestAnimationFrame(() => {
+      if (!containerRef.current) return;
+      const rect = containerRef.current.getBoundingClientRect();
+      const x = Math.max(0, Math.min(clientX - rect.left, rect.width));
+      const percent = Math.max(0, Math.min((x / rect.width) * 100, 100));
+      setSliderPosition(percent);
+    });
   };
 
   const handleMouseUp = () => setIsDragging(false);
@@ -39,6 +43,7 @@ export default function BeforeAfterSlider({
     return () => {
       window.removeEventListener('mouseup', handleMouseUp);
       window.removeEventListener('touchend', handleMouseUp);
+      cancelAnimationFrame(rafRef.current);
     };
   }, []);
 

@@ -434,7 +434,7 @@ export default async function LocationPage({ params }: { params: { location: str
                <div className="absolute inset-0 bg-gradient-to-tr from-[#080D1A] via-transparent to-transparent" />
             </div>
             {/* Floating Trust Card */}
-            <div className="absolute -bottom-6 -right-6 md:right-12 p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-xl shadow-2xl max-w-xs animate-bounce-slow">
+            <div className="absolute -bottom-6 -right-6 md:right-12 p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-xl shadow-2xl max-w-xs">
               <div className="flex items-center gap-3 mb-3">
                 <ShieldCheck className="text-orange-400" size={24} />
                 <span className="text-white font-bold">100% Quality Guaranteed</span>
