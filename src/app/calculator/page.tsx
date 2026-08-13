@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { PhoneLogo } from '@/components/ui/BrandIcons';
-import { Home, PaintRoller, Droplet, Hammer, ArrowRight, ShieldCheck, CheckCircle2, Lock, Loader2 } from 'lucide-react';
+import { Home, PaintRoller, Droplet, Hammer, ArrowRight, ShieldCheck, CheckCircle2, Lock, Loader2, Star } from 'lucide-react';
 import Navbar from '@/components/layout/Navbar';
 
 export default function CalculatorPage() {
@@ -146,15 +146,18 @@ export default function CalculatorPage() {
           <div className="bg-[#101827] border border-[#1E2D45] rounded-3xl p-6 sm:p-10 shadow-2xl relative overflow-hidden min-h-[400px]">
             {/* Progress Bar - Only show for first 4 steps */}
             {step < 5 && (
-              <div className="flex items-center justify-between mb-10 relative px-2">
-                <div className="absolute left-0 top-1/2 -translate-y-1/2 w-full h-1 bg-[#1E2D45] -z-10" />
-                <div 
-                  className="absolute left-0 top-1/2 -translate-y-1/2 h-1 bg-orange-500 -z-10 transition-all duration-500" 
-                  style={{ width: `${((step - 1) / 3) * 100}%` }}
-                />
+              <div className="flex items-center justify-between mb-12 relative px-0">
+                {/* Background Track */}
+                <div className="absolute left-[24px] sm:left-[28px] right-[24px] sm:right-[28px] top-1/2 -translate-y-1/2 h-1.5 bg-[#162133] rounded-full -z-10 overflow-hidden">
+                  {/* Animated Active Fill */}
+                  <div 
+                    className="absolute left-0 top-0 h-full bg-gradient-to-r from-orange-500 to-orange-400 transition-all duration-700 ease-in-out shadow-[0_0_15px_rgba(249,115,22,0.6)]" 
+                    style={{ width: `${((step - 1) / 3) * 100}%` }}
+                  />
+                </div>
                 {[1, 2, 3, 4].map((num) => (
-                  <div key={num} className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm transition-colors ${step >= num ? 'bg-orange-500 text-white shadow-[0_0_15px_rgba(249,115,22,0.5)]' : 'bg-[#1E2D45] text-slate-400'}`}>
-                    {step > num ? <CheckCircle2 size={20} /> : num === 4 ? <Lock size={16} /> : num}
+                  <div key={num} className={`w-12 h-12 sm:w-14 sm:h-14 rounded-full flex items-center justify-center font-bold text-base sm:text-lg transition-all duration-500 relative z-10 ${step >= num ? 'bg-gradient-to-br from-orange-400 to-orange-600 text-white shadow-[0_0_20px_rgba(249,115,22,0.4)] scale-110 border-2 border-[#101827]' : 'bg-[#162133] text-slate-400 border-2 border-[#1E2D45]'}`}>
+                    {step > num ? <CheckCircle2 size={24} className="animate-fade-in" /> : num === 4 ? <Lock size={20} /> : num}
                   </div>
                 ))}
               </div>
@@ -163,15 +166,20 @@ export default function CalculatorPage() {
             {step === 1 && (
               <div className="animate-fade-in">
                 <h2 className="text-2xl text-white font-bold mb-6">1. What is your property type?</h2>
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-8">
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-5 mb-10">
                   {propertyOptions.map((opt) => (
                     <button
                       key={opt.id}
                       onClick={() => setPropertyType(opt.id)}
-                      className={`p-4 rounded-xl border flex flex-col items-center justify-center gap-3 transition-all ${propertyType === opt.id ? 'border-orange-500 bg-orange-500/10 text-orange-400' : 'border-[#1E2D45] bg-white/5 text-slate-300 hover:border-orange-500/50 hover:bg-white/10'}`}
+                      className={`group relative p-6 sm:p-8 rounded-2xl border flex flex-col items-center justify-center gap-4 transition-all duration-300 overflow-hidden ${propertyType === opt.id ? 'border-orange-500 bg-orange-500/10 text-orange-400 shadow-[0_0_30px_rgba(249,115,22,0.15)] scale-[1.02]' : 'border-[#1E2D45] bg-[#162133] text-slate-300 hover:border-orange-500/50 hover:bg-[#1A273A] hover:-translate-y-1'}`}
                     >
-                      <opt.icon size={32} className={propertyType === opt.id ? 'text-orange-500' : 'text-slate-500'} />
-                      <span className="font-medium text-center">{opt.label}</span>
+                      {/* Active indicator glow */}
+                      {propertyType === opt.id && (
+                        <div className="absolute inset-0 bg-gradient-to-b from-orange-500/20 to-transparent opacity-50" />
+                      )}
+                      
+                      <opt.icon size={44} className={`transition-transform duration-300 group-hover:scale-110 relative z-10 ${propertyType === opt.id ? 'text-orange-500 drop-shadow-[0_0_8px_rgba(249,115,22,0.5)]' : 'text-slate-500 group-hover:text-orange-400'}`} />
+                      <span className="font-bold text-lg sm:text-xl text-center relative z-10">{opt.label}</span>
                     </button>
                   ))}
                 </div>
@@ -186,19 +194,28 @@ export default function CalculatorPage() {
             {step === 2 && (
               <div className="animate-fade-in">
                 <h2 className="text-2xl text-white font-bold mb-6">2. What services do you need?</h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-10">
                   {serviceOptions.map((opt) => (
                     <button
                       key={opt.id}
                       onClick={() => toggleService(opt.id)}
-                      className={`p-5 rounded-xl border text-left flex items-start gap-4 transition-all ${services.includes(opt.id) ? 'border-orange-500 bg-orange-500/10' : 'border-[#1E2D45] bg-white/5 hover:border-orange-500/50 hover:bg-white/10'}`}
+                      className={`group relative p-6 rounded-2xl border text-left flex items-center gap-5 transition-all duration-300 overflow-hidden ${services.includes(opt.id) ? 'border-orange-500 bg-orange-500/10 shadow-[0_0_20px_rgba(249,115,22,0.1)] scale-[1.02]' : 'border-[#1E2D45] bg-[#162133] hover:border-orange-500/50 hover:bg-[#1A273A] hover:-translate-y-1'}`}
                     >
-                      <div className={`p-3 rounded-lg ${services.includes(opt.id) ? 'bg-orange-500 text-white' : 'bg-[#1E2D45] text-slate-400'}`}>
-                        <opt.icon size={24} />
+                      {services.includes(opt.id) && (
+                        <div className="absolute inset-0 bg-gradient-to-r from-orange-500/10 to-transparent opacity-50" />
+                      )}
+                      
+                      <div className={`p-4 rounded-xl relative z-10 transition-all duration-300 ${services.includes(opt.id) ? 'bg-gradient-to-br from-orange-400 to-orange-600 text-white shadow-lg shadow-orange-500/30' : 'bg-[#1E2D45] text-slate-400 group-hover:text-orange-400 group-hover:bg-[#1E2D45]/80'}`}>
+                        <opt.icon size={28} className="group-hover:scale-110 transition-transform duration-300" />
                       </div>
-                      <div>
-                        <h3 className={`font-bold text-lg mb-1 ${services.includes(opt.id) ? 'text-orange-400' : 'text-white'}`}>{opt.label}</h3>
+                      <div className="relative z-10 flex-1">
+                        <h3 className={`font-bold text-xl mb-1 transition-colors ${services.includes(opt.id) ? 'text-orange-400' : 'text-white'}`}>{opt.label}</h3>
                         <p className="text-slate-400 text-sm">{opt.desc}</p>
+                      </div>
+                      
+                      {/* Checkbox indicator */}
+                      <div className={`w-7 h-7 rounded-full border-2 flex items-center justify-center transition-all shrink-0 relative z-10 ${services.includes(opt.id) ? 'border-orange-500 bg-orange-500' : 'border-slate-600 bg-transparent group-hover:border-orange-400/50'}`}>
+                        {services.includes(opt.id) && <CheckCircle2 size={16} className="text-white" />}
                       </div>
                     </button>
                   ))}
@@ -221,15 +238,23 @@ export default function CalculatorPage() {
             {step === 3 && (
               <div className="animate-fade-in">
                 <h2 className="text-2xl text-white font-bold mb-6">3. Select Finish Quality</h2>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-10">
                   {conditionOptions.map((opt) => (
                     <button
                       key={opt.id}
                       onClick={() => setCondition(opt.id)}
-                      className={`p-5 rounded-xl border text-center transition-all ${condition === opt.id ? 'border-orange-500 bg-orange-500/10' : 'border-[#1E2D45] bg-white/5 hover:border-orange-500/50 hover:bg-white/10'}`}
+                      className={`group relative p-8 rounded-2xl border text-center transition-all duration-300 overflow-hidden ${condition === opt.id ? 'border-orange-500 bg-orange-500/10 shadow-[0_0_25px_rgba(249,115,22,0.15)] scale-[1.03]' : 'border-[#1E2D45] bg-[#162133] hover:border-orange-500/50 hover:bg-[#1A273A] hover:-translate-y-1'}`}
                     >
-                      <h3 className={`font-bold text-xl mb-2 ${condition === opt.id ? 'text-orange-400' : 'text-white'}`}>{opt.label}</h3>
-                      <p className="text-slate-400 text-sm">{opt.desc}</p>
+                      {condition === opt.id && (
+                        <div className="absolute inset-0 bg-gradient-to-b from-orange-500/10 to-transparent opacity-50" />
+                      )}
+                      
+                      <div className={`w-14 h-14 rounded-full mx-auto mb-5 flex items-center justify-center border-2 transition-colors duration-300 ${condition === opt.id ? 'border-orange-500 bg-orange-500/20 text-orange-500' : 'border-[#1E2D45] text-slate-500 bg-[#162133] group-hover:border-orange-400/30'}`}>
+                        <Star size={24} className={`transition-all duration-300 ${condition === opt.id ? 'fill-orange-500 scale-110 drop-shadow-[0_0_5px_rgba(249,115,22,0.8)]' : 'group-hover:text-orange-400 group-hover:scale-110'}`} />
+                      </div>
+                      
+                      <h3 className={`font-bold text-2xl mb-2 relative z-10 transition-colors ${condition === opt.id ? 'text-orange-400 drop-shadow-md' : 'text-white'}`}>{opt.label}</h3>
+                      <p className="text-slate-400 text-sm relative z-10">{opt.desc}</p>
                     </button>
                   ))}
                 </div>
