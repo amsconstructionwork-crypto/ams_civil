@@ -5,7 +5,7 @@ import fs from 'fs';
 import path from 'path';
 
 export const dynamic = 'force-dynamic';
-export const maxDuration = 60; // Allow it to run for up to 60 seconds
+export const maxDuration = 30; // Reduced to 30s to save Vercel Fluid CPU
 
 export async function GET(request: Request) {
   // Security check: Only allow requests from Vercel Cron or manual admin
@@ -44,7 +44,7 @@ export async function GET(request: Request) {
     const db = await getDb();
     const collection = db.collection('blogs');
 
-    // Find up to 100 published blogs that are CURRENTLY visible (not future dated) and not indexed yet
+    // Find up to 40 published blogs (reduced from 100 to fit in 30s comfortably)
     const blogsToSubmit = await collection.find({
       published: true,
       googleIndexed: { $ne: true },
@@ -52,7 +52,7 @@ export async function GET(request: Request) {
         { publishDate: { $lte: new Date() } },
         { publishDate: { $exists: false } }
       ]
-    }).limit(100).toArray();
+    }).limit(40).toArray();
 
     if (blogsToSubmit.length === 0) {
       return NextResponse.json({ message: 'No new blogs to index today.' });
@@ -60,30 +60,48 @@ export async function GET(request: Request) {
 
     let successCount = 0;
     let failCount = 0;
-    const indexedBlogIds = [];
+    const indexedBlogIds: any[] = [];
 
-    for (const blog of blogsToSubmit) {
-      const url = `https://www.amscivilwork.in/blog/${blog.slug}`;
-      try {
-        await clientAuthed.request({
-          url: 'https://indexing.googleapis.com/v3/urlNotifications:publish',
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          data: { url: url, type: 'URL_UPDATED' }
-        });
-        successCount++;
-        indexedBlogIds.push(blog._id);
-      } catch (err: any) {
-        failCount++;
-        console.error(`Failed to submit ${url}:`, err?.response?.status || err.message);
-        if (err?.response?.status === 429) {
-          console.log('Quota exceeded. Stopping early.');
-          break; // Stop loop if quota is reached
+    // Process in batches of 5 to save active CPU and execution time
+    for (let i = 0; i < blogsToSubmit.length; i += 5) {
+      const batch = blogsToSubmit.slice(i, i + 5);
+      
+      const batchPromises = batch.map(async (blog) => {
+        const url = `https://www.amscivilwork.in/blog/${blog.slug}`;
+        try {
+          await clientAuthed.request({
+            url: 'https://indexing.googleapis.com/v3/urlNotifications:publish',
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            data: { url: url, type: 'URL_UPDATED' }
+          });
+          return { success: true, id: blog._id };
+        } catch (err: any) {
+          console.error(`Failed to submit ${url}:`, err?.response?.status || err.message);
+          return { success: false, status: err?.response?.status };
+        }
+      });
+
+      const results = await Promise.all(batchPromises);
+      
+      let quotaExceeded = false;
+      for (const res of results) {
+        if (res.success) {
+          successCount++;
+          indexedBlogIds.push(res.id);
+        } else {
+          failCount++;
+          if (res.status === 429) quotaExceeded = true;
         }
       }
+
+      if (quotaExceeded) {
+        console.log('Quota exceeded. Stopping early.');
+        break;
+      }
       
-      // Delay to respect API rate limits
-      await new Promise(r => setTimeout(r, 100));
+      // Short delay between batches
+      await new Promise(r => setTimeout(r, 200));
     }
 
     // Mark successful ones as indexed in MongoDB

@@ -229,6 +229,7 @@ export default function Footer() {
           <div className="flex items-center flex-wrap justify-center gap-6 text-xs font-medium text-slate-500 pr-12 md:pr-0">
             <Link href="/privacy" className="hover:text-orange-400 transition-colors">Privacy Policy</Link>
             <Link href="/terms" className="hover:text-orange-400 transition-colors">Terms & Conditions</Link>
+            <Link href="/sitemap.xml" className="hover:text-orange-400 transition-colors">Sitemap</Link>
           </div>
         </div>
       </div>

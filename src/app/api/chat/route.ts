@@ -3,8 +3,8 @@ import { google } from '@ai-sdk/google';
 import { streamText, tool } from 'ai';
 import { z } from 'zod';
 
-// Allow streaming responses up to 30 seconds
-export const maxDuration = 30;
+// Allow streaming responses up to 15 seconds to save Fluid CPU
+export const maxDuration = 15;
 
 const SYSTEM_PROMPT = `
 You are the official AI Assistant for AMS Civil Construction, a premium civil contractor based in Mumbai, India.

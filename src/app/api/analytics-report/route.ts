@@ -58,80 +58,75 @@ export async function GET(request: NextRequest) {
     const todayFilter = { timestamp: { $gte: todayStartUTC, $lt: todayEndUTC } };
     const yesterdayFilter = { timestamp: { $gte: yesterdayStartUTC, $lt: yesterdayEndUTC } };
 
-    const totalViews = await db.collection('page_views').countDocuments(todayFilter);
-    const yesterdayViews = await db.collection('page_views').countDocuments(yesterdayFilter);
-
-    // ── Top Services ──
-    const topServices = await db.collection('page_views').aggregate([
-      { $match: { ...todayFilter, service: { $ne: null, $nin: ['Home Page', 'Contact Page', 'Gallery', 'Projects', 'About', 'Blog'] } } },
-      { $group: { _id: '$service', views: { $sum: 1 } } },
-      { $sort: { views: -1 } },
-      { $limit: 10 },
-      { $project: { _id: 0, name: '$_id', views: 1 } },
-    ]).toArray();
-
-    // ── Top Areas ──
-    const topAreas = await db.collection('page_views').aggregate([
-      { $match: { ...todayFilter, area: { $ne: null } } },
-      { $group: { _id: '$area', views: { $sum: 1 } } },
-      { $sort: { views: -1 } },
-      { $limit: 10 },
-      { $project: { _id: 0, name: '$_id', views: 1 } },
-    ]).toArray();
-
-    // ── Top Visitor Cities ──
-    const topCities = await db.collection('page_views').aggregate([
-      { $match: { ...todayFilter, city: { $ne: null } } },
-      { $group: { _id: { $concat: [{ $ifNull: ['$city', ''] }, ', ', { $ifNull: ['$region', ''] }] }, views: { $sum: 1 } } },
-      { $sort: { views: -1 } },
-      { $limit: 10 },
-      { $project: { _id: 0, name: '$_id', views: 1 } },
-    ]).toArray();
-
-    // ── Top Blog Posts ──
-    const topBlogs = await db.collection('page_views').aggregate([
-      { $match: { ...todayFilter, page: { $regex: '^/blog/' } } },
-      { $group: { _id: '$page', views: { $sum: 1 } } },
-      { $sort: { views: -1 } },
-      { $limit: 5 },
-      { $project: { _id: 0, name: '$_id', views: 1 } },
-    ]).toArray();
-
-    // Clean up blog names
-    topBlogs.forEach(b => {
-      b.name = b.name.replace('/blog/', '').replace(/-/g, ' ').replace(/\b\w/g, (c: string) => c.toUpperCase());
-    });
-
-    // ── Device breakdown ──
-    const mobileCount = await db.collection('page_views').countDocuments({ ...todayFilter, device: 'Mobile' });
-    const desktopCount = await db.collection('page_views').countDocuments({ ...todayFilter, device: 'Desktop' });
-
-    // ── Top Referrers ──
-    const topReferrers = await db.collection('page_views').aggregate([
-      { $match: { ...todayFilter, referrer: { $nin: [null, ''] } } },
-      { $addFields: { 
-        referrerDomain: { 
-          $cond: {
-            if: { $regexMatch: { input: '$referrer', regex: /^https?:\/\// } },
-            then: { $arrayElemAt: [{ $split: [{ $arrayElemAt: [{ $split: ['$referrer', '//'] }, 1] }, '/'] }, 0] },
-            else: '$referrer'
+    // ── Execute all DB queries in parallel for performance ──
+    const [
+      totalViews,
+      yesterdayViews,
+      topServices,
+      topAreas,
+      topCities,
+      topBlogs,
+      mobileCount,
+      desktopCount,
+      topReferrers,
+      topPages
+    ] = await Promise.all([
+      db.collection('page_views').countDocuments(todayFilter),
+      db.collection('page_views').countDocuments(yesterdayFilter),
+      db.collection('page_views').aggregate([
+        { $match: { ...todayFilter, service: { $ne: null, $nin: ['Home Page', 'Contact Page', 'Gallery', 'Projects', 'About', 'Blog'] } } },
+        { $group: { _id: '$service', views: { $sum: 1 } } },
+        { $sort: { views: -1 } },
+        { $limit: 10 },
+        { $project: { _id: 0, name: '$_id', views: 1 } },
+      ]).toArray(),
+      db.collection('page_views').aggregate([
+        { $match: { ...todayFilter, area: { $ne: null } } },
+        { $group: { _id: '$area', views: { $sum: 1 } } },
+        { $sort: { views: -1 } },
+        { $limit: 10 },
+        { $project: { _id: 0, name: '$_id', views: 1 } },
+      ]).toArray(),
+      db.collection('page_views').aggregate([
+        { $match: { ...todayFilter, city: { $ne: null } } },
+        { $group: { _id: { $concat: [{ $ifNull: ['$city', ''] }, ', ', { $ifNull: ['$region', ''] }] }, views: { $sum: 1 } } },
+        { $sort: { views: -1 } },
+        { $limit: 10 },
+        { $project: { _id: 0, name: '$_id', views: 1 } },
+      ]).toArray(),
+      db.collection('page_views').aggregate([
+        { $match: { ...todayFilter, page: { $regex: '^/blog/' } } },
+        { $group: { _id: '$page', views: { $sum: 1 } } },
+        { $sort: { views: -1 } },
+        { $limit: 5 },
+        { $project: { _id: 0, name: '$_id', views: 1 } },
+      ]).toArray(),
+      db.collection('page_views').countDocuments({ ...todayFilter, device: 'Mobile' }),
+      db.collection('page_views').countDocuments({ ...todayFilter, device: 'Desktop' }),
+      db.collection('page_views').aggregate([
+        { $match: { ...todayFilter, referrer: { $nin: [null, ''] } } },
+        { $addFields: { 
+          referrerDomain: { 
+            $cond: {
+              if: { $regexMatch: { input: '$referrer', regex: /^https?:\/\// } },
+              then: { $arrayElemAt: [{ $split: [{ $arrayElemAt: [{ $split: ['$referrer', '//'] }, 1] }, '/'] }, 0] },
+              else: '$referrer'
+            }
           }
-        }
-      }},
-      { $group: { _id: '$referrerDomain', views: { $sum: 1 } } },
-      { $sort: { views: -1 } },
-      { $limit: 5 },
-      { $project: { _id: 0, name: '$_id', views: 1 } },
-    ]).toArray();
-
-    // ── Top Pages (overall) ──
-    const topPages = await db.collection('page_views').aggregate([
-      { $match: todayFilter },
-      { $group: { _id: '$page', views: { $sum: 1 } } },
-      { $sort: { views: -1 } },
-      { $limit: 10 },
-      { $project: { _id: 0, name: '$_id', views: 1 } },
-    ]).toArray();
+        }},
+        { $group: { _id: '$referrerDomain', views: { $sum: 1 } } },
+        { $sort: { views: -1 } },
+        { $limit: 5 },
+        { $project: { _id: 0, name: '$_id', views: 1 } },
+      ]).toArray(),
+      db.collection('page_views').aggregate([
+        { $match: todayFilter },
+        { $group: { _id: '$page', views: { $sum: 1 } } },
+        { $sort: { views: -1 } },
+        { $limit: 10 },
+        { $project: { _id: 0, name: '$_id', views: 1 } },
+      ]).toArray()
+    ]);
 
     // Format page names for readability
     topPages.forEach(p => {
