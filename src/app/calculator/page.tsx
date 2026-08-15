@@ -166,20 +166,20 @@ export default function CalculatorPage() {
             {step === 1 && (
               <div className="animate-fade-in">
                 <h2 className="text-2xl text-white font-bold mb-6">1. What is your property type?</h2>
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-5 mb-10">
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-8">
                   {propertyOptions.map((opt) => (
                     <button
                       key={opt.id}
                       onClick={() => setPropertyType(opt.id)}
-                      className={`group relative p-6 sm:p-8 rounded-2xl border flex flex-col items-center justify-center gap-4 transition-all duration-300 overflow-hidden ${propertyType === opt.id ? 'border-orange-500 bg-orange-500/10 text-orange-400 shadow-[0_0_30px_rgba(249,115,22,0.15)] scale-[1.02]' : 'border-[#1E2D45] bg-[#162133] text-slate-300 hover:border-orange-500/50 hover:bg-[#1A273A] hover:-translate-y-1'}`}
+                      className={`group relative p-4 sm:p-5 rounded-2xl border flex flex-col items-center justify-center gap-3 transition-all duration-300 overflow-hidden ${propertyType === opt.id ? 'border-orange-500 bg-orange-500/10 text-orange-400 shadow-[0_0_20px_rgba(249,115,22,0.15)] scale-[1.02]' : 'border-[#1E2D45] bg-[#162133] text-slate-300 hover:border-orange-500/50 hover:bg-[#1A273A] hover:-translate-y-1'}`}
                     >
                       {/* Active indicator glow */}
                       {propertyType === opt.id && (
                         <div className="absolute inset-0 bg-gradient-to-b from-orange-500/20 to-transparent opacity-50" />
                       )}
                       
-                      <opt.icon size={44} className={`transition-transform duration-300 group-hover:scale-110 relative z-10 ${propertyType === opt.id ? 'text-orange-500 drop-shadow-[0_0_8px_rgba(249,115,22,0.5)]' : 'text-slate-500 group-hover:text-orange-400'}`} />
-                      <span className="font-bold text-lg sm:text-xl text-center relative z-10">{opt.label}</span>
+                      <opt.icon size={32} className={`transition-transform duration-300 group-hover:scale-110 relative z-10 ${propertyType === opt.id ? 'text-orange-500 drop-shadow-[0_0_8px_rgba(249,115,22,0.5)]' : 'text-slate-500 group-hover:text-orange-400'}`} />
+                      <span className="font-bold text-sm sm:text-base text-center relative z-10">{opt.label}</span>
                     </button>
                   ))}
                 </div>
@@ -194,28 +194,28 @@ export default function CalculatorPage() {
             {step === 2 && (
               <div className="animate-fade-in">
                 <h2 className="text-2xl text-white font-bold mb-6">2. What services do you need?</h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-10">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
                   {serviceOptions.map((opt) => (
                     <button
                       key={opt.id}
                       onClick={() => toggleService(opt.id)}
-                      className={`group relative p-6 rounded-2xl border text-left flex items-center gap-5 transition-all duration-300 overflow-hidden ${services.includes(opt.id) ? 'border-orange-500 bg-orange-500/10 shadow-[0_0_20px_rgba(249,115,22,0.1)] scale-[1.02]' : 'border-[#1E2D45] bg-[#162133] hover:border-orange-500/50 hover:bg-[#1A273A] hover:-translate-y-1'}`}
+                      className={`group relative p-4 sm:p-5 rounded-2xl border text-left flex items-center gap-4 transition-all duration-300 overflow-hidden ${services.includes(opt.id) ? 'border-orange-500 bg-orange-500/10 shadow-[0_0_20px_rgba(249,115,22,0.1)] scale-[1.02]' : 'border-[#1E2D45] bg-[#162133] hover:border-orange-500/50 hover:bg-[#1A273A] hover:-translate-y-1'}`}
                     >
                       {services.includes(opt.id) && (
                         <div className="absolute inset-0 bg-gradient-to-r from-orange-500/10 to-transparent opacity-50" />
                       )}
                       
-                      <div className={`p-4 rounded-xl relative z-10 transition-all duration-300 ${services.includes(opt.id) ? 'bg-gradient-to-br from-orange-400 to-orange-600 text-white shadow-lg shadow-orange-500/30' : 'bg-[#1E2D45] text-slate-400 group-hover:text-orange-400 group-hover:bg-[#1E2D45]/80'}`}>
-                        <opt.icon size={28} className="group-hover:scale-110 transition-transform duration-300" />
+                      <div className={`p-3 rounded-lg relative z-10 transition-all duration-300 ${services.includes(opt.id) ? 'bg-gradient-to-br from-orange-400 to-orange-600 text-white shadow-lg shadow-orange-500/30' : 'bg-[#1E2D45] text-slate-400 group-hover:text-orange-400 group-hover:bg-[#1E2D45]/80'}`}>
+                        <opt.icon size={22} className="group-hover:scale-110 transition-transform duration-300" />
                       </div>
                       <div className="relative z-10 flex-1">
-                        <h3 className={`font-bold text-xl mb-1 transition-colors ${services.includes(opt.id) ? 'text-orange-400' : 'text-white'}`}>{opt.label}</h3>
-                        <p className="text-slate-400 text-sm">{opt.desc}</p>
+                        <h3 className={`font-bold text-lg mb-0.5 transition-colors ${services.includes(opt.id) ? 'text-orange-400' : 'text-white'}`}>{opt.label}</h3>
+                        <p className="text-slate-400 text-xs sm:text-sm">{opt.desc}</p>
                       </div>
                       
                       {/* Checkbox indicator */}
-                      <div className={`w-7 h-7 rounded-full border-2 flex items-center justify-center transition-all shrink-0 relative z-10 ${services.includes(opt.id) ? 'border-orange-500 bg-orange-500' : 'border-slate-600 bg-transparent group-hover:border-orange-400/50'}`}>
-                        {services.includes(opt.id) && <CheckCircle2 size={16} className="text-white" />}
+                      <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all shrink-0 relative z-10 ${services.includes(opt.id) ? 'border-orange-500 bg-orange-500' : 'border-slate-600 bg-transparent group-hover:border-orange-400/50'}`}>
+                        {services.includes(opt.id) && <CheckCircle2 size={14} className="text-white" />}
                       </div>
                     </button>
                   ))}
@@ -238,23 +238,23 @@ export default function CalculatorPage() {
             {step === 3 && (
               <div className="animate-fade-in">
                 <h2 className="text-2xl text-white font-bold mb-6">3. Select Finish Quality</h2>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-10">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
                   {conditionOptions.map((opt) => (
                     <button
                       key={opt.id}
                       onClick={() => setCondition(opt.id)}
-                      className={`group relative p-8 rounded-2xl border text-center transition-all duration-300 overflow-hidden ${condition === opt.id ? 'border-orange-500 bg-orange-500/10 shadow-[0_0_25px_rgba(249,115,22,0.15)] scale-[1.03]' : 'border-[#1E2D45] bg-[#162133] hover:border-orange-500/50 hover:bg-[#1A273A] hover:-translate-y-1'}`}
+                      className={`group relative p-5 sm:p-6 rounded-2xl border text-center transition-all duration-300 overflow-hidden ${condition === opt.id ? 'border-orange-500 bg-orange-500/10 shadow-[0_0_20px_rgba(249,115,22,0.15)] scale-[1.02]' : 'border-[#1E2D45] bg-[#162133] hover:border-orange-500/50 hover:bg-[#1A273A] hover:-translate-y-1'}`}
                     >
                       {condition === opt.id && (
                         <div className="absolute inset-0 bg-gradient-to-b from-orange-500/10 to-transparent opacity-50" />
                       )}
                       
-                      <div className={`w-14 h-14 rounded-full mx-auto mb-5 flex items-center justify-center border-2 transition-colors duration-300 ${condition === opt.id ? 'border-orange-500 bg-orange-500/20 text-orange-500' : 'border-[#1E2D45] text-slate-500 bg-[#162133] group-hover:border-orange-400/30'}`}>
-                        <Star size={24} className={`transition-all duration-300 ${condition === opt.id ? 'fill-orange-500 scale-110 drop-shadow-[0_0_5px_rgba(249,115,22,0.8)]' : 'group-hover:text-orange-400 group-hover:scale-110'}`} />
+                      <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-full mx-auto mb-3 flex items-center justify-center border-2 transition-colors duration-300 ${condition === opt.id ? 'border-orange-500 bg-orange-500/20 text-orange-500' : 'border-[#1E2D45] text-slate-500 bg-[#162133] group-hover:border-orange-400/30'}`}>
+                        <Star size={20} className={`transition-all duration-300 ${condition === opt.id ? 'fill-orange-500 scale-110 drop-shadow-[0_0_5px_rgba(249,115,22,0.8)]' : 'group-hover:text-orange-400 group-hover:scale-110'}`} />
                       </div>
                       
-                      <h3 className={`font-bold text-2xl mb-2 relative z-10 transition-colors ${condition === opt.id ? 'text-orange-400 drop-shadow-md' : 'text-white'}`}>{opt.label}</h3>
-                      <p className="text-slate-400 text-sm relative z-10">{opt.desc}</p>
+                      <h3 className={`font-bold text-lg sm:text-xl mb-1.5 relative z-10 transition-colors ${condition === opt.id ? 'text-orange-400 drop-shadow-md' : 'text-white'}`}>{opt.label}</h3>
+                      <p className="text-slate-400 text-xs sm:text-sm relative z-10">{opt.desc}</p>
                     </button>
                   ))}
                 </div>

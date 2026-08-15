@@ -7,7 +7,7 @@ import { locations } from '@/data/locations';
 import { services } from '@/data/siteData';
 
 // SEO: Keep sitemap dynamic so it always serves the latest live blogs without staleness
-export const dynamic = 'force-dynamic';
+// Removing force-dynamic to allow revalidate to work and save CPU
 export const revalidate = 3600; // Revalidate at most every hour to balance DB load and crawl accuracy
 
 const BASE = 'https://www.amscivilwork.in';

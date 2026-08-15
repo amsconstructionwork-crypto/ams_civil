@@ -17,7 +17,6 @@ export async function GET() {
 
     const testimonials = docs.map(({ _id, ...rest }) => ({ id: _id.toString(), ...rest }));
 
-    revalidatePath('/testimonials'); revalidatePath('/');
     return NextResponse.json({ success: true, data: testimonials });
   } catch (error) {
     console.error('GET /api/testimonials error:', error);

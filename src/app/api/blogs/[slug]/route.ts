@@ -24,8 +24,6 @@ export async function GET(
     }
 
     const { _id, ...rest } = blog;
-    revalidatePath('/blog'); revalidatePath('/blog/[slug]', 'page'); revalidatePath('/');
-    revalidatePath('/blog'); revalidatePath('/blog/[slug]', 'page'); revalidatePath('/');
     return NextResponse.json({ success: true, data: { id: _id.toString(), ...rest } });
   } catch (error) {
     console.error('GET /api/blogs/[slug] error:', error);

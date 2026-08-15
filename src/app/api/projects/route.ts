@@ -22,7 +22,6 @@ export async function GET(request: NextRequest) {
 
     const projects = docs.map(({ _id, ...rest }) => ({ id: _id.toString(), ...rest }));
 
-    revalidatePath('/projects'); revalidatePath('/');
     return NextResponse.json({ success: true, data: projects });
   } catch (error) {
     console.error('GET /api/projects error:', error);

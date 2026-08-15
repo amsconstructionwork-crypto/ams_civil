@@ -18,7 +18,6 @@ export async function GET() {
 
     const images = docs.map(({ _id, ...rest }) => ({ id: _id.toString(), ...rest }));
 
-    revalidatePath('/gallery'); revalidatePath('/');
     return NextResponse.json({ success: true, data: images });
   } catch (error) {
     console.error('GET /api/gallery error:', error);

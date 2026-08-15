@@ -24,7 +24,6 @@ export async function GET(request: NextRequest) {
     // Map `_id` to `id` for client components
     const blogs = docs.map(({ _id, ...rest }) => ({ id: _id.toString(), ...rest }));
 
-    revalidatePath('/blog'); revalidatePath('/');
     return NextResponse.json({ success: true, data: blogs });
   } catch (error) {
     console.error('GET /api/blogs error:', error);

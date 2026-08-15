@@ -1,4 +1,6 @@
 // src/app/hi/areas/[location]/page.tsx
+export const revalidate = 86400; // 24 hours ISR cache to save CPU
+
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
