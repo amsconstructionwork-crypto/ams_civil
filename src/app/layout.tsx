@@ -16,7 +16,6 @@ import SocialProofPopup from '@/components/ui/SocialProofPopup';
 import PageTracker from '@/components/tracking/PageTracker';
 import { Toaster } from 'react-hot-toast';
 import ConditionalLayout from '@/components/layout/ConditionalLayout';
-import StickyBottomCTA from '@/components/ui/StickyBottomCTA';
 import BreadcrumbNav from '@/components/ui/BreadcrumbNav';
 import SeoHead from '@/components/seo/SeoHead';
 
@@ -476,8 +475,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <QuotePopup />
               <LeadGenPopup />
               <SocialProofPopup />
-
-              <StickyBottomCTA />
             </>
           }
         >
