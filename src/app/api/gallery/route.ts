@@ -1,4 +1,4 @@
-export const dynamic = 'force-dynamic';
+export const revalidate = 86400;
 // src/app/api/gallery/route.ts
 // GET  /api/gallery  — fetch all gallery items (public)
 // POST /api/gallery  — save a new gallery item (admin only)
