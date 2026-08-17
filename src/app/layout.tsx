@@ -13,7 +13,7 @@ import QuotePopup from '@/components/ui/QuotePopup';
 import LeadGenPopup from '@/components/ui/LeadGenPopup';
 import SocialProofPopup from '@/components/ui/SocialProofPopup';
 
-import PageTracker from '@/components/tracking/PageTracker';
+
 import { Toaster } from 'react-hot-toast';
 import ConditionalLayout from '@/components/layout/ConditionalLayout';
 import BreadcrumbNav from '@/components/ui/BreadcrumbNav';
@@ -483,7 +483,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             {children}
           </main>
         </ConditionalLayout>
-        <PageTracker />
       </body>
     </html>
   );
