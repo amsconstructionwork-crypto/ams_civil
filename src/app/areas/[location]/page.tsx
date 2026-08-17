@@ -3,7 +3,7 @@
 // Redesigned: Premium SEO page for each Mumbai area
 // Each page is highly optimized for local ranking with a high-end UI
 
-export const revalidate = 86400; // 24 hours ISR cache to save CPU
+export const revalidate = 31536000; // 24 hours ISR cache to save CPU
 
 import type { Metadata } from 'next';
 import Link from 'next/link';

@@ -2,7 +2,7 @@
 // Dedicated SEO page per service e.g. /services/bathroom-renovation
 // Ranks independently for high-intent service keywords
 
-export const revalidate = 86400; // 24 hours ISR cache to save CPU
+export const revalidate = 31536000; // 24 hours ISR cache to save CPU
 
 import type { Metadata } from 'next';
 import Link from 'next/link';

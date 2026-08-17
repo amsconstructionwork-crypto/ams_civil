@@ -3,7 +3,7 @@
 // Premium Local SEO landing page with UNIQUE content per location×service
 // e.g. /areas/borivali/bathroom-renovation
 
-export const revalidate = 86400; // 24 hours ISR cache to save CPU
+export const revalidate = 31536000; // 24 hours ISR cache to save CPU
 
 import type { Metadata } from 'next';
 import Link from 'next/link';

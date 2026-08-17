@@ -1,4 +1,4 @@
-export const revalidate = 86400; // 24 hours ISR cache to save CPU
+export const revalidate = 31536000; // 24 hours ISR cache to save CPU
 
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
