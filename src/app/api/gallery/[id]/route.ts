@@ -30,6 +30,7 @@ export async function DELETE(
     }
 
     revalidatePath('/gallery'); revalidatePath('/');
+    revalidatePath('/gallery'); revalidatePath('/');
     return NextResponse.json({ success: true, message: 'Item deleted successfully.' });
   } catch (error) {
     console.error('DELETE /api/gallery error:', error);

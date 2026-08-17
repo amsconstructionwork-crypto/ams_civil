@@ -1,4 +1,4 @@
-export const revalidate = 86400;
+export const revalidate = 31536000; // 1 year cache (purged on-demand by admin)
 // src/app/api/projects/route.ts
 // GET  /api/projects          — fetch all projects (public)
 // POST /api/projects          — create a new project (admin only)
@@ -22,6 +22,7 @@ export async function GET(request: NextRequest) {
 
     const projects = docs.map(({ _id, ...rest }) => ({ id: _id.toString(), ...rest }));
 
+    revalidatePath('/projects'); revalidatePath('/');
     return NextResponse.json({ success: true, data: projects });
   } catch (error) {
     console.error('GET /api/projects error:', error);
@@ -74,6 +75,7 @@ export async function POST(request: NextRequest) {
 
     console.log('✅ Project saved to MongoDB:', newProject.title, result.insertedId);
 
+    revalidatePath('/projects'); revalidatePath('/'); revalidatePath('/api/projects');
     revalidatePath('/projects'); revalidatePath('/');
     return NextResponse.json({ success: true, data: { id: result.insertedId.toString(), ...newProject } },
       { status: 201 },

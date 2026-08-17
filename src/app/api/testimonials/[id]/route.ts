@@ -32,6 +32,8 @@ export async function DELETE(
 
     revalidatePath('/testimonials'); revalidatePath('/');
     revalidatePath('/testimonials'); revalidatePath('/');
+    revalidatePath('/testimonials'); revalidatePath('/');
+    revalidatePath('/testimonials'); revalidatePath('/');
     return NextResponse.json({ success: true, message: 'Testimonial deleted successfully.' });
   } catch (error) {
     console.error(`DELETE /api/testimonials/${params.id} error:`, error);
@@ -87,6 +89,8 @@ export async function PUT(
       return NextResponse.json({ success: false, error: 'Testimonial not found.' }, { status: 404 });
     }
 
+    revalidatePath('/testimonials'); revalidatePath('/');
+    revalidatePath('/testimonials'); revalidatePath('/');
     revalidatePath('/testimonials'); revalidatePath('/');
     revalidatePath('/testimonials'); revalidatePath('/');
     return NextResponse.json({ success: true, message: 'Testimonial updated successfully.' });

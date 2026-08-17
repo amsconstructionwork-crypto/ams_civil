@@ -1,4 +1,4 @@
-export const revalidate = 86400;
+export const revalidate = 31536000; // 1 year cache
 // src/app/api/blogs/route.ts
 // GET  /api/blogs          - Fetch all blogs (public)
 // POST /api/blogs          - Create a new blog post (admin only)
@@ -24,6 +24,7 @@ export async function GET(request: NextRequest) {
     // Map `_id` to `id` for client components
     const blogs = docs.map(({ _id, ...rest }) => ({ id: _id.toString(), ...rest }));
 
+    revalidatePath('/blog'); revalidatePath('/');
     return NextResponse.json({ success: true, data: blogs });
   } catch (error) {
     console.error('GET /api/blogs error:', error);
@@ -79,6 +80,7 @@ export async function POST(request: NextRequest) {
       pingSearchEngines().catch(console.error);
     }
 
+    revalidatePath('/blog'); revalidatePath('/'); revalidatePath('/api/blogs');
     revalidatePath('/blog'); revalidatePath('/');
     return NextResponse.json({ success: true, data: { id: result.insertedId.toString(), ...newBlog } },
       { status: 201 },
