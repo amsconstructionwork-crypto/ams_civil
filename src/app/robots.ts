@@ -11,57 +11,49 @@ export default function robots(): MetadataRoute.Robots {
         allow:     '/',
         disallow:  ['/admin', '/api/'],
       },
-      // ── AI Crawlers — Explicitly ALLOW ──────────────────
+      // ── AI Crawlers — Explicitly DISALLOW ──────────────────
       // GPTBot (OpenAI/ChatGPT)
       {
         userAgent: 'GPTBot',
-        allow: '/',
-        disallow: ['/admin', '/api/'],
+        disallow: '/',
       },
       // ChatGPT-User (ChatGPT browsing)
       {
         userAgent: 'ChatGPT-User',
-        allow: '/',
-        disallow: ['/admin', '/api/'],
+        disallow: '/',
       },
       // Google-Extended (Gemini AI)
       {
         userAgent: 'Google-Extended',
-        allow: '/',
-        disallow: ['/admin', '/api/'],
+        disallow: '/',
       },
       // PerplexityBot
       {
         userAgent: 'PerplexityBot',
-        allow: '/',
-        disallow: ['/admin', '/api/'],
+        disallow: '/',
       },
       // ClaudeBot (Anthropic)
       {
         userAgent: 'anthropic-ai',
-        allow: '/',
-        disallow: ['/admin', '/api/'],
+        disallow: '/',
       },
       // Bytespider (TikTok AI)
       {
         userAgent: 'Bytespider',
-        allow: '/',
-        disallow: ['/admin', '/api/'],
+        disallow: '/',
       },
-      { userAgent: 'ChatGPT-User', allow: '/' },
-      { userAgent: 'OAI-SearchBot', allow: '/' },
-      { userAgent: 'Meta-ExternalAgent', allow: '/' },
-      { userAgent: 'Meta-ExternalFetcher', allow: '/' },
-      { userAgent: 'Meta-Llama', allow: '/' },
-      { userAgent: 'YouBot', allow: '/' },
-      { userAgent: 'Applebot-Extended', allow: '/' },
-      { userAgent: 'cohere-ai', allow: '/' },
-      { userAgent: 'Amazonbot', allow: '/' },
+      { userAgent: 'OAI-SearchBot', disallow: '/' },
+      { userAgent: 'Meta-ExternalAgent', disallow: '/' },
+      { userAgent: 'Meta-ExternalFetcher', disallow: '/' },
+      { userAgent: 'Meta-Llama', disallow: '/' },
+      { userAgent: 'YouBot', disallow: '/' },
+      { userAgent: 'Applebot-Extended', disallow: '/' },
+      { userAgent: 'cohere-ai', disallow: '/' },
+      { userAgent: 'Amazonbot', disallow: '/' },
       // CCBot (Common Crawl — feeds many AI models)
       {
         userAgent: 'CCBot',
-        allow: '/',
-        disallow: ['/admin', '/api/'],
+        disallow: '/',
       },
     ],
     sitemap: 'https://www.amscivilwork.in/sitemap.xml',

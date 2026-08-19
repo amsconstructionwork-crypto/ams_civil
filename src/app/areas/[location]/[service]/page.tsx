@@ -16,26 +16,9 @@ import { MapPin, CheckCircle, ArrowRight, ShieldCheck, Star, Clock, Sparkles, He
 import { WhatsAppLogo, PhoneLogo } from '@/components/ui/BrandIcons';
 import ModernCTA from '@/components/ui/ModernCTA';
 
-import { getDb } from '@/lib/mongodb';
-import { unstable_cache } from 'next/cache';
+// DB imports removed to save CPU on Serverless cold starts
 
-const getCachedRelatedBlogs = unstable_cache(
-  async () => {
-    try {
-      const db = await getDb();
-      const blogs = await db.collection('blogs').find({ 
-        published: true 
-      }).sort({ createdAt: -1 }).limit(3).toArray();
-      // Serialize ObjectId to string to prevent cache serialization errors
-      return JSON.parse(JSON.stringify(blogs));
-    } catch (e) {
-      console.error('Failed to fetch blogs', e);
-      return [];
-    }
-  },
-  ['global-related-blogs-cache'],
-  { revalidate: 604800 } // Cache for 1 week across all serverless invocations
-);
+// Removed unused getCachedRelatedBlogs to save MongoDB connection overhead
 
 /* ── Allow on-demand generation for non-pre-rendered paths ── */
 export const dynamicParams = true;
@@ -44,10 +27,20 @@ export const dynamicParams = true;
 
 /* ── Pre-render top paths ───── */
 export async function generateStaticParams() {
-  // ANTI-BLOAT FIX: We return an empty array to prevent JavaScript heap out of memory
-  // during Next.js build. Vercel hobby tier has memory limits that get exhausted 
-  // when pre-building 1500+ pages. They will generate on-demand instead, and be cached by ISR.
-  return [];
+  // We pre-build a small subset of the most critical pages to save Fluid CPU.
+  // The rest will be generated on-demand (ISR).
+  const coreLocations = ['mumbai-city', 'andheri', 'bandra', 'thane', 'borivali'];
+  const coreServices = ['bungalow-construction', 'bathroom-renovation'];
+  
+  const params: { location: string; service: string }[] = [];
+  
+  for (const loc of coreLocations) {
+    for (const svc of coreServices) {
+      params.push({ location: loc, service: svc });
+    }
+  }
+  
+  return params;
 }
 
 /* ── Realistic Service-Specific Emojis for Google CTR ── */
@@ -142,8 +135,7 @@ export default async function AreaServicePage({ params }: { params: { location: 
   
   if (!loc || !svc) notFound();
 
-  /* ── Fetch Dynamic Blog Content (Heavily Cached) ── */
-  const relatedBlogs = await getCachedRelatedBlogs();
+  // Unused relatedBlogs fetch removed
 
   const exactMatchKeyword = `${svc.title} in ${loc.name}`;
   const localParagraph = generateLocalParagraph(loc, svc);
