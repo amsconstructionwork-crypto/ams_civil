@@ -49,10 +49,9 @@ const getCachedLocalData = unstable_cache(
   { revalidate: 604800 } // 1 week cache
 );
 
-/* ── Generate some top paths at build time ──────────────── */
+/* ── Generate all paths at build time ──────────────── */
 export async function generateStaticParams() {
-  const coreLocations = ['mumbai-city', 'andheri', 'bandra', 'thane', 'borivali', 'navi-mumbai', 'dadar', 'goregaon', 'malad', 'kalyan'];
-  return coreLocations.map((loc) => ({ location: loc }));
+  return locations.map((loc) => ({ location: loc.slug }));
 }
 
 /* ── Generate unique metadata per location ────────────────── */

@@ -25,18 +25,16 @@ export const dynamicParams = true;
 
 /* ── ISR: Cache generated pages for 1 week at Edge ── */
 
-/* ── Pre-render top paths ───── */
+/* ── Pre-render all paths at build time ───── */
 export async function generateStaticParams() {
-  // We pre-build a small subset of the most critical pages to save Fluid CPU.
-  // The rest will be generated on-demand (ISR).
-  const coreLocations = ['mumbai-city', 'andheri', 'bandra', 'thane', 'borivali'];
-  const coreServices = ['bungalow-construction', 'bathroom-renovation'];
-  
+  // We are pre-building ALL 1000+ pages at build time.
+  // Since we removed the MongoDB fetch, this won't cause memory issues during build,
+  // and it will completely eliminate Fluid CPU spikes since no page will be generated on-demand.
   const params: { location: string; service: string }[] = [];
   
-  for (const loc of coreLocations) {
-    for (const svc of coreServices) {
-      params.push({ location: loc, service: svc });
+  for (const loc of locations) {
+    for (const svc of services) {
+      params.push({ location: loc.slug, service: svc.slug });
     }
   }
   

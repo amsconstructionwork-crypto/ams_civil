@@ -13,8 +13,9 @@ import ModernCTA from '@/components/ui/ModernCTA';
 import { getDb } from '@/lib/mongodb';
 import { getSeededRandom, zoneContext } from '@/data/localContent';
 
+/* ── Generate all paths at build time ──────────────── */
 export async function generateStaticParams() {
-  return [];
+  return locations.map((loc) => ({ location: loc.slug }));
 }
 
 export async function generateMetadata({ params }: { params: { location: string } }): Promise<Metadata> {
