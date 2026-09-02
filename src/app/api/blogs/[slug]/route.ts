@@ -2,11 +2,11 @@
 export const dynamic = 'force-dynamic';
 
 import { NextRequest, NextResponse } from 'next/server';
-import { revalidatePath } from 'next/cache';
 import { getDb } from '@/lib/mongodb';
 import { ObjectId } from 'mongodb';
 import { requireAuth, sanitizeInput } from '@/lib/auth';
 import { pingSearchEngines } from '@/lib/seo';
+import { revalidateBlog, revalidateAllBlogs } from '@/lib/revalidate';
 
 const COLLECTION = 'blogs';
 
@@ -24,8 +24,6 @@ export async function GET(
     }
 
     const { _id, ...rest } = blog;
-    revalidatePath('/blog'); revalidatePath('/blog/[slug]', 'page'); revalidatePath('/');
-    revalidatePath('/blog'); revalidatePath('/blog/[slug]', 'page'); revalidatePath('/');
     return NextResponse.json({ success: true, data: { id: _id.toString(), ...rest } });
   } catch (error) {
     console.error('GET /api/blogs/[slug] error:', error);
@@ -84,10 +82,9 @@ export async function PUT(
       pingSearchEngines().catch(console.error);
     }
 
-    revalidatePath('/blog'); revalidatePath('/blog/[slug]', 'page'); revalidatePath('/');
-    revalidatePath('/blog'); revalidatePath('/blog/[slug]', 'page'); revalidatePath('/');
-    revalidatePath('/blog'); revalidatePath('/blog/[slug]', 'page'); revalidatePath('/');
-    revalidatePath('/blog'); revalidatePath('/blog/[slug]', 'page'); revalidatePath('/');
+    // Purge ONLY the specific blog slug + listing/sitemap pages
+    revalidateBlog(updateDoc.slug);
+
     return NextResponse.json({ success: true, data: { id, ...updateDoc } });
   } catch (error) {
     console.error('PUT /api/blogs/[slug] error:', error);
@@ -118,10 +115,9 @@ export async function DELETE(
       return NextResponse.json({ success: false, error: 'Blog not found.' }, { status: 404 });
     }
 
-    revalidatePath('/blog'); revalidatePath('/blog/[slug]', 'page'); revalidatePath('/');
-    revalidatePath('/blog'); revalidatePath('/blog/[slug]', 'page'); revalidatePath('/');
-    revalidatePath('/blog'); revalidatePath('/blog/[slug]', 'page'); revalidatePath('/');
-    revalidatePath('/blog'); revalidatePath('/blog/[slug]', 'page'); revalidatePath('/');
+    // Purge all blog pages (we don't have the slug after delete, so purge broadly)
+    revalidateAllBlogs();
+
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error('DELETE /api/blogs/[slug] error:', error);

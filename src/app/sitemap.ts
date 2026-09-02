@@ -6,9 +6,9 @@ import { getDb } from '@/lib/mongodb';
 import { locations } from '@/data/locations';
 import { services } from '@/data/siteData';
 
-// SEO: Keep sitemap dynamic so it always serves the latest live blogs without staleness
-// Removing force-dynamic to allow revalidate to work and save CPU
-export const revalidate = 3600; // Revalidate at most every hour to balance DB load and crawl accuracy
+// SSG: Purged on-demand when admin creates/updates/deletes a blog.
+// Never time-based — prevents bots from triggering Serverless CPU spikes.
+export const revalidate = false;
 
 const BASE = 'https://www.amscivilwork.in';
 // Use a fixed date — not `new Date()` — so Google sees stable lastModified

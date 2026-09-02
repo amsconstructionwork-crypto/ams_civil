@@ -3,7 +3,8 @@
 // Premium Local SEO landing page with UNIQUE content per location×service
 // e.g. /areas/borivali/bathroom-renovation
 
-export const revalidate = 31536000; // 24 hours ISR cache to save CPU
+// SSG: Fully static \u2014 content only changes on redeploy. No time-based expiry.
+export const revalidate = false;
 
 import type { Metadata } from 'next';
 import Link from 'next/link';
@@ -27,18 +28,9 @@ export const dynamicParams = true;
 
 /* ── Pre-render all paths at build time ───── */
 export async function generateStaticParams() {
-  // We are pre-building ALL 1000+ pages at build time.
-  // Since we removed the MongoDB fetch, this won't cause memory issues during build,
-  // and it will completely eliminate Fluid CPU spikes since no page will be generated on-demand.
-  const params: { location: string; service: string }[] = [];
-  
-  for (const loc of locations) {
-    for (const svc of services) {
-      params.push({ location: loc.slug, service: svc.slug });
-    }
-  }
-  
-  return params;
+  // To speed up build times, we return an empty array here.
+  // Pages will be generated on-demand when first visited, and then cached forever (since revalidate = false).
+  return [];
 }
 
 /* ── Realistic Service-Specific Emojis for Google CTR ── */

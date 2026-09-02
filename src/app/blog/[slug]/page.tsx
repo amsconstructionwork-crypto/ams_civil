@@ -1,4 +1,7 @@
-export const revalidate = 31536000; // 24 hours ISR cache to save CPU
+// SSG: Pre-build all blog posts at deploy time.
+// Cache is NEVER time-based — purged only when admin saves/updates a blog.
+export const revalidate = false;
+export const dynamic = 'force-static';
 
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
@@ -12,7 +15,20 @@ import ShareButtons from '@/components/ui/ShareButtons';
 import AdsterraBanner from '@/components/ads/AdsterraBanner';
 import AdsterraNative from '@/components/ads/AdsterraNative';
 
-
+// Pre-generate all published blog slugs at build time.
+// Next.js will statically render each one — no Serverless invocations for reads.
+export async function generateStaticParams() {
+  try {
+    const db = await getDb();
+    const blogs = await db.collection('blogs')
+      .find({ published: true }, { projection: { slug: 1 } })
+      .toArray();
+    return blogs.map((b) => ({ slug: b.slug as string }));
+  } catch {
+    // If DB is unreachable at build time, return empty — pages will generate on first hit
+    return [];
+  }
+}
 async function getBlogData(slug: string) {
   try {
     const db = await getDb();

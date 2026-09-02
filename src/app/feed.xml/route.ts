@@ -5,7 +5,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getDb } from '@/lib/mongodb';
 
-export const revalidate = 3600;
+// SSG: Purged on-demand when admin creates/updates/deletes a blog.
+// Never time-based — prevents RSS crawlers from triggering Serverless CPU spikes.
+export const revalidate = false;
 
 function escapeXml(str: string): string {
   return str
@@ -109,7 +111,8 @@ export async function GET(req: NextRequest) {
     return new NextResponse(rssFeed, {
       headers: {
         'Content-Type': 'application/xml; charset=utf-8',
-        'Cache-Control': 's-maxage=3600, stale-while-revalidate=86400',
+        // Long CDN cache — edge serves stale until on-demand revalidation fires
+        'Cache-Control': 's-maxage=31536000, stale-while-revalidate=86400',
       },
     });
   } catch (error) {

@@ -15,7 +15,7 @@ import { getSeededRandom, zoneContext } from '@/data/localContent';
 
 /* ── Generate all paths at build time ──────────────── */
 export async function generateStaticParams() {
-  return locations.map((loc) => ({ location: loc.slug }));
+  return [];
 }
 
 export async function generateMetadata({ params }: { params: { location: string } }): Promise<Metadata> {

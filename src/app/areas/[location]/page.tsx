@@ -3,7 +3,8 @@
 // Redesigned: Premium SEO page for each Mumbai area
 // Each page is highly optimized for local ranking with a high-end UI
 
-export const revalidate = 31536000; // 24 hours ISR cache to save CPU
+// SSG: Fully static \u2014 content only changes on redeploy. No time-based expiry.
+export const revalidate = false;
 
 import type { Metadata } from 'next';
 import Link from 'next/link';
@@ -51,7 +52,9 @@ const getCachedLocalData = unstable_cache(
 
 /* ── Generate all paths at build time ──────────────── */
 export async function generateStaticParams() {
-  return locations.map((loc) => ({ location: loc.slug }));
+  // To speed up build times, we return an empty array here.
+  // Pages will be generated on-demand when first visited.
+  return [];
 }
 
 /* ── Generate unique metadata per location ────────────────── */

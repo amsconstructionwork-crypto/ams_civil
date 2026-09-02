@@ -1,12 +1,12 @@
-export const revalidate = 31536000; // 1 year cache
 // src/app/api/gallery/route.ts
 // GET  /api/gallery  — fetch all gallery items (public)
 // POST /api/gallery  — save a new gallery item (admin only)
+// NOTE: No revalidate directive — API routes are always dynamic.
 
 import { NextRequest, NextResponse } from 'next/server';
-import { revalidatePath } from 'next/cache';
 import { getDb } from '@/lib/mongodb';
 import { requireAuth, sanitizeInput } from '@/lib/auth';
+import { revalidateGallery } from '@/lib/revalidate';
 
 const COLLECTION = 'gallery';
 
@@ -18,7 +18,6 @@ export async function GET() {
 
     const images = docs.map(({ _id, ...rest }) => ({ id: _id.toString(), ...rest }));
 
-    revalidatePath('/gallery'); revalidatePath('/');
     return NextResponse.json({ success: true, data: images });
   } catch (error) {
     console.error('GET /api/gallery error:', error);
@@ -55,8 +54,9 @@ export async function POST(request: NextRequest) {
 
     const result = await db.collection(COLLECTION).insertOne(newItem);
 
-    revalidatePath('/gallery'); revalidatePath('/'); revalidatePath('/api/gallery');
-    revalidatePath('/gallery'); revalidatePath('/');
+    // Purge /gallery page + home gallery carousel
+    revalidateGallery();
+
     return NextResponse.json({ success: true, 
       data: { id: result.insertedId.toString(), ...newItem } 
     }, { status: 201 });

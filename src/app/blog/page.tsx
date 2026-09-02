@@ -1,3 +1,6 @@
+// SSG: Purged on-demand when admin creates/updates/deletes a blog post.
+export const revalidate = false;
+
 import React from 'react';
 import { Metadata } from 'next';
 import Link from 'next/link';
