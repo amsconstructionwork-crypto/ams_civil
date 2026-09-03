@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 // src/components/home/HomePageSections.tsx
 // All interactive home page sub-components.
 // Receives gallery + projects as props from the SSG server component in page.tsx.
@@ -381,7 +381,7 @@ function ServicesSection() {
             Our <span className="text-gradient">Construction Services</span>
           </h2>
           <p className="text-slate-400 animate-on-scroll text-sm">
-            From the foundation to the finest interior details Ã¢â‚¬â€ every service under one roof.
+            From the foundation to the finest interior details — every service under one roof.
           </p>
         </div>
 
