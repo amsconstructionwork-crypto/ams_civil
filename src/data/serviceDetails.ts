@@ -193,5 +193,109 @@ export const serviceDetailsData: Record<string, ServiceDetail> = {
     ],
     materials: ['Dr. Fixit Fastflex / Coal Tar Epoxy', 'Fosroc Brushbond Systems', 'SikaFlex Crack Sealants', 'Fiberglass Mesh Reinforcements'],
     pricingGuide: 'Waterproofing is priced on a running feet or square foot basis. It includes a written warranty, and costs depend on the water exposure level of the site.'
+  },
+  'modular-kitchen': {
+    slug: 'modular-kitchen',
+    intro: 'Upgrade to a smart, sleek, and highly functional modular kitchen. We build robust kitchens that perfectly combine civil durability with modern modular aesthetics.',
+    detailedProcess: 'We prepare the kitchen base with strong Kadappa stone vertical supports and lay premium quartz or granite tops. Then, we integrate factory-made, water-resistant marine plywood cabinets with soft-close mechanisms, tandem boxes, and sleek acrylic finishes. All electrical and plumbing lines are seamlessly concealed for appliances.',
+    steps: [
+      { title: 'Step 1: 3D Layout & Planning', desc: 'Mapping out the kitchen triangle for stove, sink, and fridge for maximum efficiency.' },
+      { title: 'Step 2: Civil Base Setup', desc: 'Fixing Kadappa supports, laying granite tops, and executing concealed plumbing.' },
+      { title: 'Step 3: Carcass & Shutters', desc: 'Installing marine-grade plywood boxes and fixing acrylic or laminate shutters.' },
+      { title: 'Step 4: Hardware & Appliances', desc: 'Fitting Hettich/Hafele channels, tandem drawers, chimneys, and built-in hobs.' }
+    ],
+    materials: ['CenturyPly Marine Grade Plywood', 'Hettich / Hafele Hardware', 'Premium Quartz Countertops', 'Kajaria Backsplash Tiles'],
+    pricingGuide: 'Modular kitchen pricing depends on the size (L-shape, U-shape, parallel), shutter finish (acrylic/laminate), and hardware brands chosen.'
+  },
+  'hall-design': {
+    slug: 'hall-design',
+    intro: 'Your hall is the center of your home. We design and execute grand living spaces with stunning ceilings, luxury flooring, and beautiful TV unit backdrops.',
+    detailedProcess: 'We start by leveling the floor for premium Italian marble or large-format vitrified tiles. We then erect custom TV unit frames, install intricate POP false ceilings with concealed wiring for cove lights, and finish the walls with premium textures or stone cladding to create a luxurious ambiance.',
+    steps: [
+      { title: 'Step 1: Civil Alterations', desc: 'Modifying partitions and laying concealed electrical conduits for home theaters and ACs.' },
+      { title: 'Step 2: Flooring Installation', desc: 'Laying large format tiles or Italian marble with mirror-finish polishing.' },
+      { title: 'Step 3: Ceiling & TV Unit', desc: 'Crafting POP false ceilings and building structural frames for TV and display units.' },
+      { title: 'Step 4: Painting & Textures', desc: 'Applying Royal Emulsion paints and feature wall textures for a premium look.' }
+    ],
+    materials: ['Italian Marble', 'Asian Paints Royale Play', 'Gyproc False Ceiling', 'Polycab Audio/Video Wiring'],
+    pricingGuide: 'Hall design costs are estimated based on floor area, ceiling design complexity, and the type of flooring material selected.'
+  },
+  'bedroom-remodeling': {
+    slug: 'bedroom-remodeling',
+    intro: 'Transform your bedroom into a peaceful, luxurious retreat. Our bedroom remodeling covers everything from civil wardrobe framing to soundproofing and flooring.',
+    detailedProcess: 'We completely overhaul the bedroom space. This includes laying warm wooden laminate or vitrified flooring, building strong civil frames for floor-to-ceiling wardrobes, executing attached bathroom renovations, and installing ambient false ceilings to create a relaxing atmosphere.',
+    steps: [
+      { title: 'Step 1: Space Optimization', desc: 'Re-aligning walls or doors to maximize usable space for beds and wardrobes.' },
+      { title: 'Step 2: Flooring & Civil Base', desc: 'Installing wooden laminate flooring and executing civil changes for attached baths.' },
+      { title: 'Step 3: Wardrobe & Ceiling', desc: 'Building custom wardrobe structures and installing POP ceilings with soft lighting.' },
+      { title: 'Step 4: Finishing Touches', desc: 'Premium painting, fixing designer electrical switches, and installing custom doors.' }
+    ],
+    materials: ['Pergo Wooden Laminates', 'Greenply Plywood', 'Asian Paints Luxury Emulsion', 'Legrand / Anchor Roma Switches'],
+    pricingGuide: 'Bedroom remodeling is priced per square foot, with additional costs for attached bathroom renovations and customized woodwork.'
+  },
+  'interior-design': {
+    slug: 'interior-design',
+    intro: 'Experience seamless turnkey interior design and execution. We blend aesthetics with robust civil engineering to create spaces that are as beautiful as they are durable.',
+    detailedProcess: 'Our turnkey service means we handle everything from the initial 3D design concept to the final handover. Our civil teams work hand-in-hand with our designers to execute structural changes, false ceilings, specialized flooring, custom furniture frameworks, and high-end wall finishes without any miscommunication.',
+    steps: [
+      { title: 'Step 1: Consultation & 3D Design', desc: 'Understanding your vision and creating photorealistic 3D renders of the space.' },
+      { title: 'Step 2: Core Civil Work', desc: 'Executing demolition, wall building, plumbing, electrical rerouting, and flooring.' },
+      { title: 'Step 3: Carpentry & Fabrication', desc: 'Building custom furniture, modular kitchens, wardrobes, and structural frames.' },
+      { title: 'Step 4: Final Finishing', desc: 'Polishing, painting, cleaning, and handing over a ready-to-move-in space.' }
+    ],
+    materials: ['Premium Vitrified/Marble Flooring', 'Marine Grade Plywood', 'High-end Sanitary Ware', 'Luxury Paint Finishes'],
+    pricingGuide: 'Turnkey interior design is typically quoted as a comprehensive package based on the BHK size and the luxury level (Standard, Premium, Ultra-Luxury).'
+  },
+  '1bhk-2bhk-renovation': {
+    slug: '1bhk-2bhk-renovation',
+    intro: 'Maximize your space and comfort. We specialize in renovating 1BHK and 2BHK apartments with smart civil modifications, modern flooring, and efficient layouts.',
+    detailedProcess: 'We analyze the layout of your 1BHK/2BHK to make it feel larger. Our work includes removing unnecessary partitions, laying bright vitrified tiles to reflect light, upgrading old plumbing and electricals, and finishing with space-saving modular civil structures.',
+    steps: [
+      { title: 'Step 1: Space Planning', desc: 'Designing layouts to maximize usable floor area in compact apartments.' },
+      { title: 'Step 2: Civil Demolition', desc: 'Safely removing old flooring, kitchen platforms, and bathroom fittings.' },
+      { title: 'Step 3: Core Upgrades', desc: 'Installing concealed copper wiring and leak-proof CPVC plumbing.' },
+      { title: 'Step 4: Finishing', desc: 'Laying large-format vitrified tiles, painting, and handing over.' }
+    ],
+    materials: ['Kajaria Vitrified Tiles', 'Polycab Wiring', 'Asian Paints Royale', 'Standard CP/Sanitary fittings'],
+    pricingGuide: 'We offer fixed-price, highly affordable packages specifically designed for complete 1BHK and 2BHK home renovations.'
+  },
+  '3bhk-4bhk-luxury-interiors': {
+    slug: '3bhk-4bhk-luxury-interiors',
+    intro: 'Grand homes require grand execution. We provide premium, luxury civil and interior solutions tailored for large 3BHK, 4BHK, and 5BHK residences and bungalows.',
+    detailedProcess: 'Large homes involve complex project management. We execute high-end Italian marble flooring, intricate multi-level POP ceilings, luxury bathroom suite civil work, and heavy-duty smart home electrical networking. Every detail is overseen by a senior civil engineer.',
+    steps: [
+      { title: 'Step 1: Premium Layout Planning', desc: 'Coordinating with architects for master suites, living areas, and open kitchens.' },
+      { title: 'Step 2: Luxury Flooring', desc: 'Diamond-polished Italian marble or high-end wooden flooring installation.' },
+      { title: 'Step 3: Custom Ceiling & Lighting', desc: 'Elaborate POP work with integrated coves for ambient and chandelier lighting.' },
+      { title: 'Step 4: High-End Bathrooms', desc: 'Complete civil prep for jacuzzis, rain showers, and premium imported tiles.' }
+    ],
+    materials: ['Italian Marble', 'Saint-Gobain Gypsum', 'Kohler/Grohe Concealed Fittings', 'Teak Wood Frames'],
+    pricingGuide: 'Luxury renovations are priced based on the premium materials selected and the high degree of custom craftsmanship required.'
+  },
+  'terrace-renovation': {
+    slug: 'terrace-renovation',
+    intro: 'Protect your home from leaks while creating a beautiful outdoor space. We provide multi-layer terrace waterproofing and heat-reflective tiling.',
+    detailedProcess: 'A leaking terrace can damage the entire building. We chip the old surface to the concrete slab, apply advanced polyurethane or cementitious waterproofing membranes, fix the drainage slope (screed), and lay heat-reflective terrace tiles to keep your top floor cool.',
+    steps: [
+      { title: 'Step 1: Surface Chipping', desc: 'Removing the old, damaged IPS or brick-bat coba down to the RCC slab.' },
+      { title: 'Step 2: Crack Sealing', desc: 'Injecting epoxy sealants into visible structural cracks.' },
+      { title: 'Step 3: Membrane Waterproofing', desc: 'Applying a 3-layer elastomeric waterproofing coat with fiber mesh reinforcement.' },
+      { title: 'Step 4: Protective Tiling', desc: 'Laying heat-reflective cool tiles with waterproof epoxy grouting.' }
+    ],
+    materials: ['Dr. Fixit Newcoat', 'Fosroc Sealants', 'Johnson Endura Cool Roof Tiles', 'Polyurethane Membranes'],
+    pricingGuide: 'Terrace work is priced per square foot, heavily depending on whether you choose just waterproofing or waterproofing + cool tiles.'
+  },
+  'simple-kitchen-work': {
+    slug: 'simple-kitchen-work',
+    intro: 'Durable, easy-to-maintain, and highly affordable. We build traditional Indian kitchens designed to withstand heavy daily cooking.',
+    detailedProcess: 'For clients who prefer traditional setups over modular woodwork, we build ultra-strong kitchen bases using vertical Kadappa stone slabs. We lay premium granite tops, secure stainless steel sinks with strong plumbing, and install easy-to-clean ceramic tiles on the walls.',
+    steps: [
+      { title: 'Step 1: Kadappa Framing', desc: 'Erecting a solid stone under-structure for the kitchen platform.' },
+      { title: 'Step 2: Granite Installation', desc: 'Laying and cementing black or coloured granite slabs perfectly level.' },
+      { title: 'Step 3: Wall Tiling', desc: 'Fixing ceramic tiles up to 2 feet or lintel level above the counter.' },
+      { title: 'Step 4: Plumbing & Sink', desc: 'Installing heavy-duty Nirali sinks and connecting leak-proof CPVC pipes.' }
+    ],
+    materials: ['Kadappa Stone', 'Black/Telephone Black Granite', 'Nirali SS Sink', 'Ceramic Wall Tiles'],
+    pricingGuide: 'Simple kitchen civil work is highly cost-effective and is priced based on the running feet of the granite counter required.'
   }
 };

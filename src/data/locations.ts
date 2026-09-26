@@ -97,6 +97,111 @@ export const locations: LocationData[] = [
   { slug:'asansol',   name:'Asansol',   zone:'West Bengal', district:'Paschim Bardhaman',pincode:'713301', landmarks:['Ghagar Buri Chandi Temple','Maithon Dam'],                   nearby:['Kolkata','Dhanbad'] },
   { slug:'kolkata',   name:'Kolkata',   zone:'West Bengal', district:'Kolkata', pincode:'700001', landmarks:['Victoria Memorial','Howrah Bridge','Park Street','Salt Lake Sector V'], nearby:['Asansol'] },
 
+  /* ── Mumbai Micro-Markets (Hyperlocal SEO) ────────────── */
+  // South Mumbai Posh Areas
+  { slug:'malabar-hill', name:'Malabar Hill', zone:'South Mumbai', district:'Mumbai City', pincode:'400006', landmarks:['Hanging Gardens','Banganga Tank'], nearby:['Walkeshwar','Kemps Corner','Peddar Road'] },
+  { slug:'cuffe-parade', name:'Cuffe Parade', zone:'South Mumbai', district:'Mumbai City', pincode:'400005', landmarks:['World Trade Centre','Taj President'], nearby:['Colaba','Nariman Point'] },
+  { slug:'peddar-road', name:'Peddar Road', zone:'South Mumbai', district:'Mumbai City', pincode:'400026', landmarks:['Jaslok Hospital','Sophia College'], nearby:['Breach Candy','Kemps Corner','Altamount Road'] },
+  { slug:'nepean-sea-road', name:'Nepean Sea Road', zone:'South Mumbai', district:'Mumbai City', pincode:'400036', landmarks:['Priyadarshini Park'], nearby:['Malabar Hill','Breach Candy'] },
+  { slug:'breach-candy', name:'Breach Candy', zone:'South Mumbai', district:'Mumbai City', pincode:'400026', landmarks:['Breach Candy Hospital','Amarsons Garden'], nearby:['Peddar Road','Kemps Corner'] },
+  { slug:'walkeshwar', name:'Walkeshwar', zone:'South Mumbai', district:'Mumbai City', pincode:'400006', landmarks:['Walkeshwar Temple','Raj Bhavan'], nearby:['Malabar Hill'] },
+  { slug:'altamount-road', name:'Altamount Road', zone:'South Mumbai', district:'Mumbai City', pincode:'400026', landmarks:['Antilia'], nearby:['Kemps Corner','Peddar Road'] },
+  { slug:'nariman-point', name:'Nariman Point', zone:'South Mumbai', district:'Mumbai City', pincode:'400021', landmarks:['NCPA','Trident Hotel'], nearby:['Churchgate','Cuffe Parade'] },
+  { slug:'wadala', name:'Wadala', zone:'South Mumbai', district:'Mumbai City', pincode:'400031', landmarks:['Wadala TT','IMAX Big Cinemas','Five Gardens'], nearby:['Matunga','Dadar','Sion'] },
+
+  // Western Suburbs Hyperlocal
+  { slug:'lokhandwala', name:'Lokhandwala', zone:'Western Line', district:'Mumbai Suburban', pincode:'400053', landmarks:['Lokhandwala Complex','Infinity Mall'], nearby:['Andheri','Oshiwara','Versova'] },
+  { slug:'oshiwara', name:'Oshiwara', zone:'Western Line', district:'Mumbai Suburban', pincode:'400104', landmarks:['Oshiwara Police Station','Mega Mall'], nearby:['Lokhandwala','Goregaon'] },
+  { slug:'yari-road', name:'Yari Road', zone:'Western Line', district:'Mumbai Suburban', pincode:'400061', landmarks:['Yari Road','Versova Beach'], nearby:['Versova','Seven Bungalows'] },
+  { slug:'versova', name:'Versova', zone:'Western Line', district:'Mumbai Suburban', pincode:'400061', landmarks:['Versova Beach','Versova Metro'], nearby:['Yari Road','Andheri'] },
+  { slug:'pali-hill', name:'Pali Hill', zone:'Western Line', district:'Mumbai Suburban', pincode:'400050', landmarks:['Pali Market','Carter Road'], nearby:['Bandra','Khar'] },
+  { slug:'carter-road', name:'Carter Road', zone:'Western Line', district:'Mumbai Suburban', pincode:'400050', landmarks:['Carter Road Promenade'], nearby:['Pali Hill','Bandra'] },
+  { slug:'bandra-kurla-complex', name:'Bandra Kurla Complex (BKC)', zone:'Western Line', district:'Mumbai Suburban', pincode:'400051', landmarks:['Jio World Drive','Maker Maxity'], nearby:['Bandra','Kurla'] },
+  { slug:'jvpd-scheme', name:'JVPD Scheme', zone:'Western Line', district:'Mumbai Suburban', pincode:'400049', landmarks:['Juhu Gymkhana','Ecole Mondiale'], nearby:['Juhu','Vile Parle'] },
+  { slug:'mindspace', name:'Mindspace Malad', zone:'Western Line', district:'Mumbai Suburban', pincode:'400064', landmarks:['Inorbit Mall Malad','Mindspace IT Park'], nearby:['Malad','Goregaon'] },
+  { slug:'thakur-village', name:'Thakur Village', zone:'Western Line', district:'Mumbai Suburban', pincode:'400101', landmarks:['Thakur College','Dream Park'], nearby:['Kandivali','Borivali'] },
+  { slug:'ic-colony', name:'I.C. Colony', zone:'Western Line', district:'Mumbai Suburban', pincode:'400103', landmarks:['Immaculate Conception Church'], nearby:['Borivali','Dahisar'] },
+
+  // Central & Thane Hyperlocal
+  { slug:'hiranandani-gardens', name:'Hiranandani Gardens', zone:'Central Line', district:'Mumbai Suburban', pincode:'400076', landmarks:['Hiranandani Hospital','Galleria Mall'], nearby:['Powai','Vikhroli'] },
+  { slug:'raheja-vihar', name:'Raheja Vihar', zone:'Central Line', district:'Mumbai Suburban', pincode:'400072', landmarks:['Raheja Vihar Complex'], nearby:['Powai','Chandivali'] },
+  { slug:'chandivali', name:'Chandivali', zone:'Central Line', district:'Mumbai Suburban', pincode:'400072', landmarks:['Chandivali Studio','Nahar Amrit Shakti'], nearby:['Powai','Saki Naka'] },
+  { slug:'tilak-nagar', name:'Tilak Nagar', zone:'Central Line', district:'Mumbai Suburban', pincode:'400089', landmarks:['Tilak Nagar Station','Lokmanya Tilak Terminus'], nearby:['Chembur','Ghatkopar'] },
+  { slug:'garodia-nagar', name:'Garodia Nagar', zone:'Central Line', district:'Mumbai Suburban', pincode:'400077', landmarks:['Garodia Nagar','R City Mall'], nearby:['Ghatkopar','Vidyavihar'] },
+  { slug:'hiranandani-estate', name:'Hiranandani Estate', zone:'Central Line', district:'Thane', pincode:'400607', landmarks:['The Walk','Hiranandani Hospital Thane'], nearby:['Thane','Ghodbunder Road'] },
+  { slug:'ghodbunder-road', name:'Ghodbunder Road', zone:'Central Line', district:'Thane', pincode:'400615', landmarks:['Suraj Water Park','Kasarvadavali'], nearby:['Thane','Hiranandani Estate'] },
+  { slug:'majiwada', name:'Majiwada', zone:'Central Line', district:'Thane', pincode:'400601', landmarks:['Viviana Mall','Jupiter Hospital'], nearby:['Thane','Ghodbunder Road'] },
+
+  // Navi Mumbai Hyperlocal
+  { slug:'palm-beach-road', name:'Palm Beach Road', zone:'Navi Mumbai', district:'Navi Mumbai', pincode:'400706', landmarks:['NRI Complex','Jewel of Navi Mumbai'], nearby:['Nerul','Belapur','Vashi'] },
+  { slug:'seawoods', name:'Seawoods', zone:'Navi Mumbai', district:'Navi Mumbai', pincode:'400706', landmarks:['Seawoods Grand Central Mall','Seawoods Estates'], nearby:['Nerul','Belapur'] },
+
+  // Harbour Line & Eastern Suburbs
+  { slug:'gtb-nagar', name:'GTB Nagar', zone:'Harbour Line', district:'Mumbai City', pincode:'400037', landmarks:['Guru Tegh Bahadur Nagar Station'], nearby:['Sion','Wadala'] },
+  { slug:'chunabhatti', name:'Chunabhatti', zone:'Harbour Line', district:'Mumbai Suburban', pincode:'400022', landmarks:['Chunabhatti Station'], nearby:['Sion','Kurla'] },
+  { slug:'govandi', name:'Govandi', zone:'Harbour Line', district:'Mumbai Suburban', pincode:'400043', landmarks:['Govandi Station','Deonar'], nearby:['Chembur','Mankhurd'] },
+  { slug:'mankhurd', name:'Mankhurd', zone:'Harbour Line', district:'Mumbai Suburban', pincode:'400088', landmarks:['Mankhurd Station'], nearby:['Govandi','Vashi'] },
+  { slug:'sewri', name:'Sewri', zone:'Harbour Line', district:'Mumbai City', pincode:'400015', landmarks:['Sewri Fort','Sewri Mudflats'], nearby:['Wadala','Parel'] },
+  { slug:'cotton-green', name:'Cotton Green', zone:'Harbour Line', district:'Mumbai City', pincode:'400033', landmarks:['Cotton Green Station'], nearby:['Reay Road','Sewri'] },
+  { slug:'reay-road', name:'Reay Road', zone:'Harbour Line', district:'Mumbai City', pincode:'400010', landmarks:['Reay Road Station'], nearby:['Dockyard Road','Cotton Green'] },
+  { slug:'dockyard-road', name:'Dockyard Road', zone:'Harbour Line', district:'Mumbai City', pincode:'400010', landmarks:['Dockyard Road Station'], nearby:['Sandhurst Road','Reay Road'] },
+  { slug:'sandhurst-road', name:'Sandhurst Road', zone:'Harbour Line', district:'Mumbai City', pincode:'400009', landmarks:['Sandhurst Road Station'], nearby:['Masjid Bunder','Byculla'] },
+  { slug:'masjid-bunder', name:'Masjid Bunder', zone:'South Mumbai', district:'Mumbai City', pincode:'400003', landmarks:['Masjid Bunder Station','Crawford Market'], nearby:['CST','Sandhurst Road'] },
+
+  // Western Suburbs - East/West Specific
+  { slug:'bandra-east', name:'Bandra East', zone:'Western Line', district:'Mumbai Suburban', pincode:'400051', landmarks:['Kala Nagar','Bandra Court'], nearby:['BKC','Khar East'] },
+  { slug:'bandra-west', name:'Bandra West', zone:'Western Line', district:'Mumbai Suburban', pincode:'400050', landmarks:['Linking Road','Hill Road'], nearby:['Pali Hill','Khar West'] },
+  { slug:'santacruz-east', name:'Santacruz East', zone:'Western Line', district:'Mumbai Suburban', pincode:'400055', landmarks:['Kalina','Vakola'], nearby:['Vile Parle East','Kurla'] },
+  { slug:'santacruz-west', name:'Santacruz West', zone:'Western Line', district:'Mumbai Suburban', pincode:'400054', landmarks:['Juhu Road','Linking Road Ext'], nearby:['Juhu','Khar West'] },
+  { slug:'andheri-east', name:'Andheri East', zone:'Western Line', district:'Mumbai Suburban', pincode:'400069', landmarks:['MIDC','SEEPZ','Marol'], nearby:['Powai','Jogeshwari East'] },
+  { slug:'andheri-west', name:'Andheri West', zone:'Western Line', district:'Mumbai Suburban', pincode:'400053', landmarks:['Lokhandwala','DN Nagar'], nearby:['Versova','Jogeshwari West'] },
+  { slug:'goregaon-east', name:'Goregaon East', zone:'Western Line', district:'Mumbai Suburban', pincode:'400063', landmarks:['Aarey Milk Colony','Gokuldham'], nearby:['Malad East','Jogeshwari East'] },
+  { slug:'goregaon-west', name:'Goregaon West', zone:'Western Line', district:'Mumbai Suburban', pincode:'400104', landmarks:['Bangur Nagar','Motilal Nagar'], nearby:['Malad West','Oshiwara'] },
+  { slug:'malad-east', name:'Malad East', zone:'Western Line', district:'Mumbai Suburban', pincode:'400097', landmarks:['Dindoshi','Kurar Village'], nearby:['Goregaon East','Kandivali East'] },
+  { slug:'malad-west', name:'Malad West', zone:'Western Line', district:'Mumbai Suburban', pincode:'400064', landmarks:['Chincholi Bunder','Evershine Nagar'], nearby:['Kandivali West','Mindspace'] },
+  { slug:'kandivali-east', name:'Kandivali East', zone:'Western Line', district:'Mumbai Suburban', pincode:'400101', landmarks:['Lokhandwala Township','Akurli Road'], nearby:['Thakur Village','Malad East'] },
+  { slug:'kandivali-west', name:'Kandivali West', zone:'Western Line', district:'Mumbai Suburban', pincode:'400067', landmarks:['Mahavir Nagar','Charkop'], nearby:['Borivali West','Malad West'] },
+  { slug:'borivali-east', name:'Borivali East', zone:'Western Line', district:'Mumbai Suburban', pincode:'400066', landmarks:['National Park','Magathane'], nearby:['Dahisar East','Kandivali East'] },
+  { slug:'borivali-west', name:'Borivali West', zone:'Western Line', district:'Mumbai Suburban', pincode:'400092', landmarks:['Gorai','Yogi Nagar'], nearby:['Dahisar West','I.C. Colony'] },
+  { slug:'dahisar-east', name:'Dahisar East', zone:'Western Line', district:'Mumbai Suburban', pincode:'400068', landmarks:['Rawalpada'], nearby:['Borivali East','Mira Road'] },
+  { slug:'dahisar-west', name:'Dahisar West', zone:'Western Line', district:'Mumbai Suburban', pincode:'400068', landmarks:['Kandarpada'], nearby:['Borivali West','Mira Road'] },
+  
+  // Extended Palghar & Vasai-Virar Belt
+  { slug:'vasai-east', name:'Vasai East', zone:'Western Line', district:'Palghar', pincode:'401208', landmarks:['Evershine City','Gokhivare'], nearby:['Vasai West','Nalasopara East'] },
+  { slug:'vasai-west', name:'Vasai West', zone:'Western Line', district:'Palghar', pincode:'401202', landmarks:['Vasai Fort','Bhabola'], nearby:['Vasai East','Nalasopara West'] },
+  { slug:'virar-east', name:'Virar East', zone:'Western Line', district:'Palghar', pincode:'401305', landmarks:['Phoolpada','Manvelpada'], nearby:['Virar West','Nalasopara East'] },
+  { slug:'virar-west', name:'Virar West', zone:'Western Line', district:'Palghar', pincode:'401303', landmarks:['Global City','Arnala'], nearby:['Virar East','Nalasopara West'] },
+  { slug:'palghar', name:'Palghar', zone:'Western Line', district:'Palghar', pincode:'401404', landmarks:['Palghar Station','Shirgaon'], nearby:['Boisar','Kelva'] },
+  { slug:'dahanu', name:'Dahanu', zone:'Western Line', district:'Palghar', pincode:'401601', landmarks:['Dahanu Beach'], nearby:['Boisar'] },
+
+  // Central Line Extended
+  { slug:'vidyavihar', name:'Vidyavihar', zone:'Central Line', district:'Mumbai Suburban', pincode:'400077', landmarks:['Somaiya Campus'], nearby:['Ghatkopar','Kurla'] },
+  { slug:'kanjurmarg', name:'Kanjurmarg', zone:'Central Line', district:'Mumbai Suburban', pincode:'400042', landmarks:['Kanjurmarg Station','Lodha Aurum'], nearby:['Bhandup','Vikhroli'] },
+  { slug:'nahur', name:'Nahur', zone:'Central Line', district:'Mumbai Suburban', pincode:'400078', landmarks:['Nahur Station'], nearby:['Mulund','Bhandup'] },
+  { slug:'mulund-east', name:'Mulund East', zone:'Central Line', district:'Mumbai Suburban', pincode:'400081', landmarks:['Navghar Road','Mhada Colony'], nearby:['Mulund West','Thane East'] },
+  { slug:'mulund-west', name:'Mulund West', zone:'Central Line', district:'Mumbai Suburban', pincode:'400080', landmarks:['LBS Marg','Yogi Hills'], nearby:['Mulund East','Thane West'] },
+  { slug:'thane-east', name:'Thane East', zone:'Central Line', district:'Thane', pincode:'400603', landmarks:['Kopri'], nearby:['Thane West','Mulund East'] },
+  { slug:'thane-west', name:'Thane West', zone:'Central Line', district:'Thane', pincode:'400601', landmarks:['Upvan Lake','Naupada'], nearby:['Thane East','Majiwada'] },
+  { slug:'kalwa', name:'Kalwa', zone:'Central Line', district:'Thane', pincode:'400605', landmarks:['Kalwa Bridge','Parsik Hill'], nearby:['Thane','Mumbra'] },
+  { slug:'mumbra', name:'Mumbra', zone:'Central Line', district:'Thane', pincode:'400612', landmarks:['Mumbra Station','Kausa'], nearby:['Kalwa','Diva'] },
+  { slug:'diva', name:'Diva', zone:'Central Line', district:'Thane', pincode:'400612', landmarks:['Diva Station'], nearby:['Mumbra','Dombivli'] },
+  { slug:'titwala', name:'Titwala', zone:'Central Line', district:'Thane', pincode:'421605', landmarks:['Titwala Ganesh Mandir'], nearby:['Kalyan','Asangaon'] },
+  { slug:'karjat', name:'Karjat', zone:'Central Line', district:'Raigad', pincode:'410201', landmarks:['Karjat Station','ND Studios'], nearby:['Neral','Khopoli'] },
+
+  // Navi Mumbai Extended
+  { slug:'sanpada', name:'Sanpada', zone:'Navi Mumbai', district:'Navi Mumbai', pincode:'400705', landmarks:['Sanpada Station','Palm Beach Road'], nearby:['Vashi','Juinagar'] },
+  { slug:'juinagar', name:'Juinagar', zone:'Navi Mumbai', district:'Navi Mumbai', pincode:'400705', landmarks:['Juinagar Station'], nearby:['Sanpada','Nerul'] },
+  { slug:'kamothe', name:'Kamothe', zone:'Navi Mumbai', district:'Navi Mumbai', pincode:'410209', landmarks:['Mansarovar Station'], nearby:['Kharghar','Kalamboli'] },
+  { slug:'kalamboli', name:'Kalamboli', zone:'Navi Mumbai', district:'Navi Mumbai', pincode:'410218', landmarks:['Kalamboli Circle'], nearby:['Kamothe','Panvel'] },
+  { slug:'ulwe', name:'Ulwe', zone:'Navi Mumbai', district:'Navi Mumbai', pincode:'410206', landmarks:['Bamandongri Station','Navi Mumbai Airport Area'], nearby:['Belapur','Seawoods'] },
+  { slug:'taloja', name:'Taloja', zone:'Navi Mumbai', district:'Navi Mumbai', pincode:'410208', landmarks:['Taloja MIDC','Taloja Metro'], nearby:['Kharghar','Kalamboli'] },
+
+  // South / Central Mumbai Extensions
+  { slug:'kalbadevi', name:'Kalbadevi', zone:'South Mumbai', district:'Mumbai City', pincode:'400002', landmarks:['Kalbadevi Market','Mangaldas Market'], nearby:['Bhuleshwar','Marine Lines'] },
+  { slug:'bhuleshwar', name:'Bhuleshwar', zone:'South Mumbai', district:'Mumbai City', pincode:'400002', landmarks:['Bhuleshwar Market'], nearby:['Kalbadevi','Charni Road'] },
+  { slug:'charni-road', name:'Charni Road', zone:'South Mumbai', district:'Mumbai City', pincode:'400004', landmarks:['Charni Road Station','Girgaon'], nearby:['Grant Road','Marine Lines'] },
+  { slug:'girgaon', name:'Girgaon', zone:'South Mumbai', district:'Mumbai City', pincode:'400004', landmarks:['Girgaon Chowpatty'], nearby:['Charni Road','Malabar Hill'] },
+
   /* ── Others ────────────────────────────────────────────── */
   { slug:'bangalore', name:'Bangalore', zone:'Karnataka', district:'Bengaluru', pincode:'560001', landmarks:['Lalbagh','Cubbon Park','Bangalore Palace','MG Road','Indiranagar'],   nearby:['Mysore','Davangere'] },
   { slug:'mysore',    name:'Mysore',    zone:'Karnataka', district:'Mysuru',    pincode:'570001', landmarks:['Mysore Palace','Chamundi Hills','Brindavan Gardens'],                nearby:['Bangalore','Davangere'] },
