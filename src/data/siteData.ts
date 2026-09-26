@@ -345,6 +345,9 @@ export const services: Service[] = [
       'Premium material selection',
       'Dedicated project manager',
       'On-time handover',
+    ],
+    image: '/images/interior-work.png',
+  },
   {
     id: '19',
     title: '1BHK & 2BHK Renovation',
