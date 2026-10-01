@@ -12,7 +12,7 @@ import WhatsAppButton from '@/components/ui/WhatsAppButton';
 import QuotePopup from '@/components/ui/QuotePopup';
 import LeadGenPopup from '@/components/ui/LeadGenPopup';
 import SocialProofPopup from '@/components/ui/SocialProofPopup';
-
+import FestivalPopup from '@/components/ui/FestivalPopup';
 
 import { Toaster } from 'react-hot-toast';
 import ConditionalLayout from '@/components/layout/ConditionalLayout';
@@ -475,6 +475,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <QuotePopup />
               <LeadGenPopup />
               <SocialProofPopup />
+              <FestivalPopup />
             </>
           }
         >

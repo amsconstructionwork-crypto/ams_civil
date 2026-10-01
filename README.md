@@ -119,7 +119,7 @@ To update them globally: search and replace `9102615343` / `Kedar Mandal` in the
 
 
 
-
+kal jaise gandhi janti hai koi calende ka module nhi waha se fatible wagera fatch kar leta pura sal ka jisa din rahata usdin koi vist ussa din bas mst jaise open karega website mast se primum card banta likha aata mst sa
 
 
 
