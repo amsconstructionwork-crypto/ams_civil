@@ -419,6 +419,74 @@ export const services: Service[] = [
     ],
     image: '/images/kitchen-work.png',
   },
+  {
+    id: '23',
+    title: 'Gym Renovation',
+    slug: 'gym-renovation',
+    icon: 'Wrench',
+    shortDesc: 'Complete civil and interior remodeling for commercial and home gyms.',
+    description:
+      'We upgrade and renovate existing gyms with heavy-duty civil work. From sound-proofing and rubberized flooring for heavy weights, to mirrored walls, proper ventilation, and locker room makeovers.',
+    benefits: [
+      'Heavy-duty rubber flooring',
+      'Wall-to-wall mirror installation',
+      'Acoustic and soundproofing work',
+      'Locker room & bathroom overhaul',
+      'High-grade electrical & HVAC prep',
+    ],
+    image: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&q=80',
+  },
+  {
+    id: '24',
+    title: 'New Gym Construction',
+    slug: 'new-gym-construction',
+    icon: 'Building2',
+    shortDesc: 'Turnkey civil construction for new commercial fitness centers.',
+    description:
+      'Starting a new gym? We provide end-to-end turnkey civil construction tailored for fitness centers. We handle structural reinforcement for heavy machines, custom layouts for cardio/weight sections, reception areas, and specialized plumbing for spa/shower facilities.',
+    benefits: [
+      'Structural reinforcement for weights',
+      'Custom zoning (Cardio, Weights, Spa)',
+      'Reception & juice bar civil work',
+      'Premium locker room construction',
+      'Turnkey handover',
+    ],
+    image: 'https://images.unsplash.com/photo-1540497077202-7c8a3999166f?w=800&q=80',
+  },
+  {
+    id: '25',
+    title: 'Office Renovation',
+    slug: 'office-renovation',
+    icon: 'Briefcase',
+    shortDesc: 'Modernize your workspace with professional office remodeling.',
+    description:
+      'We upgrade and renovate existing offices to create a modern, productive workspace. Our services cover everything from acoustic ceilings and glass partitions to ergonomic electrical setups and premium carpeting or vitrified flooring.',
+    benefits: [
+      'Modern glass partitions & cabins',
+      'Acoustic false ceilings',
+      'Ergonomic electrical & networking',
+      'Carpet & premium vitrified flooring',
+      'Quick execution with minimal downtime',
+    ],
+    image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80',
+  },
+  {
+    id: '26',
+    title: 'New Office Construction',
+    slug: 'new-office-construction',
+    icon: 'Building',
+    shortDesc: 'Turnkey civil and interior build-out for new corporate offices.',
+    description:
+      'Setting up a new commercial space? We provide complete turnkey civil and interior construction for new offices. From bare-shell civil preparation to high-end corporate interiors, reception design, and HVAC/networking integration.',
+    benefits: [
+      'Bare-shell to fully-furnished turnkey',
+      'Custom reception & boardroom design',
+      'Complete HVAC & networking integration',
+      'Commercial grade plumbing & washrooms',
+      'Dedicated project management',
+    ],
+    image: 'https://images.unsplash.com/photo-1497215728101-856f4ea42174?w=800&q=80',
+  },
 ];
 
 /* ─────────────────────────────────────────────────────────────── */

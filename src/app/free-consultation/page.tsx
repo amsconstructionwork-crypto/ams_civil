@@ -186,11 +186,24 @@ export default function LandingPage() {
                           className="w-full bg-[#161F2E] border border-[#1E2D45] rounded-xl px-4 py-3 text-white focus:outline-none focus:border-orange-500 transition-colors appearance-none"
                         >
                           <option value="Full Home Renovation">Full Home Renovation</option>
+                          <option value="1BHK Complete Renovation">1BHK Complete Renovation</option>
+                          <option value="2BHK Complete Renovation">2BHK Complete Renovation</option>
+                          <option value="3BHK Luxury Interiors">3BHK Luxury Interiors</option>
+                          <option value="4BHK Ultra Premium">4BHK Ultra Premium</option>
                           <option value="Bungalow Construction">Bungalow Construction</option>
+                          <option value="Terrace Home Construction">Terrace Home Construction</option>
+                          <option value="Building / Society Renovation">Building / Society Renovation</option>
                           <option value="Bathroom Renovation">Bathroom Renovation</option>
                           <option value="Modular Kitchen">Modular Kitchen</option>
                           <option value="Tiles & Flooring">Tiles & Flooring</option>
                           <option value="Painting & POP">Painting & POP</option>
+                          <option value="Waterproofing">Waterproofing</option>
+                          <option value="Gym Renovation">Gym Renovation</option>
+                          <option value="New Gym Construction">New Gym Construction</option>
+                          <option value="Office Renovation">Office Renovation</option>
+                          <option value="New Office Construction">New Office Construction</option>
+                          <option value="New Home Design & Build">New Home Design & Build</option>
+                          <option value="B2B Partner / Architect Connect">B2B Partner / Architect Connect</option>
                         </select>
                       </div>
 

@@ -60,6 +60,7 @@ export default function HomePageSections({ galleryItems, projects }: { galleryIt
       <TickerSection />
       <IntroSection />
       <ServicesSection />
+      <PackagesPromoSection />
       <TransformationSection />
       <ProjectsCarousel projects={projects} />
       <ProcessSection />
@@ -869,6 +870,74 @@ function FAQSection() {
   );
 }
 
+/* ─────────────────────────────────────────────────────────────
+   PACKAGES PROMO SECTION (Homepage)
+─────────────────────────────────────────────────────────── */
+function PackagesPromoSection() {
+  const pkgs = [
+    { title: '1 BHK', price: '₹2.5L', duration: '25 Days', color: 'from-blue-500/20 to-blue-600/5' },
+    { title: '2 BHK', price: '₹4.5L', duration: '35 Days', color: 'from-orange-500/20 to-orange-600/5', popular: true },
+    { title: '3 BHK', price: '₹8L', duration: '45 Days', color: 'from-purple-500/20 to-purple-600/5' },
+    { title: '4 BHK', price: '₹12L', duration: '60 Days', color: 'from-emerald-500/20 to-emerald-600/5' },
+    { title: 'Terrace', price: '₹15L', duration: '3 Months', color: 'from-pink-500/20 to-pink-600/5' },
+    { title: 'Bungalow', price: '₹25L', duration: '6 Months', color: 'from-amber-500/20 to-amber-600/5' },
+  ];
+
+  return (
+    <section className="section-y bg-[#080D1A] border-t border-white/5 relative overflow-hidden">
+      <div className="absolute inset-0 opacity-[0.03]"
+           style={{ backgroundImage: 'radial-gradient(#ffffff 0.5px, transparent 0.5px)', backgroundSize: '24px 24px' }} />
+
+      <div className="container-custom relative z-10">
+        <div className="text-center mb-12">
+          <p className="section-label justify-center">Transparent Pricing</p>
+          <h2 className="font-display font-black text-white text-3xl sm:text-4xl lg:text-5xl mb-4">
+            Complete Renovation <span className="text-gradient">Packages</span>
+          </h2>
+          <p className="text-slate-400 max-w-2xl mx-auto">
+            All-inclusive packages with zero hidden costs. Choose your home size, we handle everything.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 mb-10">
+          {pkgs.map((pkg, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.08 }}
+              className={`relative p-5 rounded-2xl bg-gradient-to-b ${pkg.color} border border-white/10 hover:border-orange-500/30 transition-all group text-center ${
+                pkg.popular ? 'ring-2 ring-orange-500/40' : ''
+              }`}
+            >
+              {pkg.popular && (
+                <div className="absolute -top-2 left-1/2 -translate-x-1/2 bg-orange-500 text-white text-[9px] font-bold px-3 py-0.5 rounded-full uppercase tracking-wider">
+                  Popular
+                </div>
+              )}
+              <h3 className="text-white font-bold text-lg mb-1 group-hover:text-orange-400 transition-colors">{pkg.title}</h3>
+              <p className="text-2xl font-black text-orange-400 font-display mb-1">{pkg.price}<span className="text-xs text-slate-500">+</span></p>
+              <p className="text-[10px] text-slate-500 uppercase tracking-wider font-bold">{pkg.duration}</p>
+            </motion.div>
+          ))}
+        </div>
+
+        <div className="text-center">
+          <Link
+            href="/packages"
+            className="btn-primary text-base px-8 py-4 shadow-[0_0_30px_rgba(249,115,22,0.3)] hover:shadow-[0_0_50px_rgba(249,115,22,0.5)]"
+          >
+            View All Packages & EMI Options <ArrowRight size={18} />
+          </Link>
+          <p className="text-xs text-slate-600 mt-4">
+            * Starting prices. Exact cost depends on material selection & site condition. Free site visit included.
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}
 /* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
    CONTACT CTA
 Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */

@@ -162,18 +162,31 @@ export default function QuotePopup() {
                 <select {...register('service', { required: 'Please select a service' })}
                   className="form-input appearance-none">
                   <option value="">Select a service…</option>
+                  <option>1BHK Complete Renovation</option>
+                  <option>2BHK Complete Renovation</option>
+                  <option>3BHK Luxury Interiors</option>
+                  <option>4BHK Ultra Premium</option>
                   <option>Bungalow Construction</option>
+                  <option>Terrace Home Construction</option>
                   <option>Full Interior Civil Work</option>
-                  <option>Swimming Pool Work</option>
-                  <option>Compound Wall & Gates</option>
-                  <option>Building Repair</option>
+                  <option>New Home Design & Build</option>
                   <option>Bathroom Renovation</option>
                   <option>Kitchen Work</option>
                   <option>Tiles Work</option>
                   <option>Flooring Work</option>
                   <option>POP Work</option>
+                  <option>Painting Work</option>
+                  <option>Waterproofing</option>
+                  <option>Gym Renovation</option>
+                  <option>New Gym Construction</option>
+                  <option>Office Renovation</option>
+                  <option>New Office Construction</option>
+                  <option>Swimming Pool Work</option>
+                  <option>Compound Wall & Gates</option>
+                  <option>Building Repair</option>
                   <option>Wall Work</option>
                   <option>Plaster Work</option>
+                  <option>B2B Partner / Architect Connect</option>
                   <option>Other</option>
                 </select>
                 {errors.service && <p className="text-red-400 text-xs mt-1">{errors.service.message}</p>}
