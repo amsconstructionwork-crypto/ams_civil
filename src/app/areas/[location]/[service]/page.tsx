@@ -21,16 +21,20 @@ import ModernCTA from '@/components/ui/ModernCTA';
 
 // Removed unused getCachedRelatedBlogs to save MongoDB connection overhead
 
-/* ── Allow on-demand generation for non-pre-rendered paths ── */
-export const dynamicParams = true;
+/* ── Fully static \u2014 no on-demand generation to save Vercel Origin Transfer ── */
+export const dynamicParams = false;
 
 /* ── ISR: Cache generated pages for 1 week at Edge ── */
 
 /* ── Pre-render all paths at build time ───── */
 export async function generateStaticParams() {
-  // To speed up build times, we return an empty array here.
-  // Pages will be generated on-demand when first visited, and then cached forever (since revalidate = false).
-  return [];
+  const params = [];
+  for (const loc of locations) {
+    for (const s of services) {
+      params.push({ location: loc.slug, service: s.slug });
+    }
+  }
+  return params;
 }
 
 /* ── Realistic Service-Specific Emojis for Google CTR ── */

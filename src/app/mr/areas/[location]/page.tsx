@@ -1,5 +1,6 @@
 // src/app/mr/areas/[location]/page.tsx
-export const revalidate = 31536000; // 24 hours ISR cache to save CPU
+export const revalidate = false;
+export const dynamicParams = false;
 
 import type { Metadata } from 'next';
 import Link from 'next/link';
@@ -15,7 +16,9 @@ import { getSeededRandom, zoneContext } from '@/data/localContent';
 
 /* ── Generate all paths at build time ──────────────── */
 export async function generateStaticParams() {
-  return [];
+  return locations.map((loc) => ({
+    location: loc.slug,
+  }));
 }
 
 export async function generateMetadata({ params }: { params: { location: string } }): Promise<Metadata> {

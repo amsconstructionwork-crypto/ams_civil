@@ -5,6 +5,7 @@
 
 // SSG: Fully static \u2014 content only changes on redeploy. No time-based expiry.
 export const revalidate = false;
+export const dynamicParams = false;
 
 import type { Metadata } from 'next';
 import Link from 'next/link';
@@ -52,9 +53,9 @@ const getCachedLocalData = unstable_cache(
 
 /* ── Generate all paths at build time ──────────────── */
 export async function generateStaticParams() {
-  // To speed up build times, we return an empty array here.
-  // Pages will be generated on-demand when first visited.
-  return [];
+  return locations.map((loc) => ({
+    location: loc.slug,
+  }));
 }
 
 /* ── Generate unique metadata per location ────────────────── */
