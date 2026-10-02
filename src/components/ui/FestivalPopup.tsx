@@ -148,6 +148,19 @@ export default function FestivalPopup() {
               <X size={20} />
             </button>
 
+            {/* Share Button (Outside the screenshot area) */}
+            <button 
+              onClick={handleDownloadAndShare}
+              disabled={isCapturing}
+              className="absolute top-0 left-0 z-20 w-10 h-10 sm:w-12 sm:h-12 bg-black/40 hover:bg-black/60 rounded-br-2xl sm:rounded-br-3xl rounded-tl-3xl flex items-center justify-center text-white/70 hover:text-white transition-colors disabled:opacity-50"
+            >
+              {isCapturing ? (
+                <div className="w-4 h-4 sm:w-5 sm:h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+              ) : (
+                <Share2 size={18} />
+              )}
+            </button>
+
             {/* Area to capture */}
             <div ref={cardRef} className="relative flex-1 w-full h-full flex flex-col justify-between rounded-[1.3rem] sm:rounded-[1.4rem] overflow-hidden">
               {/* Background Gradient Effect */}
@@ -186,27 +199,7 @@ export default function FestivalPopup() {
             </div>
           </motion.div>
 
-          {/* Share Action Button */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 10 }}
-            transition={{ delay: 0.2 }}
-            className="relative z-10 mt-6 sm:mt-8"
-          >
-            <button 
-              onClick={handleDownloadAndShare} 
-              disabled={isCapturing}
-              className="flex items-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-400 hover:to-emerald-500 text-white rounded-full font-bold shadow-[0_0_30px_rgba(34,197,94,0.3)] transition-all hover:scale-105 disabled:opacity-70 disabled:hover:scale-100 text-sm sm:text-base"
-            >
-              {isCapturing ? (
-                <div className="w-4 h-4 sm:w-5 sm:h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-              ) : (
-                <Share2 size={18} />
-              )}
-              <span>{isCapturing ? 'Preparing Image...' : 'Share / Add to Status'}</span>
-            </button>
-          </motion.div>
+          {/* Removed external share button */}
         </div>
       )}
     </AnimatePresence>
