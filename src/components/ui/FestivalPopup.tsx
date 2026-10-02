@@ -62,7 +62,6 @@ export default function FestivalPopup() {
       const canvas = await html2canvas(cardRef.current, {
         scale: 2, // High resolution
         backgroundColor: '#0B1120',
-        useCORS: true, // Allow external images like logo
         logging: false,
       });
       
@@ -171,12 +170,12 @@ export default function FestivalPopup() {
                 
                 {/* Top Logo */}
                 <div className="pt-2 sm:pt-4">
-                  <img src="/logo.png" alt="AMS Civil Construction" className="h-10 sm:h-16 w-auto object-contain drop-shadow-lg" crossOrigin="anonymous" />
+                  <img src="/logo.png" alt="AMS Civil Construction" className="h-10 sm:h-16 w-auto object-contain drop-shadow-lg" />
                 </div>
 
                 {/* Center Content */}
                 <div className="flex flex-col items-center my-4">
-                  <div className="text-5xl sm:text-7xl mb-3 sm:mb-6 drop-shadow-2xl animate-pulse" style={{ animationDuration: '3s' }}>
+                  <div className="text-5xl sm:text-7xl mb-3 sm:mb-6 drop-shadow-2xl">
                     {activeFestival.icon}
                   </div>
                   <h2 className="font-display font-black text-2xl sm:text-4xl text-white mb-2 sm:mb-4 drop-shadow-lg leading-tight">
