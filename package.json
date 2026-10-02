@@ -19,6 +19,7 @@
     "embla-carousel-react": "^8.0.0",
     "framer-motion": "^11.0.0",
     "googleapis": "^172.0.0",
+    "html2canvas": "^1.4.1",
     "lucide-react": "^0.363.0",
     "marked": "^18.0.7",
     "mongodb": "^6.3.0",

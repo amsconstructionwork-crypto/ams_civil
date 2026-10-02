@@ -1,8 +1,9 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X } from 'lucide-react';
+import { X, Share2, Download } from 'lucide-react';
+import html2canvas from 'html2canvas';
 
 // You can update this list every year with specific dates (MM-DD) for movable festivals like Diwali, Holi, etc.
 const festivals = [
@@ -26,6 +27,8 @@ const festivals = [
 export default function FestivalPopup() {
   const [activeFestival, setActiveFestival] = useState<any>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const [isCapturing, setIsCapturing] = useState(false);
+  const cardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     // Get today's date in MM-DD format
@@ -38,26 +41,78 @@ export default function FestivalPopup() {
     const festivalToday = festivals.find(f => f.date === currentMMDD);
 
     if (festivalToday) {
-      // Check if we already showed it today using localStorage
-      const lastShownDate = localStorage.getItem('lastFestivalPopupDate');
-      
-      // If not shown today, show it
-      if (lastShownDate !== currentMMDD) {
-        setActiveFestival(festivalToday);
-        // Add a slight delay so it feels premium and doesn't pop instantly on load
-        const timer = setTimeout(() => {
-          setIsVisible(true);
-        }, 2000);
-        return () => clearTimeout(timer);
-      }
+      setActiveFestival(festivalToday);
+      // Add a slight delay so it feels premium and doesn't pop instantly on load
+      const timer = setTimeout(() => {
+        setIsVisible(true);
+      }, 2000);
+      return () => clearTimeout(timer);
     }
   }, []);
 
   const closePopup = () => {
     setIsVisible(false);
-    // Mark as shown for today
-    if (activeFestival) {
-      localStorage.setItem('lastFestivalPopupDate', activeFestival.date);
+  };
+
+  const handleDownloadAndShare = async () => {
+    if (!cardRef.current || !activeFestival) return;
+    
+    setIsCapturing(true);
+    try {
+      const canvas = await html2canvas(cardRef.current, {
+        scale: 2, // High resolution
+        backgroundColor: '#0B1120',
+        useCORS: true, // Allow external images like logo
+        logging: false,
+      });
+      
+      const blob = await new Promise<Blob | null>((resolve) => canvas.toBlob(resolve, 'image/png'));
+      if (!blob) {
+        setIsCapturing(false);
+        return;
+      }
+
+      const file = new File([blob], `${activeFestival.title.replace(/\\s+/g, '-').toLowerCase()}.png`, { type: 'image/png' });
+
+      // Check if Web Share API with files is supported (mobile devices usually support this)
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        await navigator.share({
+          files: [file],
+          title: activeFestival.title,
+          text: `${activeFestival.title} - AMS Civil Construction.\\nwww.amscivilwork.in`,
+        });
+      } else {
+        // Fallback: Download the image
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `${activeFestival.title.replace(/\\s+/g, '-').toLowerCase()}.png`;
+        a.click();
+        URL.revokeObjectURL(url);
+        
+        // Try native share for text as well for desktop fallbacks
+        if (navigator.share) {
+          setTimeout(() => {
+             navigator.share({
+               title: activeFestival.title,
+               text: `${activeFestival.title} - AMS Civil Construction.\\nwww.amscivilwork.in`,
+               url: window.location.href,
+             }).catch(console.error);
+          }, 500);
+        }
+      }
+    } catch (err) {
+      console.error("Error generating image", err);
+      // Fallback text share if canvas fails
+      if (navigator.share) {
+        navigator.share({
+           title: activeFestival.title,
+           text: `${activeFestival.title} - AMS Civil Construction.\\nwww.amscivilwork.in`,
+           url: window.location.href,
+        }).catch(console.error);
+      }
+    } finally {
+      setIsCapturing(false);
     }
   };
 
@@ -66,64 +121,91 @@ export default function FestivalPopup() {
   return (
     <AnimatePresence>
       {isVisible && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6">
+        <div className="fixed inset-0 z-[100] flex flex-col items-center justify-center p-4 sm:p-6">
           {/* Backdrop */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={closePopup}
-            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+            className="absolute inset-0 bg-black/70 backdrop-blur-sm"
           />
 
-          {/* Premium Card / Poster */}
+          {/* Premium Card / Poster Wrapper */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 10 }}
             transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-            className="relative w-full max-w-md aspect-[4/5] bg-[#0B1120] border-2 border-white/20 rounded-3xl overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.5)] z-10 flex flex-col justify-between"
+            className="relative w-full max-w-[90vw] sm:max-w-md bg-[#0B1120] border-2 border-white/20 rounded-3xl shadow-[0_0_50px_rgba(0,0,0,0.5)] z-10 flex flex-col"
+            style={{ aspectRatio: '4/5', maxHeight: '75vh' }}
           >
-            {/* Background Gradient Effect */}
-            <div className={`absolute inset-0 bg-gradient-to-br ${activeFestival.gradient} opacity-80`} />
-            <div className="absolute inset-0 bg-black/20" />
-            
-            <div className="relative p-8 h-full flex flex-col items-center justify-between text-center">
-              {/* Close Button */}
-              <button 
-                onClick={closePopup}
-                className="absolute top-0 right-0 w-12 h-12 bg-black/20 hover:bg-black/40 rounded-bl-3xl flex items-center justify-center text-white/70 hover:text-white transition-colors"
-              >
-                <X size={20} />
-              </button>
+            {/* Close Button (Outside the screenshot area) */}
+            <button 
+              onClick={closePopup}
+              className="absolute top-0 right-0 z-20 w-10 h-10 sm:w-12 sm:h-12 bg-black/40 hover:bg-black/60 rounded-bl-2xl sm:rounded-bl-3xl rounded-tr-3xl flex items-center justify-center text-white/70 hover:text-white transition-colors"
+            >
+              <X size={20} />
+            </button>
 
-              {/* Top Logo */}
-              <div className="pt-2">
-                <img src="/logo.png" alt="AMS Civil Construction" className="h-16 w-auto object-contain drop-shadow-lg" />
-              </div>
-
-              {/* Center Content */}
-              <div className="flex flex-col items-center mt-4">
-                <div className="text-7xl mb-6 drop-shadow-2xl animate-pulse" style={{ animationDuration: '3s' }}>
-                  {activeFestival.icon}
+            {/* Area to capture */}
+            <div ref={cardRef} className="relative flex-1 w-full h-full flex flex-col justify-between rounded-[1.3rem] sm:rounded-[1.4rem] overflow-hidden">
+              {/* Background Gradient Effect */}
+              <div className={`absolute inset-0 bg-gradient-to-br ${activeFestival.gradient} opacity-80`} />
+              <div className="absolute inset-0 bg-black/20" />
+              
+              <div className="relative p-6 sm:p-8 h-full flex flex-col items-center justify-between text-center overflow-y-auto no-scrollbar">
+                
+                {/* Top Logo */}
+                <div className="pt-2 sm:pt-4">
+                  <img src="/logo.png" alt="AMS Civil Construction" className="h-10 sm:h-16 w-auto object-contain drop-shadow-lg" crossOrigin="anonymous" />
                 </div>
-                <h2 className="font-display font-black text-3xl sm:text-4xl text-white mb-4 drop-shadow-lg">
-                  {activeFestival.title}
-                </h2>
-                <p className="text-white/90 text-lg leading-relaxed font-medium px-2 drop-shadow-md">
-                  {activeFestival.message}
-                </p>
-              </div>
 
-              {/* Bottom Brand */}
-              <div className="w-full pb-2">
-                <div className="w-12 h-1 bg-white/40 mx-auto rounded-full mb-4" />
-                <p className="text-sm font-bold tracking-widest uppercase text-white drop-shadow-lg">
-                  Building Dreams Since 25 Years
-                </p>
-                <p className="text-xs text-white/80 mt-1 font-mono tracking-widest">WWW.AMSCIVILWORK.IN</p>
+                {/* Center Content */}
+                <div className="flex flex-col items-center my-4">
+                  <div className="text-5xl sm:text-7xl mb-3 sm:mb-6 drop-shadow-2xl animate-pulse" style={{ animationDuration: '3s' }}>
+                    {activeFestival.icon}
+                  </div>
+                  <h2 className="font-display font-black text-2xl sm:text-4xl text-white mb-2 sm:mb-4 drop-shadow-lg leading-tight">
+                    {activeFestival.title}
+                  </h2>
+                  <p className="text-white/90 text-xs sm:text-lg leading-relaxed font-medium px-2 drop-shadow-md">
+                    {activeFestival.message}
+                  </p>
+                </div>
+
+                {/* Bottom Brand */}
+                <div className="w-full pb-2">
+                  <div className="w-10 sm:w-12 h-1 bg-white/40 mx-auto rounded-full mb-3 sm:mb-4" />
+                  <p className="text-[10px] sm:text-sm font-bold tracking-widest uppercase text-white drop-shadow-lg">
+                    Building Dreams Since 25 Years
+                  </p>
+                  <p className="text-[8px] sm:text-xs text-white/80 mt-1 font-mono tracking-widest">WWW.AMSCIVILWORK.IN</p>
+                </div>
               </div>
             </div>
+          </motion.div>
+
+          {/* Share Action Button */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 10 }}
+            transition={{ delay: 0.2 }}
+            className="relative z-10 mt-6 sm:mt-8"
+          >
+            <button 
+              onClick={handleDownloadAndShare} 
+              disabled={isCapturing}
+              className="flex items-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-400 hover:to-emerald-500 text-white rounded-full font-bold shadow-[0_0_30px_rgba(34,197,94,0.3)] transition-all hover:scale-105 disabled:opacity-70 disabled:hover:scale-100 text-sm sm:text-base"
+            >
+              {isCapturing ? (
+                <div className="w-4 h-4 sm:w-5 sm:h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+              ) : (
+                <Share2 size={18} />
+              )}
+              <span>{isCapturing ? 'Preparing Image...' : 'Share / Add to Status'}</span>
+            </button>
           </motion.div>
         </div>
       )}
